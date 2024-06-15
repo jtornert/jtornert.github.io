@@ -18,6 +18,8 @@ function sanitize(target) {
 selected.innerText = characters.value;
 remaining.innerText = characters.value - answer.value.length;
 
+sanitize(answer);
+
 answer.addEventListener("paste", (e) => {
     alert("Nope");
     e.preventDefault();
@@ -30,8 +32,6 @@ characters.addEventListener("input", (e) => {
     selected.innerText = e.currentTarget.value;
 });
 characters.addEventListener("change", (e) => {
-    let cache = maxCharacters;
     maxCharacters = e.currentTarget.value;
-    console.debug(cache, maxCharacters);
     sanitize(answer);
 });
