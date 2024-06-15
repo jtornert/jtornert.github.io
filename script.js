@@ -1,17 +1,19 @@
 let maxCharacters = 20;
 
-function sanitize(target) {
-    if (target.value.length > maxCharacters) {
-        target.value = target.value.slice(0, maxCharacters);
-        alert("Nope");
-        throw new Error("Max characters reached.");
-    }
-}
-
 const answer = document.getElementById("answer");
 const characters = document.getElementById("characters");
 const selected = document.getElementById("selected");
 const remaining = document.getElementById("remaining");
+
+function sanitize(target) {
+    remaining.innerText = maxCharacters - target.value.length;
+    if (target.value.length > maxCharacters) {
+        target.value = target.value.slice(0, maxCharacters);
+        remaining.innerText = maxCharacters - target.value.length;
+        alert("Nope");
+        throw new Error("Max characters reached.");
+    }
+}
 
 selected.innerText = characters.value;
 remaining.innerText = characters.value - answer.value.length;
@@ -30,12 +32,6 @@ characters.addEventListener("input", (e) => {
 characters.addEventListener("change", (e) => {
     let cache = maxCharacters;
     maxCharacters = e.currentTarget.value;
-    const newAnswer = document.getElementById("answer");
-    console.debug(answer.value, newAnswer.value);
-    try {
-        sanitize(newAnswer);
-    } catch (e) {
-        maxCharacters = cache;
-    }
-    remaining.innerText = maxCharacters - newAnswer.value.length;
+    console.debug(cache, maxCharacters);
+    sanitize(answer);
 });
