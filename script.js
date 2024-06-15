@@ -14,6 +14,7 @@ const selected = document.getElementById("selected");
 const remaining = document.getElementById("remaining");
 
 selected.innerText = characters.value;
+remaining.innerText = characters.value - answer.value.length;
 
 answer.addEventListener("paste", (e) => {
     alert("Nope");
