@@ -1,12 +1,12 @@
 html {
     color-scheme: dark;
-    font-family: "Fira Sans";
+    font-family: system-ui, "-apple-system", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
     background: #222;
     color: #ccc;
 }
 
 table {
-    --columns: repeat(3, minmax(20ch, 1fr));
+    --columns: repeat(3, minmax(10ch, 1fr));
     --rows: 10;
     --row-height: 2rem;
     --min-height: calc(var(--row-height) * 6);
@@ -19,6 +19,7 @@ table {
     max-height: var(--max-height);
     overflow: hidden;
     border: 1px solid #444;
+    border-radius: 0.25rem;
 }
 
 table :is([aria-busy=true], [role=status]) {
