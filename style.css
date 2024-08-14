@@ -1,31 +1,108 @@
-:root {
-    --side-margins: 1rem;
-}
-
 html {
     color-scheme: dark;
-    font-family: "Helvetica", "Inter", sans-serif;
+    font-family: "Fira Sans";
+    background: #222;
+    color: #ccc;
 }
 
-body {
-    margin-inline: var(--side-margins);
-}
-
-textarea {
-    display: block;
-    text-align: start;
-    font-family: inherit;
-    padding: 0.5rem;
-    width: calc(100% - 2 * var(--side-margins));
-}
-
-p {
+table {
+    --columns: repeat(3, minmax(20ch, 1fr));
+    --rows: 10;
+    --row-height: 2rem;
+    --min-height: calc(var(--row-height) * 6);
+    --max-height: 100%;
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+    height: calc(var(--row-height) * (var(--rows) + 1) + 2px);
+    min-height: var(--min-height);
+    max-height: var(--max-height);
+    overflow: hidden;
+    border: 1px solid #444;
 }
 
-#selected {
-    display: inline-block;
-    width: 4ch;
+table :is([aria-busy=true], [role=status]) {
+    grid-column: 1 / -1;
+    background: #333;
+    justify-content: center;
+    border: none;
+}
+
+thead,
+tbody,
+tr {
+    display: grid;
+}
+
+thead,
+tbody {
+    grid-template-columns: var(--columns);
+}
+
+thead {
+    background: #333;
+}
+
+tbody {
+    overflow: auto;
+}
+
+tbody:has(tr:only-child :is([aria-busy=true], [role=status])) {
+    background: #333;
+    align-content: center;
+    flex: 100%;
+}
+
+tbody tr:hover {
+    background: #333;
+}
+
+tbody tr:last-child {
+    border: none;
+}
+
+tbody tr:not([hx-get]) {
+    cursor: pointer;
+}
+
+tfoot {
+    display: block;
+    flex: 1;
+    overflow: hidden;
+}
+
+tfoot tr {
+    border: none;
+    border-top: 1px solid #444;
+    height: 0;
+    flex: 1;
+}
+
+tr {
+    height: var(--row-height);
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    box-sizing: border-box;
+    border-bottom: 1px solid #444;
+}
+
+th,
+td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    padding-left: 1ch;
+}
+
+.tables {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+@media screen and (min-width: 900px) {
+    .tables {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
