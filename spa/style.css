@@ -3,8 +3,17 @@
     --print-width: clamp(200px, calc(100% - 2 * var(--side-margin)), 80ch);
 }
 
+[data-color-scheme=light] {
+    --danger: crimson;
+}
+
 [data-color-scheme=dark] {
+    --danger: lightcoral;
     color-scheme: dark;
+}
+
+.danger {
+    color: var(--danger);
 }
 
 html {
