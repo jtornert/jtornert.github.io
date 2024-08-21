@@ -1,0 +1,59 @@
+:root {
+    --side-margin: 1rem;
+    --print-width: clamp(200px, calc(100% - 2 * var(--side-margin)), 80ch);
+}
+
+[data-color-scheme=dark] {
+    color-scheme: dark;
+}
+
+html {
+    font-family: sans-serif;
+    line-height: 1.625;
+}
+
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+select,
+input {
+    letter-spacing: calc(0.1 * (1rem - 1em) + 0.04rem);
+}
+
+body {
+    height: 100svh;
+    margin: 0;
+}
+
+#root {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#page {
+    width: 100%;
+    height: 100%;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text {
+    width: var(--print-width);
+}
+
+.auto-width {
+    width: var(--print-width);
+}

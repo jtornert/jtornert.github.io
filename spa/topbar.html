@@ -1,0 +1,66 @@
+<style
+    id="topbar-style"
+    x-init="style($el)"
+>
+    .topbar {
+        display: flex;
+        justify-content: center;
+        background: #80808040;
+    }
+
+    .topbar>.content {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-block: 0.5rem;
+    }
+
+    .topbar :is(nav, .right) {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+    }
+</style>
+
+<header
+    class="topbar"
+    hx-boost="true"
+>
+    <div class="content auto-width">
+        <a
+            href="home.html"
+            hx-target="#content"
+        >
+            Brand
+        </a>
+        <div class="right">
+            <nav>
+                <a
+                    href="about.html"
+                    hx-target="#content"
+                >
+                    About
+                </a>
+                <a
+                    href="app.html"
+                    hx-target="#content"
+                >
+                    App
+                </a>
+                <a
+                    href="login.html"
+                    hx-target="#page"
+                >
+                    <button style="cursor: pointer;">
+                        Log in
+                    </button>
+                </a>
+            </nav>
+            <select x-init="colorSchemeSwitcher($el)">
+                <option value="auto">Auto</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </div>
+</header>
