@@ -1,0 +1,32 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewbox="16 16 0 0"
+    width="16"
+    height="16"
+>
+    <g
+        stroke="#ccc"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+        fill="none"
+    >
+        <path d="
+            M 7 1
+            L 1 1
+            L 1 15
+            L 15 15
+            L 15 9
+        "></path>
+
+        <path d="
+            M 9 1
+            L 15 1
+            L 15 7
+        "></path>
+
+        <path d="
+            M 15 1
+            L 5 11
+        "></path>
+    </g>
+</svg>

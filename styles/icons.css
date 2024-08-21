@@ -1,0 +1,12 @@
+i.icon {
+    --size: 0.75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    vertical-align: -0.0625em;
+    background-size: contain;
+}
+
+i.icon.new-tab {
+    background-image: url("../svg/new-tab.svg");
+}
