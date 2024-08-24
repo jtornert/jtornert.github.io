@@ -82,7 +82,7 @@ body {
     width: var(--print-width);
 }
 
-@media screen and (min-width: 40ch) {
+@media screen and (min-width: 50ch) {
     #app-wrapper {
         display: flex;
         width: var(--print-width);
