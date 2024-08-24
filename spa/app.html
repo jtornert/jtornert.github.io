@@ -5,12 +5,12 @@
 </head>
 
 <body>
-    <div style="display: flex;gap: 4rem;">
-        <aside>
+    <div id="app-wrapper">
+        <aside class="sidebar">
             <h1>Menu</h1>
             <nav
+                class="links"
                 hx-boost="true"
-                style="display: flex;flex-direction: column;gap: 1rem;"
             >
                 <a
                     href="profile.html"
@@ -28,7 +28,7 @@
         </aside>
         <div
             id="app"
-            style="width: 80ch;"
+            class="auto-width"
         >
             <div
                 hx-get="profile.html"

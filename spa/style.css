@@ -60,10 +60,40 @@ body {
     align-items: center;
 }
 
+#app-wrapper {
+    display: grid;
+    justify-items: center;
+}
+
+.sidebar {
+    width: var(--print-width);
+}
+
+.sidebar > .links {
+    display: flex;
+    gap: 1rem;
+}
+
 .text {
     width: var(--print-width);
 }
 
 .auto-width {
     width: var(--print-width);
+}
+
+@media screen and (min-width: 40ch) {
+    #app-wrapper {
+        display: flex;
+        width: var(--print-width);
+        gap: 4rem;
+    }
+
+    .sidebar {
+        width: auto;
+    }
+
+    .sidebar > .links {
+        flex-direction: column;
+    }
 }
