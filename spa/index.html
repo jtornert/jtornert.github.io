@@ -75,7 +75,10 @@
 
 <body>
     <div id="root">
-        <div id="page">
+        <div
+            id="page"
+            hx-boost="true"
+        >
             <div
                 hx-get="topbar.html"
                 hx-trigger="load"
@@ -90,13 +93,17 @@
                     everything is static. Come back to <a href="index.html">this page</a> if something breaks.
                 </small>
             </p>
-            <main id="content">
+            <div
+                id="content"
+                hx-target="this"
+            >
                 <div
                     hx-get="home.html"
+                    hx-target="this"
                     hx-trigger="load"
                     hx-swap="outerHTML"
                 ></div>
-            </main>
+            </div>
         </div>
     </div>
 </body>

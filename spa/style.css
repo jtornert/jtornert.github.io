@@ -74,12 +74,9 @@ body {
     gap: 1rem;
 }
 
-.text {
-    width: var(--print-width);
-}
-
 .auto-width {
     width: var(--print-width);
+    margin-inline: auto;
 }
 
 @media screen and (min-width: 50ch) {

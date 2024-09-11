@@ -29,9 +29,11 @@
         <div
             id="app"
             class="auto-width"
+            hx-target="this"
         >
             <div
                 hx-get="profile.html"
+                hx-target="this"
                 hx-trigger="load"
                 hx-swap="outerHTML"
             ></div>
