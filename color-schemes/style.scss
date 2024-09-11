@@ -84,12 +84,11 @@ html {
     color: var(--body-text);
     line-height: 1.625;
     accent-color: var(--primary);
-    font-size: clamp(0.875rem, 2.5svw, 1rem);
 }
 
 body {
     margin: 0;
-    margin-bottom: clamp(3rem, 5svw, 4rem);
+    margin-bottom: 3rem;
 }
 
 html,
@@ -116,20 +115,8 @@ h4,
 h5,
 h6 {
     color: var(--strong-text);
-    margin-top: clamp(1.25em, 5svw, 2em);
-    margin-bottom: clamp(0.25em, 3svw, 1em);
-}
-
-h1 {
-    font-size: clamp(2rem, 5svw, 2.5rem);
-}
-
-h2 {
-    font-size: clamp(1.5rem, 4svw, 2rem);
-}
-
-p {
-    margin-block: clamp(0.5rem, 5svw, 1rem);
+    margin-top: 1.5em;
+    margin-bottom: 1em;
 }
 
 a {
@@ -356,7 +343,7 @@ header[role=banner] {
     }
 
     select {
-        padding-block: clamp(1rem, 2.5svw, 2rem);
+        padding-block: 1rem;
 
         &[data-color=transparent] {
             background: var(--primary);
