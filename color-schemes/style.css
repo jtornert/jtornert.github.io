@@ -6,55 +6,55 @@
 
 [data-color-scheme=light] {
   --neutral: oklch(0.85 0.02 75);
-  --neutral-hover: oklch(from var(--neutral) calc(l * 0.9) calc(c * 0.9 * 1) h);
-  --neutral-active: oklch(from var(--neutral) calc(l * 0.8) calc(c * 0.8 * 1) h);
-  --neutral-outline: oklch(from var(--neutral) calc(l * 0.9) calc(c * 0.9 * 1) h);
+  --neutral-hover: oklch(from var(--neutral) calc(l * 0.9) calc(c * 0.9 * 1) h/1);
+  --neutral-active: oklch(from var(--neutral) calc(l * 0.8) calc(c * 0.8 * 1) h/1);
+  --neutral-outline: oklch(from var(--neutral) calc(l * 0.9) calc(c * 0.9 * 1) h/1);
   --neutral-contrast: var(--strong-text);
-  --neutral-shadow: var(--shadow-size) oklch(from oklch(from var(--neutral) calc(l * 0.8) calc(c * 0.8 * 1) h) l c h/0.5);
+  --neutral-shadow: var(--shadow-size) oklch(from var(--neutral) calc(l * 0.8) calc(c * 0.8 * 1) h/0.5);
   --primary: oklch(0.45 0.35 350);
-  --primary-hover: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 0.8) h);
-  --primary-active: oklch(from var(--primary) calc(l * 0.7) calc(c * 0.7 * 0.8) h);
-  --primary-outline: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 1) h);
-  --primary-contrast: oklch(from var(--primary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h);
-  --primary-shadow: var(--shadow-size) oklch(from oklch(from var(--primary) calc(l * 0.2) calc(c * 0.2 * 1) h) l c h/0.5);
+  --primary-hover: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
+  --primary-active: oklch(from var(--primary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
+  --primary-outline: oklch(from var(--primary) calc(l + (1 - l) * 0.1) calc(c * 0.9 * 1) h/1);
+  --primary-contrast: oklch(from var(--primary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h/1);
+  --primary-shadow: var(--shadow-size) oklch(from var(--primary) calc(l * 0.2) calc(c * 0.2 * 1) h/0.5);
   --secondary: oklch(0.5 0.35 180);
-  --secondary-hover: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 0.8) h);
-  --secondary-active: oklch(from var(--secondary) calc(l * 0.7) calc(c * 0.7 * 0.8) h);
-  --secondary-outline: oklch(from var(--secondary) calc(l * 0.8) calc(c * 0.8 * 1) h);
-  --secondary-contrast: oklch(from var(--secondary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h);
-  --secondary-shadow: var(--shadow-size) oklch(from oklch(from var(--secondary) calc(l * 0.8) calc(c * 0.8 * 1) h) l c h/0.5);
-  --surface-3: oklch(from var(--neutral) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h);
-  --surface-2: oklch(from var(--surface-3) calc(l + (1 - l) * 0.3) calc(c * 0.7 * 1) h);
-  --surface-1: oklch(from var(--surface-2) calc(l + (1 - l) * 0.5) calc(c * 0.5 * 1) h);
-  --body-text: oklch(from var(--neutral) calc(l * 0.55) calc(c * 0.55 * 1) h);
-  --strong-text: oklch(from var(--neutral) calc(l * 0.5) calc(c * 0.5 * 1) h);
-  --selection: oklch(from var(--primary) calc(l + (1 - l) * 0.3) calc(c * 0.7 * 0.7) h);
+  --secondary-hover: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
+  --secondary-active: oklch(from var(--secondary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
+  --secondary-outline: oklch(from var(--secondary) calc(l + (1 - l) * 0.2) calc(c * 0.8 * 1) h/1);
+  --secondary-contrast: oklch(from var(--secondary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h/1);
+  --secondary-shadow: var(--shadow-size) oklch(from var(--secondary) calc(l * 0.8) calc(c * 0.8 * 1) h/0.5);
+  --surface-3: oklch(from var(--neutral) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h/1);
+  --surface-2: oklch(from var(--surface-3) calc(l + (1 - l) * 0.3) calc(c * 0.7 * 1) h/1);
+  --surface-1: oklch(from var(--surface-2) calc(l + (1 - l) * 0.5) calc(c * 0.5 * 1) h/1);
+  --body-text: oklch(from var(--neutral) calc(l * 0.55) calc(c * 0.55 * 1) h/1);
+  --strong-text: oklch(from var(--neutral) calc(l * 0.5) calc(c * 0.5 * 1) h/1);
+  --selection: oklch(from var(--primary) calc(l + (1 - l) * 0.3) calc(c * 0.7 * 0.7) h/1);
 }
 
 [data-color-scheme=dark] {
   --neutral: oklch(0.35 0.02 75);
-  --neutral-hover: oklch(from var(--neutral) calc(l + (1 - l) * 0.15) calc(c * 0.85 * 1) h);
-  --neutral-active: oklch(from var(--neutral) calc(l * 0.85) calc(c * 0.85 * 1) h);
-  --neutral-outline: oklch(from var(--neutral) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h);
+  --neutral-hover: oklch(from var(--neutral) calc(l + (1 - l) * 0.15) calc(c * 0.85 * 1) h/1);
+  --neutral-active: oklch(from var(--neutral) calc(l * 0.85) calc(c * 0.85 * 1) h/1);
+  --neutral-outline: oklch(from var(--neutral) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h/1);
   --neutral-contrast: var(--strong-text);
-  --neutral-shadow: var(--shadow-size) oklch(from oklch(from var(--neutral) calc(l * 0.35) calc(c * 0.35 * 1) h) l c h/0.5);
+  --neutral-shadow: var(--shadow-size) oklch(from var(--neutral) calc(l * 0.4) calc(c * 0.4 * 1) h/0.5);
   --primary: oklch(0.45 0.35 350);
-  --primary-hover: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 0.8) h);
-  --primary-active: oklch(from var(--primary) calc(l * 0.7) calc(c * 0.7 * 0.8) h);
-  --primary-outline: oklch(from var(--primary) calc(l + (1 - l) * 0.15) calc(c * 0.85 * 1) h);
-  --primary-contrast: oklch(from var(--primary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h);
-  --primary-shadow: var(--shadow-size) oklch(from oklch(from var(--primary) calc(l * 0.6) calc(c * 0.6 * 1) h) l c h/0.5);
+  --primary-hover: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
+  --primary-active: oklch(from var(--primary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
+  --primary-outline: oklch(from var(--primary) calc(l + (1 - l) * 0.15) calc(c * 0.85 * 1) h/1);
+  --primary-contrast: oklch(from var(--primary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h/1);
+  --primary-shadow: var(--shadow-size) oklch(from var(--primary) calc(l * 0.6) calc(c * 0.6 * 1) h/0.5);
   --secondary: oklch(0.42 0.35 180);
-  --secondary-hover: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 0.8) h);
-  --secondary-active: oklch(from var(--secondary) calc(l * 0.7) calc(c * 0.7 * 0.8) h);
-  --secondary-outline: oklch(from var(--secondary) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h);
-  --secondary-contrast: oklch(from var(--secondary) calc(l + (1 - l) * 0.9) calc(c * 0.1 * 1) h);
-  --secondary-shadow: var(--shadow-size) oklch(from oklch(from var(--secondary) calc(l * 0.4) calc(c * 0.4 * 1) h) l c h/0.5);
-  --surface-3: oklch(from oklch(0.5 0.02 75) calc(l * 0.63) calc(c * 0.63 * 0.7) h);
-  --surface-2: oklch(from var(--surface-3) calc(l * 0.85) calc(c * 0.85 * 1) h);
-  --surface-1: oklch(from var(--surface-2) calc(l * 0.85) calc(c * 0.85 * 1) h);
-  --body-text: oklch(from oklch(0.5 0.02 75) calc(l + (1 - l) * 0.6) calc(c * 0.4 * 1) h);
-  --strong-text: oklch(from oklch(0.5 0.02 75) calc(l + (1 - l) * 0.7) calc(c * 0.3 * 1) h);
+  --secondary-hover: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
+  --secondary-active: oklch(from var(--secondary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
+  --secondary-outline: oklch(from var(--secondary) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h/1);
+  --secondary-contrast: oklch(from var(--secondary) calc(l + (1 - l) * 0.9) calc(c * 0.1 * 1) h/1);
+  --secondary-shadow: var(--shadow-size) oklch(from var(--secondary) calc(l * 0.6) calc(c * 0.6 * 1) h/0.5);
+  --surface-3: oklch(from oklch(0.5 0.02 75) calc(l * 0.63) calc(c * 0.63 * 0.7) h/1);
+  --surface-2: oklch(from var(--surface-3) calc(l * 0.85) calc(c * 0.85 * 1) h/1);
+  --surface-1: oklch(from var(--surface-2) calc(l * 0.85) calc(c * 0.85 * 1) h/1);
+  --body-text: oklch(from oklch(0.5 0.02 75) calc(l + (1 - l) * 0.6) calc(c * 0.4 * 1) h/1);
+  --strong-text: oklch(from oklch(0.5 0.02 75) calc(l + (1 - l) * 0.7) calc(c * 0.3 * 1) h/1);
   --selection: oklch(from var(--primary) l calc(c - 0.2) h);
 }
 
@@ -118,7 +118,7 @@ a {
   cursor: pointer;
   font-weight: 500;
   text-decoration-thickness: 1px;
-  text-decoration-color: oklch(from var(--secondary-outline) l c h/0.5);
+  text-decoration-color: oklch(from var(--secondary-outline) calc(l + (1 - l) * 0) calc(c * 1 * 1) h/0.5);
 }
 a:hover {
   text-decoration-color: var(--secondary-outline);
@@ -131,7 +131,7 @@ button,
 input,
 select {
   font-weight: 500;
-  border: 1px solid oklch(from var(--neutral-outline) l c h/0.5);
+  border: 1px solid oklch(from var(--neutral-outline) calc(l + (1 - l) * 0) calc(c * 1 * 1) h/0.5);
   box-shadow: var(--neutral-shadow);
   font-family: inherit;
   font-size: inherit;
@@ -155,7 +155,7 @@ button:active {
 button[data-color=primary] {
   background: var(--primary);
   color: var(--primary-contrast);
-  border-color: oklch(from var(--primary-outline) l c h/0.5);
+  border-color: oklch(from var(--primary-outline) calc(l + (1 - l) * 0) calc(c * 1 * 1) h/0.5);
   box-shadow: var(--primary-shadow);
 }
 button[data-color=primary]:hover {
@@ -167,7 +167,7 @@ button[data-color=primary]:active {
 button[data-color=secondary] {
   background: var(--secondary);
   color: var(--secondary-contrast);
-  border-color: oklch(from var(--secondary-outline) l c h/0.5);
+  border-color: oklch(from var(--secondary-outline) calc(l + (1 - l) * 0) calc(c * 1 * 1) h/0.5);
   box-shadow: var(--secondary-shadow);
 }
 button[data-color=secondary]:hover {

@@ -1,13 +1,11 @@
-@function tint($color, $amount, $desaturate: 0) {
-    @return oklch(from $color calc(l + (1 - l) * $amount) calc(c * (1 - $amount) * (1 - $desaturate)) h);
-}
+@function derive($color, $lightness: 0, $desaturate: 0, $alpha: 1) {
+    @if $lightness < 0 {
+        @return oklch(from $color calc(l * (1 + $lightness)) calc(c * (1 + $lightness) * (1 - $desaturate)) h / $alpha);
+    }
 
-@function shade($color, $amount, $desaturate: 0) {
-    @return oklch(from $color calc(l * (1 - $amount)) calc(c * (1 - $amount) * (1 - $desaturate)) h);
-}
-
-@function opacity($color, $amount) {
-    @return oklch(from $color l c h / $amount);
+    @else {
+        @return oklch(from $color calc(l + (1 - l) * $lightness) calc(c * (1 - $lightness) * (1 - $desaturate)) h / $alpha);
+    }
 }
 
 :root {
@@ -17,55 +15,55 @@
 
 [data-color-scheme=light] {
     --neutral: oklch(0.85 0.02 75);
-    --neutral-hover: #{shade(var(--neutral), 0.1)};
-    --neutral-active: #{shade(var(--neutral), 0.2)};
-    --neutral-outline: #{shade(var(--neutral), 0.1)};
+    --neutral-hover: #{derive(var(--neutral), -0.1)};
+    --neutral-active: #{derive(var(--neutral), -0.2)};
+    --neutral-outline: #{derive(var(--neutral), -0.1)};
     --neutral-contrast: var(--strong-text);
-    --neutral-shadow: var(--shadow-size) #{opacity(shade(var(--neutral), 0.2), 0.5)};
+    --neutral-shadow: var(--shadow-size) #{derive(var(--neutral), -0.2, $alpha: 0.5)};
     --primary: oklch(0.45 0.35 350);
-    --primary-hover: #{shade(var(--primary), 0.1, 0.2)};
-    --primary-active: #{shade(var(--primary), 0.3, 0.2)};
-    --primary-outline: #{shade(var(--primary), 0.1)};
-    --primary-contrast: #{tint(var(--primary), 0.95)};
-    --primary-shadow: var(--shadow-size) #{opacity(shade(var(--primary), 0.8), 0.5)};
+    --primary-hover: #{derive(var(--primary), -0.1, 0.2)};
+    --primary-active: #{derive(var(--primary), -0.3, 0.2)};
+    --primary-outline: #{derive(var(--primary), 0.1)};
+    --primary-contrast: #{derive(var(--primary), 0.95)};
+    --primary-shadow: var(--shadow-size) #{derive(var(--primary), -0.8, $alpha: 0.5)};
     --secondary: oklch(0.5 0.35 180);
-    --secondary-hover: #{shade(var(--secondary), 0.1, 0.2)};
-    --secondary-active: #{shade(var(--secondary), 0.3, 0.2)};
-    --secondary-outline: #{shade(var(--secondary), 0.2)};
-    --secondary-contrast: #{tint(var(--secondary), 0.95)};
-    --secondary-shadow: var(--shadow-size) #{opacity(shade(var(--secondary), 0.2), 0.5)};
-    --surface-3: #{tint(var(--neutral), 0.4)};
-    --surface-2: #{tint(var(--surface-3), 0.3)};
-    --surface-1: #{tint(var(--surface-2), 0.5)};
-    --body-text: #{shade(var(--neutral), 0.45)};
-    --strong-text: #{shade(var(--neutral), 0.5)};
-    --selection: #{tint(var(--primary), 0.3, 0.3)};
+    --secondary-hover: #{derive(var(--secondary), -0.1, 0.2)};
+    --secondary-active: #{derive(var(--secondary), -0.3, 0.2)};
+    --secondary-outline: #{derive(var(--secondary), 0.2)};
+    --secondary-contrast: #{derive(var(--secondary), 0.95)};
+    --secondary-shadow: var(--shadow-size) #{derive(var(--secondary), -0.2, $alpha: 0.5)};
+    --surface-3: #{derive(var(--neutral), 0.4)};
+    --surface-2: #{derive(var(--surface-3), 0.3)};
+    --surface-1: #{derive(var(--surface-2), 0.5)};
+    --body-text: #{derive(var(--neutral), -0.45)};
+    --strong-text: #{derive(var(--neutral), -0.5)};
+    --selection: #{derive(var(--primary), 0.3, 0.3)};
 }
 
 [data-color-scheme=dark] {
     --neutral: oklch(0.35 0.02 75);
-    --neutral-hover: #{tint(var(--neutral), 0.15)};
-    --neutral-active: #{shade(var(--neutral), 0.15)};
-    --neutral-outline: #{tint(var(--neutral), 0.4)};
+    --neutral-hover: #{derive(var(--neutral), 0.15)};
+    --neutral-active: #{derive(var(--neutral), -0.15)};
+    --neutral-outline: #{derive(var(--neutral), 0.4)};
     --neutral-contrast: var(--strong-text);
-    --neutral-shadow: var(--shadow-size) #{opacity(shade(var(--neutral), 0.65), 0.5)};
+    --neutral-shadow: var(--shadow-size) #{derive(var(--neutral), -0.6, $alpha: 0.5)};
     --primary: oklch(0.45 0.35 350);
-    --primary-hover: #{shade(var(--primary), 0.1, 0.2)};
-    --primary-active: #{shade(var(--primary), 0.3, 0.2)};
-    --primary-outline: #{tint(var(--primary), 0.15)};
-    --primary-contrast: #{tint(var(--primary), 0.95)};
-    --primary-shadow: var(--shadow-size) #{opacity(shade(var(--primary), 0.4), 0.5)};
+    --primary-hover: #{derive(var(--primary), -0.1, 0.2)};
+    --primary-active: #{derive(var(--primary), -0.3, 0.2)};
+    --primary-outline: #{derive(var(--primary), 0.15)};
+    --primary-contrast: #{derive(var(--primary), 0.95)};
+    --primary-shadow: var(--shadow-size) #{derive(var(--primary), -0.4, $alpha: 0.5)};
     --secondary: oklch(0.42 0.35 180);
-    --secondary-hover: #{shade(var(--secondary), 0.1, 0.2)};
-    --secondary-active: #{shade(var(--secondary), 0.3, 0.2)};
-    --secondary-outline: #{tint(var(--secondary), 0.4)};
-    --secondary-contrast: #{tint(var(--secondary), 0.9)};
-    --secondary-shadow: var(--shadow-size) #{opacity(shade(var(--secondary), 0.6), 0.5)};
-    --surface-3: #{shade(oklch(0.5 0.02 75), 0.37, 0.3)};
-    --surface-2: #{shade(var(--surface-3), 0.15)};
-    --surface-1: #{shade(var(--surface-2), 0.15)};
-    --body-text: #{tint(oklch(0.5 0.02 75), 0.6)};
-    --strong-text: #{tint(oklch(0.5 0.02 75), 0.7)};
+    --secondary-hover: #{derive(var(--secondary), -0.1, 0.2)};
+    --secondary-active: #{derive(var(--secondary), -0.3, 0.2)};
+    --secondary-outline: #{derive(var(--secondary), 0.4)};
+    --secondary-contrast: #{derive(var(--secondary), 0.9)};
+    --secondary-shadow: var(--shadow-size) #{derive(var(--secondary), -0.4, $alpha: 0.5)};
+    --surface-3: #{derive(oklch(0.5 0.02 75), -0.37, 0.3)};
+    --surface-2: #{derive(var(--surface-3), -0.15)};
+    --surface-1: #{derive(var(--surface-2), -0.15)};
+    --body-text: #{derive(oklch(0.5 0.02 75), 0.6)};
+    --strong-text: #{derive(oklch(0.5 0.02 75), 0.7)};
     --selection: oklch(from var(--primary) l calc(c - 0.2) h);
 }
 
@@ -124,7 +122,7 @@ a {
     cursor: pointer;
     font-weight: 500;
     text-decoration-thickness: 1px;
-    text-decoration-color: opacity(var(--secondary-outline), 0.5);
+    text-decoration-color: derive(var(--secondary-outline), $alpha: 0.5);
 
     &:hover {
         text-decoration-color: var(--secondary-outline);
@@ -140,7 +138,7 @@ input,
 select {
     // border-radius: var(--border-radius);
     font-weight: 500;
-    border: 1px solid opacity(var(--neutral-outline), 0.5);
+    border: 1px solid derive(var(--neutral-outline), $alpha: 0.5);
     box-shadow: var(--neutral-shadow);
     font-family: inherit;
     font-size: inherit;
@@ -164,7 +162,7 @@ button {
     &[data-color=primary] {
         background: var(--primary);
         color: var(--primary-contrast);
-        border-color: opacity(var(--primary-outline), 0.5);
+        border-color: derive(var(--primary-outline), $alpha: 0.5);
         box-shadow: var(--primary-shadow);
 
         &:hover {
@@ -179,7 +177,7 @@ button {
     &[data-color=secondary] {
         background: var(--secondary);
         color: var(--secondary-contrast);
-        border-color: opacity(var(--secondary-outline), 0.5);
+        border-color: derive(var(--secondary-outline), $alpha: 0.5);
         box-shadow: var(--secondary-shadow);
 
         &:hover {
