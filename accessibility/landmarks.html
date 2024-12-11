@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Landmarks</title>
+    </head>
+    <style>
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+            line-height: 1;
+            background: #111;
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: 25ch auto;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "header header"
+                "aside main"
+                "footer footer";
+            margin: 0;
+            height: 100svh;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        a {
+            color: #99f;
+        }
+
+        header {
+            grid-area: header;
+            background: #333;
+            padding-inline: 0.5rem;
+            padding-block: 1rem;
+            z-index: 1;
+        }
+
+        header > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header > div > nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        aside {
+            grid-area: aside;
+            background: #222;
+            padding: 0.5rem;
+        }
+
+        aside > nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        main {
+            grid-area: main;
+            padding: 0.5rem;
+        }
+
+        footer {
+            grid-area: footer;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            padding: 2rem;
+        }
+
+        article {
+            background: #222;
+            padding: 1rem;
+        }
+
+        article > :is(h1, h2, h3, h4, h5, h6) {
+            margin-top: 1rem;
+        }
+
+        hr {
+            border: none;
+            border-bottom: 1px solid #555;
+            margin-block: 3rem;
+        }
+
+        search > form {
+            position: relative;
+        }
+
+        search > form::before {
+            content: "";
+            position: absolute;
+            height: 1.25rem;
+            width: 1.25rem;
+            background: currentColor;
+            z-index: 1;
+            mask-image: url("/svg/search.svg");
+            mask-size: cover;
+        }
+
+        input[type="search"] {
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 1.25rem;
+            padding-left: 1.25rem;
+        }
+
+        .print-width {
+            width: 100%;
+            max-width: 80ch;
+            margin-inline: auto;
+        }
+
+        header,
+        aside,
+        footer,
+        article {
+            box-shadow: 0 0.125rem 0.75rem -0.125rem #0001;
+        }
+    </style>
+    <body>
+        <header>
+            <div class="print-width">
+                <a href="#">Brand</a>
+                <nav aria-label="Main navigation, pages on this site">
+                    <search>
+                        <form method="post" onsubmit="event.preventDefault()">
+                            <input
+                                type="search"
+                                name="q"
+                                id="search-q"
+                                placeholder="Search this site..."
+                                aria-label="Search this site..."
+                            />
+                        </form>
+                    </search>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="print-width">
+            <section aria-labelledby="page-title">
+                <h1 id="page-title">HTML Landmarks and Accessibility</h1>
+                <p>Very cool, very cool...</p>
+
+                <article>
+                    <h2>Here is a self-sufficient article title</h2>
+                    <p>Here is some text.</p>
+                    <button>Call to Action</button>
+                </article>
+            </section>
+
+            <hr />
+
+            <section aria-labelledby="about-title">
+                <h2 id="about-title">Here is another title</h2>
+                <p>And some other text.</p>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Officia totam laudantium repudiandae ad fugit, facere veniam
+                    quo cupiditate. Aspernatur et quae nisi nobis distinctio
+                    amet nulla quasi repellendus dicta deleniti.
+                </p>
+
+                <article>
+                    <h2>Tip</h2>
+                    <p>Don't trip yourself over when making websites.</p>
+                </article>
+            </section>
+        </main>
+
+        <aside>
+            <h2>Sidebar</h2>
+            <nav aria-label="Sidebar links, application pages">
+                <a href="#">Profile</a>
+                <a href="#">Settings</a>
+            </nav>
+        </aside>
+
+        <footer>
+            <p>Copyright 2024 &copy; Joakim Tornert</p>
+            <form
+                action="post"
+                aria-labelledby="stupid"
+                onsubmit="event.preventDefault()"
+            >
+                <h2 id="stupid" style="margin-top: 0.5rem">
+                    Never subscribe to newsletters
+                </h2>
+                <label for="email">Your silly little email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email..."
+                />
+                <button type="submit">No</button>
+            </form>
+        </footer>
+    </body>
+</html>

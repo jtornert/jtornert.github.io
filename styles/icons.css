@@ -8,5 +8,5 @@ i.icon {
 }
 
 i.icon.new-tab {
-    background-image: url("../svg/new-tab.svg");
+    background-image: url("/svg/new-tab.svg");
 }
