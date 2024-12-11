@@ -10,7 +10,7 @@
             color-scheme: dark;
             font-family: sans-serif;
             line-height: 1;
-            background: #111;
+            background: #222;
         }
 
         body {
@@ -40,12 +40,12 @@
         }
 
         a {
-            color: #99f;
+            color: #aaf;
         }
 
         header {
             grid-area: header;
-            background: #333;
+            background: #444;
             padding-inline: 0.5rem;
             padding-block: 1rem;
             z-index: 1;
@@ -65,7 +65,7 @@
 
         aside {
             grid-area: aside;
-            background: #222;
+            background: #333;
             padding: 0.5rem;
         }
 
@@ -82,7 +82,7 @@
 
         footer {
             grid-area: footer;
-            background: #333;
+            background: #444;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -91,12 +91,19 @@
         }
 
         article {
-            background: #222;
+            background: #333;
             padding: 1rem;
         }
 
         article > :is(h1, h2, h3, h4, h5, h6) {
             margin-top: 1rem;
+        }
+
+        header,
+        aside,
+        footer,
+        article {
+            box-shadow: 0 0.125rem 0.75rem -0.125rem #0002;
         }
 
         hr {
@@ -131,13 +138,6 @@
             width: 100%;
             max-width: 80ch;
             margin-inline: auto;
-        }
-
-        header,
-        aside,
-        footer,
-        article {
-            box-shadow: 0 0.125rem 0.75rem -0.125rem #0001;
         }
     </style>
     <body>
