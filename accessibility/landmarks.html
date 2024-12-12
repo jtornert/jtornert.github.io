@@ -6,6 +6,10 @@
         <title>Landmarks</title>
     </head>
     <style>
+        :root {
+            --input-height: 1.5rem;
+        }
+
         html {
             color-scheme: dark;
             font-family: sans-serif;
@@ -119,19 +123,21 @@
         search > form::before {
             content: "";
             position: absolute;
-            height: 1.25rem;
-            width: 1.25rem;
+            height: var(--input-height);
+            width: var(--input-height);
             background: currentColor;
             z-index: 1;
             mask-image: url("/svg/search.svg");
             mask-size: cover;
         }
 
-        input[type="search"] {
+        input {
             box-sizing: border-box;
-            overflow: hidden;
-            height: 1.25rem;
-            padding-left: 1.25rem;
+            height: var(--input-height);
+        }
+
+        input[type="search"] {
+            padding-left: var(--input-height);
         }
 
         .print-width {
