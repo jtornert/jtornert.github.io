@@ -59,6 +59,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-sizing: border-box;
+        }
+
+        header > div > input[type="checkbox"] {
+            display: none;
+            appearance: none;
+            width: var(--input-height);
+            height: var(--input-height);
+            background: currentColor;
+            mask-image: url("/svg/hamburger.svg");
+        }
+
+        header > div > input[type="checkbox"]:hover {
+            background: #ddd;
+        }
+
+        header > div > input[type="checkbox"]:active {
+            background: #aaa;
         }
 
         header > div > nav {
@@ -82,6 +100,7 @@
         main {
             grid-area: main;
             padding: 0.5rem;
+            box-sizing: border-box;
         }
 
         footer {
@@ -129,6 +148,7 @@
             z-index: 1;
             mask-image: url("/svg/search.svg");
             mask-size: cover;
+            pointer-events: none;
         }
 
         input {
@@ -145,11 +165,66 @@
             max-width: 80ch;
             margin-inline: auto;
         }
+
+        @media screen and (max-width: 1080px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "footer"
+                    "aside";
+            }
+
+            header {
+                padding: 0.5rem;
+                position: relative;
+            }
+
+            header > div > input[type="checkbox"] {
+                display: inline;
+            }
+
+            header > div > nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: #444;
+                padding: 0.5rem;
+            }
+
+            header > div:has(> input[type="checkbox"]:checked) > nav {
+                display: grid;
+            }
+
+            aside {
+                position: sticky;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            aside > h2 {
+                margin-block: 1rem;
+            }
+
+            aside > nav {
+                flex-direction: row;
+            }
+
+            footer {
+                flex-direction: column-reverse;
+                gap: 2rem;
+            }
+        }
     </style>
     <body>
         <header>
             <div class="print-width">
                 <a href="#">Brand</a>
+                <input type="checkbox" />
                 <nav aria-label="Main navigation, pages on this site">
                     <search>
                         <form method="post" onsubmit="event.preventDefault()">
@@ -201,7 +276,7 @@
         </main>
 
         <aside>
-            <h2>Sidebar</h2>
+            <h2>User links</h2>
             <nav aria-label="Sidebar links, application pages">
                 <a href="#">Profile</a>
                 <a href="#">Settings</a>
