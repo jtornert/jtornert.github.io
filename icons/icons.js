@@ -9,7 +9,7 @@ async function create(name) {
     const url = `${baseURL}/${name}.svg`;
     const text = await fetch(url).then((res) => res.text());
     const svg = new DOMParser().parseFromString(text, "image/svg+xml");
-    svg.querySelector("script").remove();
+    svg.querySelector("script")?.remove();
     const g = svg.querySelector("g");
     g.removeAttribute("stroke");
     g.removeAttribute("stroke-width");
