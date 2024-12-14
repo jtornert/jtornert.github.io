@@ -15,8 +15,6 @@ async function create(name) {
     g.removeAttribute("stroke-width");
     icons[name] = svg.firstElementChild;
 
-    console.debug(svg.firstElementChild);
-
     return svg.firstElementChild.cloneNode(true);
 }
 
