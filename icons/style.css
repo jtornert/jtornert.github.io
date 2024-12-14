@@ -1,0 +1,17 @@
+html {
+    color-scheme: dark;
+    font-family: sans-serif;
+}
+
+p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+[data-icon] {
+    width: 2em;
+    height: 2em;
+    stroke-width: calc((1rem - 1em) * 0.0625 * 0.618 + 2px);
+    stroke: currentColor;
+}

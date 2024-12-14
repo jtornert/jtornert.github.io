@@ -1,32 +1,31 @@
 <svg
+    class="icon"
+    viewBox="0 0 32 32"
     xmlns="http://www.w3.org/2000/svg"
-    viewbox="16 16 0 0"
-    width="16"
-    height="16"
 >
     <g
-        stroke="#ccc"
-        stroke-width="1.4"
         stroke-linejoin="round"
         fill="none"
+        stroke="#ccc"
+        stroke-width="2"
     >
         <path d="
-            M 7 1
-            L 1 1
-            L 1 15
-            L 15 15
-            L 15 9
+            M 13 6
+            L 6 6
+            L 6 26
+            L 26 26
+            L 26 19
         "></path>
 
         <path d="
-            M 9 1
-            L 15 1
-            L 15 7
+            M 16 6
+            L 26 6
+            L 26 16
         "></path>
 
         <path d="
-            M 15 1
-            L 5 11
+            M 26 6
+            L 13 19
         "></path>
     </g>
 </svg>
