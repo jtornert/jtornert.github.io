@@ -1,8 +1,7 @@
 i.icon {
-    --size: 1em;
     display: inline-block;
-    width: var(--size);
-    height: var(--size);
+    width: 1em;
+    height: 1em;
     vertical-align: -0.125em;
     background: currentColor;
     mask-size: contain;

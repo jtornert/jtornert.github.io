@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Test</title>
+    <link
+        rel="stylesheet"
+        href="https://rsms.me/inter/inter.css"
+    >
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+    <script
+        src="script.js"
+        async
+    ></script>
+    <script
+        src="//unpkg.com/alpinejs"
+        defer
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+</head>
+
+<body>
+    <main>
+        <form
+            class="text-center"
+            x-data
+            @submit="event.preventDefault(); $store.tasks.add($refs.TitleInput)"
+        >
+            <label>
+                Add tasks:
+                <input
+                    type="text"
+                    name="title"
+                    x-ref="TitleInput"
+                >
+            </label>
+            <button type="submit">+ Add</button>
+        </form>
+
+        <p
+            class="removeme"
+            style="text-align: center;"
+        >
+            Loading...
+        </p>
+        <ul
+            class="tasklist"
+            x-data
+        >
+            <template
+                x-for="task in $store.tasks.list"
+                :key="task.id"
+            >
+                <li x-bind:class="{completed: task.completed}">
+                    <span class="icon"></span>
+                    <input
+                        type="text"
+                        x-bind:value="task.title"
+                        @change="$store.tasks.update(task, {title: $el.value}, $el)"
+                    ></input>
+                    <input
+                        type="checkbox"
+                        x-bind:checked="task.completed"
+                        @change="$store.tasks.toggle(task.id)"
+                    >
+                    <button
+                        class="icon"
+                        @click="$store.tasks.remove(task.id)"
+                    >&cross;</button>
+                </li>
+            </template>
+        </ul>
+    </main>
+</body>
+
+</html>
