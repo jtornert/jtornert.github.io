@@ -7,7 +7,10 @@ document.addEventListener("alpine:init", () => {
         element.remove();
     }
 
-    new Sortable(document.querySelector(".tasklist"), { handle: "span.icon" });
+    new Sortable(document.querySelector(".tasklist"), {
+        handle: "span.icon",
+        scroll: true,
+    });
 
     Alpine.store("tasks", {
         list: [],
