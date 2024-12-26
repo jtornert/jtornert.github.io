@@ -1,9 +1,12 @@
 <svg
-    class="icon"
     viewBox="0 0 32 32"
     xmlns="http://www.w3.org/2000/svg"
 >
-    <g fill="none">
+    <g
+        fill="none"
+        stroke="#ccc"
+        stroke-width="2"
+    >
         <path d="M 4 7 L 28 7" />
         <path d="M 4 16 L 28 16" />
         <path d="M 4 25 L 28 25" />
