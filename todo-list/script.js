@@ -3,10 +3,6 @@ function id() {
 }
 
 document.addEventListener("alpine:init", () => {
-    for (const element of document.querySelectorAll(".removeme")) {
-        element.remove();
-    }
-
     new Sortable(document.querySelector(".tasklist"), {
         handle: "span.icon",
         scroll: true,
