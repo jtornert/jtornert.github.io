@@ -1,6 +1,5 @@
 @charset "UTF-8";
 :root {
-  --border-radius: 9px;
   --input-height: 1.5rem;
 }
 
@@ -8,6 +7,11 @@ html {
   color-scheme: dark;
   font-family: "Inter", sans-serif;
   background: #222;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
 }
 
 button,
@@ -70,6 +74,18 @@ input[type=checkbox]::before {
   opacity: 0;
 }
 
+main {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100svh;
+  gap: 0;
+}
+
+form {
+  padding-block: 1rem;
+  background: #222;
+}
+
 label {
   display: inline-flex;
   flex-direction: column;
@@ -86,17 +102,12 @@ label {
 .tasklist {
   list-style: none;
   padding: 0;
+  margin: 0;
   width: 100%;
   max-width: 50ch;
   margin-inline: auto;
-}
-.tasklist > li:first-of-type {
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-}
-.tasklist > li:last-of-type {
-  border-bottom-left-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
+  overflow-y: auto;
+  flex: 1;
 }
 .tasklist li {
   display: flex;
@@ -127,4 +138,10 @@ label {
   flex: 1;
   background: transparent;
   border-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    flex-direction: column;
+  }
 }
