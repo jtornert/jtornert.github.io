@@ -3,15 +3,171 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite + Svelte + TS</title>
-        <script
-            type="module"
-            crossorigin
-            src="assets/index-D65Mbaoj.js"
-        ></script>
-        <link rel="stylesheet" crossorigin href="assets/index-CV7YA33V.css" />
+        <title>Color scheme generator</title>
+        <script src="//unpkg.com/alpinejs" defer></script>
+        <link rel="stylesheet" href="style.css" />
+        <script>
+            function id() {
+                return "i" + Math.random().toString(36).slice(2);
+            }
+
+            async function setAccentColor({ l, c, h }) {
+                document.documentElement.style.accentColor = `oklch(${l} ${c} ${h})`;
+            }
+
+            function handleFormSubmit(data) {
+                const globals = Alpine.store("globals");
+                if (globals.selected) {
+                    globals.selected = undefined;
+                    setAccentColor(globals.inputs);
+                } else {
+                    globals.colors.push({
+                        l: data.l,
+                        c: data.c,
+                        h: data.h,
+                        id: id(),
+                    });
+                }
+            }
+
+            function handleRemoveColor(id) {
+                const globals = Alpine.store("globals");
+                globals.colors = globals.colors.filter((c) => c.id !== id);
+            }
+
+            function handleEditColor(id) {
+                const globals = Alpine.store("globals");
+                globals.selected = globals.colors.find((c) => c.id === id);
+                setAccentColor(globals.selected);
+            }
+
+            window.addEventListener("alpine:init", () => {
+                Alpine.store("globals", {
+                    colors: [],
+                    inputs: { l: 0.5, c: 0.2, h: 0 },
+                    selected: undefined,
+                });
+            });
+        </script>
     </head>
     <body>
-        <div id="app"></div>
+        <h1 style="text-align: center">Color scheme generator</h1>
+
+        <h2 style="font-size: 1rem; font-weight: normal; text-align: center">
+            Choose an accent color:
+        </h2>
+        <form
+            x-data="{get data() {return $store.globals.selected ?? $store.globals.inputs}}"
+            x-effect="setAccentColor(data)"
+            @submit.prevent="handleFormSubmit(data)"
+        >
+            <div class="slider-grid">
+                <label for="lightness">L</label>
+                <input
+                    id="lightness"
+                    name="lightness"
+                    type="range"
+                    min="0.3"
+                    max="0.8"
+                    step="0.01"
+                    x-model="data.l"
+                />
+                <input
+                    type="number"
+                    min="0.3"
+                    max="0.8"
+                    step="0.01"
+                    x-model.debounce="data.l"
+                />
+                <label for="chroma">C</label>
+                <input
+                    id="chroma"
+                    name="chroma"
+                    type="range"
+                    min="0.1"
+                    max="0.3"
+                    step="0.01"
+                    x-model="data.c"
+                />
+                <input
+                    type="number"
+                    min="0.1"
+                    max="0.3"
+                    step="0.01"
+                    x-model.debounce="data.c"
+                />
+                <label for="hue">H</label>
+                <input
+                    id="hue"
+                    name="hue"
+                    type="range"
+                    min="0"
+                    max="360"
+                    step="1"
+                    x-model="data.h"
+                />
+                <input
+                    type="number"
+                    min="0"
+                    max="360"
+                    step="1"
+                    x-model.debounce="data.h"
+                />
+            </div>
+            <button
+                type="submit"
+                style="width: 8ch"
+                x-text="$store.globals.selected ? 'Confirm' : '+ Add'"
+            >
+                + Add
+            </button>
+        </form>
+
+        <template x-data x-for="color in $store.globals.colors" :key="color.id">
+            <div class="demo">
+                <div class="demo-actions">
+                    <button @click="handleEditColor(color.id)">Edit</button>
+                    <button @click="handleRemoveColor(color.id)">Remove</button>
+                </div>
+                <div class="demo-areas">
+                    <template x-for="theme in ['light', 'dark']">
+                        <div
+                            class="demo-area"
+                            x-bind:data-color-scheme="theme"
+                            x-bind:style="{
+                                    '--l': color.l,
+                                    '--c': color.c,
+                                    '--h': color.h,
+                                    '--z': color.l > 0.7 ? 0.3 : 0.95
+                                }"
+                        >
+                            <header>
+                                <h2>Heading</h2>
+                                <button data-variant="accent">Button</button>
+                            </header>
+                            <aside>
+                                <h2>Sidebar</h2>
+                                <small>v1.0</small>
+                            </aside>
+                            <div>
+                                <p>
+                                    Lorem ipsum, dolor sit amet consectetur
+                                    adipisicing elit. Consequatur mollitia
+                                    voluptatem quo quia necessitatibus hic in at
+                                    minus sapiente tempore.
+                                </p>
+                                <fieldset>
+                                    <input
+                                        type="text"
+                                        placeholder="Type something..."
+                                    />
+                                    <button>Button</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
     </body>
 </html>
