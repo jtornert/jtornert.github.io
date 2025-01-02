@@ -128,7 +128,7 @@ label {
         }
 
         &.sortable-ghost {
-            background: oklch(0.7 0.2 260 / 0.5);
+            opacity: 0;
         }
 
         span.icon {
