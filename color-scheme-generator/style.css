@@ -75,7 +75,7 @@ label {
     --accent-active: color-mix(in oklab, var(--accent), black 15%);
     --accent-contrast: oklch(var(--z) 0.004 var(--h));
     --accent-border: color-mix(in oklab, var(--accent), black 10%);
-    --neutral: oklch(0.85 0.02 var(--h));
+    --neutral: oklch(0.85 0.01 var(--h));
     --neutral-hover: color-mix(in oklab, var(--neutral), black 10%);
     --neutral-active: color-mix(in oklab, var(--neutral), black 20%);
     --neutral-border: color-mix(in oklab, var(--neutral), black 10%);
@@ -84,9 +84,9 @@ label {
 }
 
 [data-color-scheme="dark"] {
-    --surface-1: oklch(0.24 0.004 var(--h));
-    --surface-2: oklch(0.28 0.004 var(--h));
-    --surface-3: oklch(0.37 0.004 var(--h));
+    --surface-1: oklch(0.24 0.002 var(--h));
+    --surface-2: oklch(0.28 0.002 var(--h));
+    --surface-3: oklch(0.37 0.002 var(--h));
     --weak-text: oklch(0.6 0.004 var(--h));
     --body-text: oklch(0.85 0.01 var(--h));
     --strong-text: oklch(0.95 0.01 var(--h));
@@ -95,7 +95,7 @@ label {
     --accent-active: color-mix(in oklab, var(--accent), black 15%);
     --accent-contrast: oklch(var(--z) 0.004 var(--h));
     --accent-border: oklch(var(--l) var(--c) var(--h));
-    --neutral: oklch(0.4 0.02 var(--h));
+    --neutral: oklch(0.4 0.01 var(--h));
     --neutral-hover: color-mix(in oklab, var(--neutral), white 15%);
     --neutral-active: color-mix(in oklab, var(--neutral), black 15%);
     --neutral-border: color-mix(in oklab, var(--neutral), white 10%);
