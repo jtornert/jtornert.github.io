@@ -80,7 +80,9 @@
                 hljs.highlightAll();
             });
         </script>
-        <script src="script.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.12"></script>
+        <script type="module" src="script.js" defer></script>
     </head>
 
     <body>
@@ -143,14 +145,14 @@
         </ui-collapse>
         <ui-menu>
             <button>Menu</button>
-            <menu style="width: 20ch; top: 100%; left: 0">
+            <menu style="width: 20ch">
                 <li><button>One</button></li>
                 <li><button>Two</button></li>
                 <li><button>Three</button></li>
                 <li>
                     <ui-menu data-wrapping>
                         <button>Click me</button>
-                        <menu style="top: 0; left: 100%">
+                        <menu>
                             <li>
                                 <button>Four (this menu wraps)</button>
                             </li>
@@ -166,7 +168,7 @@
                             <li>
                                 <ui-menu data-auto-expand>
                                     <button>Hover me</button>
-                                    <menu style="top: 0; left: 100%">
+                                    <menu>
                                         <li><button>Seven</button></li>
                                         <li><button>Eight</button></li>
                                         <li><button>Nine</button></li>

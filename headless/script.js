@@ -109,6 +109,8 @@ class Accordion extends HTMLElement {
     }
 }
 
+var topLevelMenu = undefined;
+
 class Menu extends HTMLElement {
     constructor() {
         super();
@@ -156,10 +158,36 @@ class Menu extends HTMLElement {
         }
     }
 
+    computeMenuPosition() {
+        const { computePosition, flip } = FloatingUIDOM;
+        const isTopLevelMenu = this.parentElement.closest("ui-menu") === null;
+
+        computePosition(this, this.menu, {
+            placement: isTopLevelMenu ? "bottom-start" : "right-start",
+            middleware: [
+                flip({
+                    fallbackAxisSideDirection: "end",
+                }),
+            ],
+        }).then(({ x, y }) => {
+            Object.assign(this.menu.style, {
+                left: `${x}px`,
+                top: `${y}px`,
+            });
+        });
+    }
+
     open() {
+        const { autoUpdate } = FloatingUIDOM;
+
         this.button.setAttribute("aria-expanded", "true");
         this.menu.addEventListener("keydown", this.handleKeyDown);
         this.menu.addEventListener("mouseover", this.handleMenuMouseOver);
+        this.cleanup = autoUpdate(
+            this.button,
+            this.menu,
+            this.computeMenuPosition.bind(this)
+        );
         window.addEventListener("click", this.handleOutsideClick, {
             capture: true,
         });
@@ -173,6 +201,7 @@ class Menu extends HTMLElement {
         this.button.setAttribute("aria-expanded", "false");
         this.menu.removeEventListener("keydown", this.handleKeyDown);
         this.menu.removeEventListener("mouseover", this.handleMenuMouseOver);
+        this.cleanup();
         window.removeEventListener("click", this.handleOutsideClick, {
             capture: true,
         });

@@ -23,11 +23,11 @@ ui-menu > menu {
   margin: 0;
   padding: 0;
   position: absolute;
-  width: 100%;
 }
-ui-menu > menu a,
-ui-menu > menu button,
-ui-menu > menu ui-menu {
+ui-menu a,
+ui-menu button,
+ui-menu menu,
+ui-menu ui-menu {
   width: 100%;
 }
 ui-menu > [aria-expanded=true] + menu {
