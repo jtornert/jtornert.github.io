@@ -23,13 +23,13 @@
     --primary: oklch(0.45 0.35 350);
     --primary-hover: #{derive(var(--primary), -0.1, 0.2)};
     --primary-active: #{derive(var(--primary), -0.3, 0.2)};
-    --primary-outline: #{derive(var(--primary), 0.1)};
+    --primary-outline: #{derive(var(--primary), -0.1)};
     --primary-contrast: #{derive(var(--primary), 0.95)};
     --primary-shadow: var(--shadow-size) #{derive(var(--primary), -0.8, $alpha: 0.5)};
     --secondary: oklch(0.5 0.35 180);
     --secondary-hover: #{derive(var(--secondary), -0.1, 0.2)};
     --secondary-active: #{derive(var(--secondary), -0.3, 0.2)};
-    --secondary-outline: #{derive(var(--secondary), 0.2)};
+    --secondary-outline: #{derive(var(--secondary), -0.1)};
     --secondary-contrast: #{derive(var(--secondary), 0.95)};
     --secondary-shadow: var(--shadow-size) #{derive(var(--secondary), -0.2, $alpha: 0.5)};
     --surface-3: #{derive(var(--neutral), 0.4)};

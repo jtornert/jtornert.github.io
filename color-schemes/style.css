@@ -14,13 +14,13 @@
   --primary: oklch(0.45 0.35 350);
   --primary-hover: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
   --primary-active: oklch(from var(--primary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
-  --primary-outline: oklch(from var(--primary) calc(l + (1 - l) * 0.1) calc(c * 0.9 * 1) h/1);
+  --primary-outline: oklch(from var(--primary) calc(l * 0.9) calc(c * 0.9 * 1) h/1);
   --primary-contrast: oklch(from var(--primary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h/1);
   --primary-shadow: var(--shadow-size) oklch(from var(--primary) calc(l * 0.2) calc(c * 0.2 * 1) h/0.5);
   --secondary: oklch(0.5 0.35 180);
   --secondary-hover: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 0.8) h/1);
   --secondary-active: oklch(from var(--secondary) calc(l * 0.7) calc(c * 0.7 * 0.8) h/1);
-  --secondary-outline: oklch(from var(--secondary) calc(l + (1 - l) * 0.2) calc(c * 0.8 * 1) h/1);
+  --secondary-outline: oklch(from var(--secondary) calc(l * 0.9) calc(c * 0.9 * 1) h/1);
   --secondary-contrast: oklch(from var(--secondary) calc(l + (1 - l) * 0.95) calc(c * 0.05 * 1) h/1);
   --secondary-shadow: var(--shadow-size) oklch(from var(--secondary) calc(l * 0.8) calc(c * 0.8 * 1) h/0.5);
   --surface-3: oklch(from var(--neutral) calc(l + (1 - l) * 0.4) calc(c * 0.6 * 1) h/1);
