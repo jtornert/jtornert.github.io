@@ -32,6 +32,22 @@
                 align-items: center;
             }
 
+            .code-heading > button::before {
+                content: "";
+                display: inline-block;
+                height: 1rem;
+                width: 1rem;
+                vertical-align: -0.19rem;
+                background: currentColor;
+                margin-right: 0.25rem;
+                mask-image: url("/svg/chevron.svg");
+                mask-size: cover;
+            }
+
+            .code-heading > button[aria-expanded="true"]::before {
+                rotate: 180deg;
+            }
+
             .code-heading > pre {
                 display: block;
                 grid-area: styles;
