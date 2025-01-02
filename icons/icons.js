@@ -24,5 +24,6 @@ window.addEventListener("load", async () => {
         svg.dataset.icon = element.dataset.icon;
         svg.setAttribute("style", element.style.cssText);
         element.replaceWith(svg);
+        document.body.dispatchEvent(new CustomEvent("icons:load"));
     }
 });

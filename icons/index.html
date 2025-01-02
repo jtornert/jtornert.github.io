@@ -1,100 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Icons</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="icons.js" defer></script>
+        <script>
+            window.addEventListener("load", () => {
+                const checkbox = document.querySelector("input[type=checkbox]");
 
-<head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <title>Icons</title>
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-    <script
-        src="icons.js"
-        defer
-    ></script>
-</head>
+                checkbox.checked && document.body.classList.add("spin");
 
-<body>
-    <h1>Icons</h1>
-    <p>
-        All icons are made of raw SVG data, loaded dynamically by JavaScript, and styled depending on font-size by CSS.
-    </p>
-    <p data-font-size="small1">
-        <i data-icon="hamburger"></i>
-        <i data-icon="new-tab"></i>
-        <i data-icon="search"></i>
-        <span data-icon></span>
-        <i
-            data-icon="hamburger"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="new-tab"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="search"
-            style="outline: 1px solid;"
-        ></i>
-    </p>
-    <p data-font-size="normal">
-        <i data-icon="hamburger"></i>
-        <i data-icon="new-tab"></i>
-        <i data-icon="search"></i>
-        <span data-icon></span>
-        <i
-            data-icon="hamburger"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="new-tab"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="search"
-            style="outline: 1px solid;"
-        ></i>
-    </p>
-    <p data-font-size="large1">
-        <i data-icon="hamburger"></i>
-        <i data-icon="new-tab"></i>
-        <i data-icon="search"></i>
-        <span data-icon></span>
-        <i
-            data-icon="hamburger"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="new-tab"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="search"
-            style="outline: 1px solid;"
-        ></i>
-    </p>
-    <p data-font-size="large2">
-        <i data-icon="hamburger"></i>
-        <i data-icon="new-tab"></i>
-        <i data-icon="search"></i>
-        <span data-icon></span>
-        <i
-            data-icon="hamburger"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="new-tab"
-            style="outline: 1px solid;"
-        ></i>
-        <i
-            data-icon="search"
-            style="outline: 1px solid;"
-        ></i>
-    </p>
-</body>
+                checkbox.addEventListener("change", () => {
+                    document.body.classList.toggle("spin");
+                });
 
+                document.body.addEventListener("icons:load", () => {
+                    const range = document.querySelector("input[type=range]");
+                    const display = range.nextElementSibling;
+
+                    display.innerText = range.value + "deg";
+                    for (const svg of document.querySelectorAll("svg")) {
+                        svg.style.rotate = range.value + "deg";
+                    }
+
+                    range.addEventListener("input", (e) => {
+                        display.innerText = e.currentTarget.value + "deg";
+                        for (const svg of document.querySelectorAll("svg")) {
+                            svg.style.rotate = range.value + "deg";
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>Icons</h1>
+        <p>
+            All icons are made of raw SVG data, loaded dynamically by
+            JavaScript, and styled depending on font-size by CSS.
+        </p>
+        <p>
+            <label>
+                Spin
+                <input type="checkbox" />
+            </label>
+            <label>
+                Angle
+                <input type="range" min="-180" max="180" value="0" step="45" />
+                <span></span>
+            </label>
+        </p>
+        <p data-font-size="small1">
+            <i data-icon="hamburger"></i>
+            <i data-icon="new-tab"></i>
+            <i data-icon="search"></i>
+            <i data-icon="chevron"></i>
+            <span data-icon></span>
+            <span class="frame">
+                <i data-icon="hamburger"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="new-tab"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="search"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="chevron"></i>
+            </span>
+        </p>
+        <p data-font-size="normal">
+            <i data-icon="hamburger"></i>
+            <i data-icon="new-tab"></i>
+            <i data-icon="search"></i>
+            <i data-icon="chevron"></i>
+            <span data-icon></span>
+            <span class="frame">
+                <i data-icon="hamburger"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="new-tab"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="search"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="chevron"></i>
+            </span>
+        </p>
+        <p data-font-size="large1">
+            <i data-icon="hamburger"></i>
+            <i data-icon="new-tab"></i>
+            <i data-icon="search"></i>
+            <i data-icon="chevron"></i>
+            <span data-icon></span>
+            <span class="frame">
+                <i data-icon="hamburger"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="new-tab"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="search"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="chevron"></i>
+            </span>
+        </p>
+        <p data-font-size="large2">
+            <i data-icon="hamburger"></i>
+            <i data-icon="new-tab"></i>
+            <i data-icon="search"></i>
+            <i data-icon="chevron"></i>
+            <span data-icon></span>
+            <span class="frame">
+                <i data-icon="hamburger"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="new-tab"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="search"></i>
+            </span>
+            <span class="frame">
+                <i data-icon="chevron"></i>
+            </span>
+        </p>
+    </body>
 </html>

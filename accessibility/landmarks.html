@@ -152,13 +152,16 @@
         search > form::before {
             content: "";
             position: absolute;
-            height: var(--input-height);
-            width: var(--input-height);
+            height: calc(var(--input-height) - 2px);
+            width: calc(var(--input-height) - 2px);
             background: currentColor;
             z-index: 1;
             mask-image: url("/svg/search.svg");
-            mask-size: cover;
+            mask-size: contain;
+            mask-position: center;
+            padding-inline: 0.125rem 0.25rem;
             pointer-events: none;
+            margin-top: 1px;
             opacity: 0.75;
         }
 
@@ -168,7 +171,7 @@
         }
 
         input[type="search"] {
-            padding-left: var(--input-height);
+            padding-left: calc(var(--input-height) + 0.25rem);
         }
 
         .print-width {
