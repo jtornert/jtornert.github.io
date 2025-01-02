@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Headless JavaScript</title>
+        <style>
+            html {
+                color-scheme: dark;
+                font-family: sans-serif;
+                line-height: 1.5;
+            }
+
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-size: 1rem;
+            }
+
+            hr {
+                border-top: none;
+            }
+
+            .code-heading {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "heading control"
+                    "styles styles";
+                align-items: center;
+            }
+
+            .code-heading > pre {
+                display: block;
+                grid-area: styles;
+                margin-top: 0;
+            }
+        </style>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/css.min.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                const rules = Array.from(document.styleSheets[1].cssRules).map(
+                    (r) =>
+                        r.cssText
+                            .replace("{ ", "{\n    ")
+                            .replaceAll("; ", ";\n    ")
+                            .replace("    }", "}")
+                );
+                const tags = document.querySelectorAll("pre>code");
+                for (const tag of tags) {
+                    const styles = rules.filter((r) =>
+                        r.includes(tag.dataset.tag)
+                    );
+                    tag.innerHTML = styles.join("\n\n");
+                }
+                hljs.highlightAll();
+            });
+        </script>
+        <script src="script.js" defer></script>
+    </head>
+
+    <body>
+        <h1>Headless JavaScript</h1>
+
+        <ui-collapse data-panel="ui-collapse" class="code-heading">
+            <h2>Collapsible panel cached in local storage</h2>
+            <button aria-controls="ui-collapse">Styles</button>
+            <pre
+                id="ui-collapse"
+            ><code class="language-css" data-tag="ui-collapse"></code></pre>
+        </ui-collapse>
+        <ui-collapse data-panel="panel" data-cache>
+            <button aria-controls="panel">Toggle</button>
+            <div id="panel" aria-hidden="true">
+                <h2>Panel</h2>
+                <p>Hello</p>
+            </div>
+        </ui-collapse>
+
+        <hr />
+
+        <ui-collapse data-panel="ui-accordion" class="code-heading">
+            <h2>Accordion with exclusive and persistent panels</h2>
+            <button aria-controls="ui-accordion">Styles</button>
+            <pre
+                id="ui-accordion"
+            ><code class="language-css" data-tag="ui-accordion"></code></pre>
+        </ui-collapse>
+        <ui-accordion data-persistent>
+            <h3><button aria-expanded="true">Summary</button></h3>
+            <article>
+                <p>Panel</p>
+            </article>
+
+            <h3><button>Summary</button></h3>
+            <article>
+                <p>Panel</p>
+            </article>
+
+            <h3><button>Summary</button></h3>
+            <article>
+                <p>Panel</p>
+            </article>
+
+            <h3><button>Summary</button></h3>
+            <article>
+                <p>Panel</p>
+            </article>
+        </ui-accordion>
+
+        <hr />
+
+        <ui-collapse data-panel="ui-menu" class="code-heading">
+            <h2>Menu button</h2>
+            <button aria-controls="ui-menu">Styles</button>
+            <pre
+                id="ui-menu"
+            ><code class="language-css" data-tag="ui-menu"></code></pre>
+        </ui-collapse>
+        <ui-menu>
+            <button>Menu</button>
+            <menu style="width: 20ch; top: 100%; left: 0">
+                <li><button>One</button></li>
+                <li><button>Two</button></li>
+                <li><button>Three</button></li>
+                <li>
+                    <ui-menu data-wrapping>
+                        <button>Click me</button>
+                        <menu style="top: 0; left: 100%">
+                            <li>
+                                <button>Four (this menu wraps)</button>
+                            </li>
+                            <li><button>Five</button></li>
+                            <li>
+                                <a
+                                    href="https://jtornert.github.io"
+                                    target="_blank"
+                                >
+                                    <button>Six (link)</button>
+                                </a>
+                            </li>
+                            <li>
+                                <ui-menu data-auto-expand>
+                                    <button>Hover me</button>
+                                    <menu style="top: 0; left: 100%">
+                                        <li><button>Seven</button></li>
+                                        <li><button>Eight</button></li>
+                                        <li><button>Nine</button></li>
+                                    </menu>
+                                </ui-menu>
+                            </li>
+                        </menu>
+                    </ui-menu>
+                </li>
+            </menu>
+        </ui-menu>
+
+        <div style="margin-top: 15rem"></div>
+
+        <hr />
+
+        <ui-collapse data-panel="ui-tabs" class="code-heading">
+            <h2>Horizontal tabs</h2>
+            <button aria-controls="ui-tabs">Styles</button>
+            <pre
+                id="ui-tabs"
+            ><code class="language-css" data-tag="ui-tabs"></code></pre>
+        </ui-collapse>
+        <ui-tabs>
+            <div role="tablist">
+                <button role="tab">One</button>
+                <button role="tab">Two</button>
+                <button role="tab">Three</button>
+            </div>
+            <div role="tabpanel" aria-hidden="false">
+                <h3>Hello</h3>
+                <p>One</p>
+            </div>
+            <div role="tabpanel">
+                <h3>Hello</h3>
+                <p>Two</p>
+            </div>
+            <div role="tabpanel">
+                <h3>Hello</h3>
+                <p>Three</p>
+            </div>
+        </ui-tabs>
+
+        <h2 style="font-size: 1rem; margin-top: 3rem">
+            Vertical tabs with auto select on keyboard focus cached in local
+            storage
+        </h2>
+        <ui-tabs id="important-tabs" data-select-on-focus data-cache>
+            <div role="tablist" aria-orientation="vertical">
+                <button role="tab">One</button>
+                <button role="tab">Two</button>
+                <button role="tab">Three</button>
+            </div>
+            <div role="tabpanel" aria-hidden="false">
+                <h3>Hello</h3>
+                <p>One</p>
+            </div>
+            <div role="tabpanel">
+                <h3>Hello</h3>
+                <p>Two</p>
+            </div>
+            <div role="tabpanel">
+                <h3>Hello</h3>
+                <p>Three</p>
+            </div>
+        </ui-tabs>
+    </body>
+</html>
