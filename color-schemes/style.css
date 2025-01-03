@@ -21,7 +21,7 @@
     --secondary-active: color-mix(in oklab, var(--secondary), black 30%);
     --secondary-outline: color-mix(in oklab, var(--secondary), black 10%);
     --secondary-contrast: color-mix(in oklab, var(--secondary), white 95%);
-    --secondary-shadow: color-mix(in oklab, var(--secondary), black 20%);
+    --secondary-shadow: oklch(from color-mix(in oklab, var(--secondary), black 20%) l c h / 0.5);
     --surface-3: color-mix(in oklab, var(--neutral), white 40%);
     --surface-2: color-mix(in oklab, var(--surface-3), white 30%);
     --surface-1: color-mix(in oklab, var(--surface-2), white 50%);
