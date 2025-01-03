@@ -178,19 +178,21 @@ class Menu extends HTMLElement {
     }
 
     open() {
-        const { autoUpdate } = FloatingUIDOM;
+        const { autoUpdate } = window.FloatingUIDOM ?? {};
 
         this.button.setAttribute("aria-expanded", "true");
         this.menu.addEventListener("keydown", this.handleKeyDown);
         this.menu.addEventListener("mouseover", this.handleMenuMouseOver);
-        this.cleanup = autoUpdate(
-            this.button,
-            this.menu,
-            this.computeMenuPosition.bind(this)
-        );
         window.addEventListener("click", this.handleOutsideClick, {
             capture: true,
         });
+        if (window.FloatingUIDOM) {
+            this.cleanup = autoUpdate(
+                this.button,
+                this.menu,
+                this.computeMenuPosition.bind(this)
+            );
+        }
         if (this.autoExpand) {
             window.addEventListener("mouseover", this.handleOutsideMouseOver);
         }
@@ -201,10 +203,12 @@ class Menu extends HTMLElement {
         this.button.setAttribute("aria-expanded", "false");
         this.menu.removeEventListener("keydown", this.handleKeyDown);
         this.menu.removeEventListener("mouseover", this.handleMenuMouseOver);
-        this.cleanup();
         window.removeEventListener("click", this.handleOutsideClick, {
             capture: true,
         });
+        if (window.FloatingUIDOM) {
+            this.cleanup();
+        }
         if (this.autoExpand) {
             window.removeEventListener(
                 "mouseover",
