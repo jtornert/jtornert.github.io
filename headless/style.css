@@ -1,51 +1,65 @@
-ui-collapse > [id][aria-hidden=true] {
-  display: none;
+ui-collapse {
+    >[id][aria-hidden="true"] {
+        display: none;
+    }
 }
 
-ui-accordion > :is(h2, h3, h4, h5, h6) {
-  font-size: inherit;
-  margin: 0;
-}
-ui-accordion > article {
-  display: none;
-}
-ui-accordion :has([aria-expanded=true]) + article {
-  display: block;
+ui-accordion {
+    > :is(h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        margin: 0;
+    }
+
+    >article {
+        display: none;
+    }
+
+    :has([aria-expanded="true"])+article {
+        display: block;
+    }
 }
 
 ui-menu {
-  position: relative;
-  display: inline-block;
-}
-ui-menu > menu {
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-}
-ui-menu a,
-ui-menu button,
-ui-menu menu,
-ui-menu ui-menu {
-  width: 100%;
-}
-ui-menu > [aria-expanded=true] + menu {
-  display: block;
+    position: relative;
+    display: inline-block;
+
+    >menu {
+        display: none;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+    }
+
+    a,
+    button,
+    menu,
+    ui-menu {
+        width: 100%;
+    }
+
+    >[aria-expanded="true"]+menu {
+        display: block;
+    }
 }
 
-ui-tabs:has([aria-orientation=vertical]) {
-  display: flex;
-  gap: 0.5rem;
-}
-ui-tabs:has([aria-orientation=vertical]) > [role=tablist] {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-ui-tabs > [role=tabpanel] {
-  display: none;
-}
-ui-tabs > [role=tabpanel][aria-hidden=false] {
-  display: block;
+ui-tabs {
+    &:has([aria-orientation="vertical"]) {
+        display: flex;
+        gap: 0.5rem;
+
+        &>[role="tablist"] {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+    }
+
+    >[role="tabpanel"] {
+        display: none;
+
+        &[aria-hidden="false"] {
+            display: block;
+        }
+    }
 }
