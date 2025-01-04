@@ -1,77 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; style-src 'self' rsms.me; style-src-attr 'unsafe-inline'; script-src 'nonce-a23gbfz9e'; font-src 'self' rsms.me"
+        /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test</title>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script nonce="a23gbfz9e" src="script.js"></script>
+        <script
+            defer
+            nonce="a23gbfz9e"
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/sort@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            defer
+            nonce="a23gbfz9e"
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            nonce="a23gbfz9e"
+            src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"
+        ></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <title>Test</title>
-    <link
-        rel="stylesheet"
-        href="https://rsms.me/inter/inter.css"
-    >
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-    <script
-        src="script.js"
-        async
-    ></script>
-    <script
-        src="//unpkg.com/alpinejs"
-        defer
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
-</head>
-
-<body>
-    <main>
-        <form
-            class="text-center"
-            x-data
-            @submit="event.preventDefault(); $store.tasks.add($refs.TitleInput)"
-        >
-            <label>
-                Add tasks:
-                <input
-                    type="text"
-                    name="title"
-                    x-ref="TitleInput"
-                >
-            </label>
-            <button type="submit">+ Add</button>
-        </form>
-        <ul
-            class="tasklist"
-            x-data
-        >
-            <template
-                x-for="task in $store.tasks.list"
-                :key="task.id"
-            >
-                <li x-bind:class="{completed: task.completed}">
-                    <span class="icon"></span>
-                    <input
-                        type="text"
-                        x-bind:value="task.title"
-                        @change="$store.tasks.update(task, {title: $el.value}, $el)"
-                    ></input>
-                    <input
-                        type="checkbox"
-                        x-bind:checked="task.completed"
-                        @change="$store.tasks.toggle(task.id)"
+    <body>
+        <main x-data="app">
+            <form class="text-center" @submit.prevent="add">
+                <label>
+                    Add tasks:
+                    <input type="text" name="title" />
+                </label>
+                <button type="submit">+ Add</button>
+            </form>
+            <ul class="tasklist" x-sort @end="end">
+                <template x-for="task in list" :key="task.id" x-sort:handle>
+                    <li
+                        x-sort:item
+                        x-bind:data-task-id="task.id"
+                        x-bind:class="classes.task"
                     >
-                    <button
-                        class="icon"
-                        @click="$store.tasks.remove(task.id)"
-                    >&cross;</button>
-                </li>
-            </template>
-        </ul>
-    </main>
-</body>
-
+                        <span class="icon" x-sort:handle></span>
+                        <input
+                            type="text"
+                            x-bind:value="task.title"
+                            @change="update"
+                        />
+                        <input
+                            type="checkbox"
+                            x-bind:checked="task.completed"
+                            @change="toggle"
+                        />
+                        <button class="icon" @click="remove">&cross;</button>
+                    </li>
+                </template>
+            </ul>
+        </main>
+    </body>
 </html>

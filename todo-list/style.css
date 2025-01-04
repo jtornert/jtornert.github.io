@@ -127,10 +127,6 @@ label {
             background: #0f04;
         }
 
-        &.sortable-ghost {
-            opacity: 0;
-        }
-
         span.icon {
             width: var(--input-height);
             height: var(--input-height);
