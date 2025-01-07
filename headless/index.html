@@ -66,9 +66,9 @@
                 const rules = Array.from(document.styleSheets[1].cssRules).map(
                     (r) =>
                         r.cssText
-                            .replace("{ ", "{\n    ")
+                            .replaceAll("{ ", "{\n    ")
                             .replaceAll("; ", ";\n    ")
-                            .replace("    }", "}")
+                            .replaceAll("  }", "}")
                 );
                 const tags = document.querySelectorAll("pre>code");
                 for (const tag of tags) {
