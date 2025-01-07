@@ -14,7 +14,7 @@ ui-accordion {
         display: none;
     }
 
-    :has([aria-expanded="true"])+article {
+    > :has([aria-expanded="true"])+article {
         display: block;
     }
 }
