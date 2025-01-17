@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test</title>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="reset.css" />
+        <style>
+            :root {
+                --transition-duration-in: 150ms;
+                --transition-duration-out: 75ms;
+            }
+
+            html {
+                color-scheme: light dark;
+                font-family: "Inter", sans-serif;
+            }
+
+            main {
+                margin: 1rem;
+            }
+
+            [x-bind="panel"] {
+                background: #333;
+                border-radius: 3px;
+                transition: ease allow-discrete;
+                transition-property: opacity, scale, display;
+                box-shadow: 0 1rem 4rem -0.125rem #000c;
+                max-width: min(60ch, 100% - 2rem);
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                --margin-top: clamp(1rem, 10svh, 10rem);
+                margin-top: var(--margin-top);
+                max-height: max(10rem, 80svh - var(--margin-top));
+                overflow: hidden;
+                isolation: isolate;
+
+                > * {
+                    padding: 1rem;
+                    margin: 0;
+                }
+
+                h2 {
+                    border-bottom: 1px solid #fff4;
+                    box-shadow: 0 0 0.5rem -0.125rem #0008;
+                }
+
+                p {
+                    overflow: auto;
+                    z-index: -1;
+                }
+
+                form {
+                    display: flex;
+                    justify-content: end;
+                    gap: 0.25rem;
+                    border-top: 1px solid #fff4;
+                    box-shadow: 0 0 0.5rem -0.125rem #0008;
+                }
+            }
+
+            [x-bind="close"] {
+                height: 1.5rem;
+                width: 1.5rem;
+                font-size: 60%;
+            }
+
+            .fade-in {
+                transition-duration: var(--transition-duration-in);
+                opacity: 1;
+
+                @starting-style {
+                    opacity: 0;
+                }
+            }
+
+            .fade-out {
+                transition-duration: var(--transition-duration-out);
+                opacity: 0;
+
+                @starting-style {
+                    opacity: 1;
+                }
+            }
+
+            .scale-in {
+                transition-duration: var(--transition-duration-in);
+                scale: 1;
+
+                @starting-style {
+                    scale: 0.9;
+                }
+            }
+
+            .scale-out {
+                transition-duration: var(--transition-duration-out);
+                scale: 0.75;
+
+                @starting-style {
+                    scale: 1;
+                }
+            }
+
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                pointer-events: none;
+                transition: var(--transition-duration-out) ease;
+                transition-property: backdrop-filter;
+                display: grid;
+                justify-items: center;
+                align-items: start;
+
+                &:has(> [aria-modal="true"]) {
+                    pointer-events: all;
+                    backdrop-filter: blur(2px) brightness(0.25) contrast(0.75);
+                    transition-duration: var(--transition-duration-in);
+                }
+            }
+        </style>
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"
+        ></script>
+    </head>
+    <body>
+        <div id="root">
+            <div id="page">
+                <main>
+                    <h1>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Molestias culpa minus, necessitatibus eveniet
+                        fugiat quis numquam omnis rerum nostrum quos.
+                    </h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Deleniti maiores, enim fuga pariatur quos ullam iusto
+                        recusandae et sed, ut nisi, autem dolorem? Eius cum illo
+                        ducimus sed praesentium voluptatum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Nostrum corrupti doloribus necessitatibus enim
+                        temporibus reiciendis laboriosam fugit iste, perferendis
+                        iusto.
+                    </p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Aperiam velit, similique quae sed tempora
+                        recusandae. Repudiandae odit in, optio exercitationem
+                        maiores omnis. Fugit itaque ut error quidem veniam quod
+                        nobis, ad delectus temporibus? Quam quod unde saepe
+                        delectus impedit debitis cupiditate assumenda totam.
+                        Laborum repellat sed distinctio assumenda unde illo
+                        optio similique inventore numquam neque, vitae maiores
+                        quae sequi minima a deleniti at explicabo error
+                        voluptas, ab itaque aliquam? Deserunt voluptates
+                        officiis distinctio cupiditate laudantium eum minima
+                        perspiciatis facilis repellendus tempore laborum
+                        provident quibusdam cum quod delectus nemo accusantium
+                        repellat voluptatum, et ad tenetur ex illum, magnam
+                        blanditiis. Autem, nulla!
+                    </p>
+                    <div x-data="modal">
+                        <button x-bind="trigger">Trigger</button>
+                        <template x-teleport="#overlay">
+                            <div
+                                x-bind="panel"
+                                x-transition:enter="fade-in scale-in"
+                                x-transition:leave="fade-out scale-out"
+                            >
+                                <h2>
+                                    Panel
+                                    <button
+                                        x-bind="close"
+                                        style="float: inline-end"
+                                    >
+                                        &cross;
+                                    </button>
+                                </h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Asperiores dicta
+                                    voluptatem pariatur unde? Autem, corporis
+                                    sed earum veniam nostrum repellendus, sequi
+                                    harum modi voluptatem nemo ducimus
+                                    obcaecati, recusandae quisquam asperiores.
+                                </p>
+                                <form
+                                    x-bind="form"
+                                    @submit.prevent.capture="$store.form-actions.save-form"
+                                >
+                                    <input
+                                        type="text"
+                                        name="woot"
+                                        placeholder="Placeholder..."
+                                        tabindex="0"
+                                    />
+                                    <button type="submit">Save</button>
+                                </form>
+                            </div>
+                        </template>
+                    </div>
+                </main>
+            </div>
+            <div id="overlay"></div>
+        </div>
+    </body>
+</html>
