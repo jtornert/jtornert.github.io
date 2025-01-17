@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS Reset</title>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="reset.css" />
+        <link rel="stylesheet" href="utilities.css" />
+        <style>
+            html {
+                color-scheme: dark;
+                font-family: "Inter", sans-serif;
+            }
+
+            main {
+                margin-inline: 1rem;
+            }
+
+            .transitions {
+                height: 20rem;
+                margin-bottom: 4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                overflow: hidden;
+
+                > div {
+                    background: #333;
+                    text-align: center;
+                }
+            }
+        </style>
+        <script defer src="collapse.js"></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+    </head>
+    <body>
+        <main>
+            <h1 data-font-size="large5">CSS Reset</h1>
+            <hr />
+            <h1 data-font-size="large5">Heading</h1>
+            <h2 data-font-size="large4">Heading</h2>
+            <h3 data-font-size="large3">Heading</h3>
+            <h4 data-font-size="large2">Heading</h4>
+            <h5 data-font-size="large1">Heading</h5>
+            <h6 data-font-size="normal">Heading</h6>
+            <p>Paragraph</p>
+            <p><a href="#bottom">Go to bottom</a></p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam
+                molestiae numquam veritatis odit odio maiores. Fugit voluptas,
+                esse ducimus iure laboriosam tempora fuga reprehenderit!
+                Accusantium pariatur neque illum quasi natus.
+            </p>
+            <p><q>Quote</q></p>
+            <blockquote>Blockquote</blockquote>
+            <fieldset>
+                <legend>Legend</legend>
+                <label>Label</label>
+                <button>Button</button>
+                <input type="text" placeholder="Input" />
+                <select>
+                    <optgroup label="Option group">
+                        <option>Select</option>
+                    </optgroup>
+                </select>
+                <textarea>Text area</textarea>
+            </fieldset>
+            <dl>
+                <dt>Data <dfn>term</dfn></dt>
+                <dd>Data term description</dd>
+            </dl>
+            <figure>
+                <img
+                    src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg"
+                    alt="image"
+                />
+                <figcaption>Figure captions</figcaption>
+            </figure>
+            <pre>Pre-formatted text</pre>
+            <code>Code</code>
+            <kbd>Enter</kbd>
+            <time datetime="2000-01-01">Date</time>
+            <p id="bottom"><em>You've reached the bottom.</em></p>
+            <hr />
+            <h2 data-font-size="large5">Utilities</h2>
+            <h3 data-font-size="large1">
+                Font size adjustments with tailored letter spacing
+            </h3>
+            <p data-font-size="large6">large6</p>
+            <p data-font-size="large5">large5</p>
+            <p data-font-size="large4">large4</p>
+            <p data-font-size="large3">large3</p>
+            <p data-font-size="large2">large2</p>
+            <p data-font-size="large1">large1</p>
+            <p data-font-size="normal">normal</p>
+            <p data-font-size="small1">small1</p>
+            <p data-font-size="small2">small2</p>
+            <p data-font-size="small3">small3</p>
+            <h3 data-font-size="large1">Transitions</h3>
+            <div class="transitions" x-data="{visible: false}">
+                <button @click="visible = !visible">Toggle visibility</button>
+                <div
+                    x-show="visible"
+                    x-transition:enter="transition fade-in"
+                    x-transition:leave="transition fade-out"
+                >
+                    <p>FaGde</p>
+                </div>
+                <div
+                    x-show="visible"
+                    x-transition:enter="transition scale-in"
+                    x-transition:leave="transition scale-out"
+                >
+                    <p>Scale</p>
+                </div>
+                <div
+                    x-show="visible"
+                    x-transition:enter="transition fly-in"
+                    x-transition:leave="transition fly-out"
+                    style="--fly-in-x: 2rem; --fly-out-x: -4rem"
+                >
+                    <p>Fly</p>
+                </div>
+                <div x-show="visible" x-collapse>
+                    <p>Collapse (JavaScript)</p>
+                </div>
+            </div>
+            <hr style="margin-bottom: 4rem" />
+        </main>
+    </body>
+</html>
