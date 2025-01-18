@@ -1,0 +1,27 @@
+<div
+    x-init="modal-open"
+    x-data="modal"
+    x-bind="panel"
+    x-transition:enter="fade-in scale-in"
+    x-transition:leave="fade-out scale-out"
+>
+    <h2>
+        Panel
+        <button @click="modal-close" style="float: inline-end">&cross;</button>
+    </h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+        dicta voluptatem pariatur unde? Autem, corporis sed earum veniam nostrum
+        repellendus, sequi harum modi voluptatem nemo ducimus obcaecati,
+        recusandae quisquam asperiores.
+    </p>
+    <form @submit.prevent="$store.form-actions.save-form">
+        <input
+            type="text"
+            name="woot"
+            placeholder="Placeholder..."
+            tabindex="0"
+        />
+        <button type="submit">Save</button>
+    </form>
+</div>

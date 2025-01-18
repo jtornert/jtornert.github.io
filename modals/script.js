@@ -14,17 +14,49 @@ document.addEventListener("alpine:init", () => {
                 if (input) input.value = "";
 
                 alert(woot);
+                target.dispatchEvent(
+                    new CustomEvent("ui:modal-close", { bubbles: true })
+                );
+            }
+        },
+    });
+
+    Alpine.store("ui", {
+        /** @param {Event & {currentTarget: EventTarget & HTMLElement}} e */
+        remove(e) {
+            const target = e.currentTarget;
+
+            if (target.getAttribute("x-transition:leave")) {
+                const style = getComputedStyle(document.documentElement);
+                const transitionDurationOut = Number(
+                    style
+                        .getPropertyValue("--transition-duration-out")
+                        .replace(/[a-z]+/, "")
+                );
+
+                console.debug(target);
+
+                setTimeout(() => {
+                    console.debug(target);
+
+                    target.remove();
+                }, transitionDurationOut);
             } else {
-                e.stopPropagation();
+                target.remove();
             }
         },
     });
 
     Alpine.data("modal", () => ({
+        init() {
+            this.$el.addEventListener("ui:modal-open", () => {
+                this.open = true;
+            });
+        },
         open: false,
         trigger: {
             "@click"() {
-                this.open = true;
+                this.$dispatch("ui:modal-open");
             },
         },
         panel: {
@@ -32,12 +64,15 @@ document.addEventListener("alpine:init", () => {
                 return this.open;
             },
             "@click.outside"() {
-                this.open = false;
+                this.$dispatch("ui:modal-close");
             },
             "@keydown.escape"() {
-                this.open = false;
+                this.$dispatch("ui:modal-close");
             },
             "@keydown.escape.outside"() {
+                this.$dispatch("ui:modal-close");
+            },
+            "@ui:modal-close"() {
                 this.open = false;
             },
             "x-show"() {
@@ -47,15 +82,11 @@ document.addEventListener("alpine:init", () => {
                 return this.open;
             },
         },
-        close: {
-            "@click"() {
-                this.open = false;
-            },
+        "modal-open"() {
+            this.$dispatch("ui:modal-open");
         },
-        form: {
-            "@submit"() {
-                this.open = false;
-            },
+        "modal-close"() {
+            this.$dispatch("ui:modal-close");
         },
     }));
 });

@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Test</title>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link rel="stylesheet" href="reset.css" />
         <style>
             :root {
                 --transition-duration-in: 150ms;
@@ -121,12 +120,48 @@
                     transition-duration: var(--transition-duration-in);
                 }
             }
+
+            .htmx-indicator {
+                display: none;
+            }
+
+            .htmx-request.htmx-indicator,
+            .htmx-request .htmx-indicator {
+                display: inline-block;
+            }
+
+            button.htmx-request + i.icon::after {
+                content: "";
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                vertical-align: -0.125em;
+                background: currentColor;
+                mask-image: url("/svg/spinner.svg");
+                mask-size: contain;
+                animation: spin 1000ms linear infinite;
+            }
+
+            @keyframes spin {
+                from {
+                    rotate: 0deg;
+                }
+
+                to {
+                    rotate: 360deg;
+                }
+            }
         </style>
         <script src="script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
         <script
             defer
             src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            src="https://unpkg.com/htmx.org@2.0.4"
+            integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+            crossorigin="anonymous"
         ></script>
     </head>
     <body>
@@ -168,7 +203,7 @@
                         blanditiis. Autem, nulla!
                     </p>
                     <div x-data="modal">
-                        <button x-bind="trigger">Trigger</button>
+                        <button x-bind="trigger">With raw Alpine</button>
                         <template x-teleport="#overlay">
                             <div
                                 x-bind="panel"
@@ -178,7 +213,7 @@
                                 <h2>
                                     Panel
                                     <button
-                                        x-bind="close"
+                                        @click="modal-close"
                                         style="float: inline-end"
                                     >
                                         &cross;
@@ -193,8 +228,7 @@
                                     obcaecati, recusandae quisquam asperiores.
                                 </p>
                                 <form
-                                    x-bind="form"
-                                    @submit.prevent.capture="$store.form-actions.save-form"
+                                    @submit.prevent="$store.form-actions.save-form"
                                 >
                                     <input
                                         type="text"
@@ -207,6 +241,10 @@
                             </div>
                         </template>
                     </div>
+                    <button hx-get="modal.html" hx-target="#overlay">
+                        With htmx and Alpine
+                    </button>
+                    <i class="icon"></i>
                 </main>
             </div>
             <div id="overlay"></div>
