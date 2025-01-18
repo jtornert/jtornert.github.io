@@ -101,7 +101,8 @@
                 }
             }
 
-            #overlay {
+            #overlay-alpine,
+            #overlay-htmx {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -204,7 +205,7 @@
                     </p>
                     <div x-data="modal">
                         <button x-bind="trigger">With raw Alpine</button>
-                        <template x-teleport="#overlay">
+                        <template x-teleport="#overlay-alpine">
                             <div
                                 x-bind="panel"
                                 x-transition:enter="fade-in scale-in"
@@ -241,13 +242,14 @@
                             </div>
                         </template>
                     </div>
-                    <button hx-get="modal.html" hx-target="#overlay">
+                    <button hx-get="modal.html" hx-target="#overlay-htmx">
                         With htmx and Alpine
                     </button>
                     <i class="icon"></i>
                 </main>
             </div>
-            <div id="overlay"></div>
+            <div id="overlay-alpine"></div>
+            <div id="overlay-htmx"></div>
         </div>
     </body>
 </html>
