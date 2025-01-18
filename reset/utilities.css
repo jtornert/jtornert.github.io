@@ -54,6 +54,10 @@ textarea,
     letter-spacing: 0.15ch;
 }
 
+.print-width {
+    max-width: 50rem;
+}
+
 .transition {
     transition-property: opacity, scale, translate, clip-path;
     transition-timing-function: ease;
