@@ -55,7 +55,7 @@ textarea,
 }
 
 .print-width {
-    max-width: 50rem;
+    max-width: min(50rem, 100% - 16px);
 }
 
 .transition {
