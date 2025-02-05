@@ -2,6 +2,9 @@ html,
 label,
 button,
 input,
+small,
+sub,
+sup,
 select,
 textarea,
 [data-font-size] {
@@ -47,6 +50,9 @@ textarea,
     --rem: 0.875;
 }
 
+small,
+sub,
+sup,
 [data-font-size="small2"] {
     --rem: 0.75;
 }
