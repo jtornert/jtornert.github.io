@@ -65,6 +65,10 @@ sup,
     max-width: min(50rem, 100% - 16px);
 }
 
+div[role="separator"][aria-orientation="vertical"] {
+    border-left: 1px solid;
+}
+
 .transition {
     transition-property: opacity, scale, translate;
     transition-timing-function: ease;
