@@ -3,38 +3,9 @@
     --print-width: clamp(200px, calc(100% - 2 * var(--side-margin)), 80ch);
 }
 
-[data-color-scheme=light] {
-    --danger: crimson;
-}
-
-[data-color-scheme=dark] {
-    --danger: lightcoral;
-    color-scheme: dark;
-}
-
-.danger {
-    color: var(--danger);
-}
-
 html {
     font-family: sans-serif;
-    line-height: 1.625;
-}
-
-html,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-small,
-button,
-select,
-input {
-    letter-spacing: calc(0.1 * (1rem - 1em) + 0.04rem);
+    color-scheme: dark;
 }
 
 body {
