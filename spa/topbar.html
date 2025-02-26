@@ -1,14 +1,11 @@
-<style
-    id="topbar-style"
-    x-init="style($el)"
->
+<style id="topbar-style" x-init="style($el)">
     .topbar {
         display: flex;
         justify-content: center;
         background: #80808040;
     }
 
-    .topbar>.content {
+    .topbar > .content {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -22,30 +19,15 @@
     }
 </style>
 
-<header
-    class="topbar"
-    hx-boost="true"
-    hx-target="#content"
->
+<header class="topbar" hx-target="#content">
     <div class="content auto-width">
-        <a href="home.html">
-            Brand
-        </a>
+        <a href="home.html"> Brand </a>
         <div class="right">
             <nav>
-                <a href="about.html">
-                    About
-                </a>
-                <a href="app.html">
-                    App
-                </a>
-                <a
-                    href="login.html"
-                    hx-target="#page"
-                >
-                    <button style="cursor: pointer;">
-                        Log in
-                    </button>
+                <a href="about.html"> About </a>
+                <a href="app.html"> App </a>
+                <a href="login.html" hx-target="#page">
+                    <button style="cursor: pointer">Log in</button>
                 </a>
             </nav>
             <select x-init="colorSchemeSwitcher($el)">

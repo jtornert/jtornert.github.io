@@ -1,44 +1,25 @@
 <html>
+    <head>
+        <title>App</title>
+    </head>
 
-<head>
-    <title>App</title>
-</head>
-
-<body>
-    <div id="app-wrapper">
-        <aside class="sidebar">
-            <h1>Menu</h1>
-            <nav
-                class="links"
-                hx-boost="true"
-            >
-                <a
-                    href="profile.html"
-                    hx-target="#app"
-                >
-                    Profile
-                </a>
-                <a
-                    href="settings.html"
-                    hx-target="#app"
-                >
-                    Settings
-                </a>
-            </nav>
-        </aside>
-        <div
-            id="app"
-            class="auto-width"
-            hx-target="this"
-        >
-            <div
-                hx-get="profile.html"
-                hx-target="this"
-                hx-trigger="load"
-                hx-swap="outerHTML"
-            ></div>
+    <body>
+        <div id="app-wrapper">
+            <aside class="sidebar">
+                <h1>Menu</h1>
+                <nav class="links">
+                    <a href="profile.html" hx-target="#app"> Profile </a>
+                    <a href="settings.html" hx-target="#app"> Settings </a>
+                </nav>
+            </aside>
+            <div id="app" class="auto-width" hx-target="this">
+                <div
+                    hx-get="profile.html"
+                    hx-target="this"
+                    hx-trigger="load"
+                    hx-swap="outerHTML"
+                ></div>
+            </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>

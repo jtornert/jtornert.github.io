@@ -1,111 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <script>
-        function setAutoDocumentColorScheme(isDarkMode) {
-            if (isDarkMode) {
-                document.documentElement.dataset.colorScheme = "dark";
-            } else {
-                document.documentElement.dataset.colorScheme = "light";
+    <head>
+        <script>
+            function setAutoDocumentColorScheme(isDarkMode) {
+                if (isDarkMode) {
+                    document.documentElement.dataset.colorScheme = "dark";
+                } else {
+                    document.documentElement.dataset.colorScheme = "light";
+                }
             }
-        }
 
-        const systemColorScheme = matchMedia("(prefers-color-scheme: dark)");
-        const preference = localStorage.getItem("colorScheme");
-
-        if (preference === null) {
-            setAutoDocumentColorScheme(systemColorScheme.matches);
-        } else {
-            document.documentElement.dataset.colorScheme = preference;
-        }
-
-        systemColorScheme.addEventListener("change", (e) => {
+            const systemColorScheme = matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
             const preference = localStorage.getItem("colorScheme");
 
             if (preference === null) {
-                setAutoDocumentColorScheme(e.matches);
-            }
-        });
-
-    </script>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <meta
-        name="htmx-config"
-        content='{"historyCacheSize":0}'
-    >
-    <title>Home</title>
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-    <script
-        src="https://unpkg.com/htmx.org@2.0.1/dist/htmx.js"
-        integrity="sha384-gpIh5aLQ0qmX8kZdyhsd6jA24uKLkqIr1WAGtantR4KsS97l/NRBvh8/8OYGThAf"
-        crossorigin="anonymous"
-    ></script>
-    <script src="https://unpkg.com/htmx-ext-multi-swap@2.0.0/multi-swap.js"></script>
-    <script
-        defer
-        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.js"
-    ></script>
-    <script src="color-scheme-switcher.js"></script>
-    <script>
-        function style(element) {
-            const existingStyles = document.head.querySelector("style#" + element.id)
-            const node = element.cloneNode(true);
-            node.removeAttribute("x-init");
-            if (existingStyles) {
-                existingStyles.replaceWith(node)
+                setAutoDocumentColorScheme(systemColorScheme.matches);
             } else {
-                document.head.appendChild(node)
+                document.documentElement.dataset.colorScheme = preference;
             }
-            element.remove()
-        }
 
-        function script(element) {
-            element.remove()
-        }
-    </script>
-</head>
+            systemColorScheme.addEventListener("change", (e) => {
+                const preference = localStorage.getItem("colorScheme");
 
-<body>
-    <div id="root">
-        <div
-            id="page"
-            hx-boost="true"
-        >
-            <div
-                hx-get="topbar.html"
-                hx-trigger="load"
-                hx-swap="outerHTML"
-            ></div>
-            <p
-                class="auto-width"
-                style="margin-inline: auto;"
-            >
-                <small class="danger">
-                    NOTE: Page reloads do not work as intended since
-                    everything is static. Come back to <a href="index.html">this page</a> if something breaks.
-                </small>
-            </p>
-            <div
-                id="content"
-                hx-target="this"
-            >
+                if (preference === null) {
+                    setAutoDocumentColorScheme(e.matches);
+                }
+            });
+        </script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="htmx-config" content='{"historyCacheSize":0}' />
+        <title>Home</title>
+        <link rel="stylesheet" href="style.css" />
+        <script
+            src="https://unpkg.com/htmx.org@2.0.1/dist/htmx.js"
+            integrity="sha384-gpIh5aLQ0qmX8kZdyhsd6jA24uKLkqIr1WAGtantR4KsS97l/NRBvh8/8OYGThAf"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://unpkg.com/htmx-ext-multi-swap@2.0.0/multi-swap.js"></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.js"
+        ></script>
+        <script src="color-scheme-switcher.js"></script>
+        <script>
+            function style(element) {
+                const existingStyles = document.head.querySelector(
+                    "style#" + element.id
+                );
+                const node = element.cloneNode(true);
+                node.removeAttribute("x-init");
+                if (existingStyles) {
+                    existingStyles.replaceWith(node);
+                } else {
+                    document.head.appendChild(node);
+                }
+                element.remove();
+            }
+
+            function script(element) {
+                element.remove();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="root">
+            <div id="page" hx-boost="true" hx-push-url="false">
                 <div
-                    hx-get="home.html"
-                    hx-target="this"
+                    hx-get="topbar.html"
                     hx-trigger="load"
                     hx-swap="outerHTML"
                 ></div>
+                <div id="content" hx-target="this">
+                    <div
+                        hx-get="home.html"
+                        hx-target="this"
+                        hx-trigger="load"
+                        hx-swap="outerHTML"
+                    ></div>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
