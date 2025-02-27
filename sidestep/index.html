@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Boosted links</title>
+        <script
+            src="https://unpkg.com/htmx.org@2.0.4"
+            integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+            crossorigin="anonymous"
+        ></script>
+        <style>
+            html {
+                color-scheme: dark;
+                font-family: sans-serif;
+            }
+        </style>
+        <script>
+            htmx.defineExtension("sidestep", {
+                onEvent: function (name, evt) {
+                    if (name === "htmx:beforeProcessNode") {
+                        const target = evt.target;
+                        if (!target.href)
+                            throw new Error("link must have href");
+                        if (!target.getAttribute("hx-get"))
+                            throw new Error("link must have hx-get");
+                        if (!target.getAttribute("hx-push-url"))
+                            target.setAttribute("hx-push-url", target.href);
+                    }
+                },
+            });
+        </script>
+    </head>
+
+    <body hx-boost="true">
+        <h1>Sidestepping links</h1>
+        <p>
+            <a href="/headless" hx-swap="none">This link goes to /headless</a>
+        </p>
+        <p>
+            <a
+                href="/headless"
+                hx-get="/modals"
+                hx-push-url="/headless"
+                hx-swap="none"
+            >
+                This link goes to /headless but sidestepped to /modals
+            </a>
+        </p>
+        <p>
+            <a
+                href="/headless"
+                hx-get="/modals"
+                hx-ext="sidestep"
+                hx-swap="none"
+            >
+                This link goes to /headless but sidestepped to /modals and is
+                controlled by htmx extension
+            </a>
+        </p>
+    </body>
+</html>
