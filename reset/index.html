@@ -47,7 +47,7 @@
         ></script>
     </head>
     <body>
-        <main class="print-width" style="margin-inline: auto">
+        <main class="print-width">
             <h1 data-font-size="large5">CSS Reset</h1>
             <hr />
             <h1>Heading</h1>
@@ -67,12 +67,68 @@
                     Smaller text. Lorem ipsum dolor sit amet consectetur.
                 </small>
             </p>
-            <p>Baseline<sub>Subscript</sub><sup>Superscript</sup></p>
+            <p>
+                <span>Baseline<sub>Subscript</sub><sup>Superscript</sup></span>
+                <span>H<sub>2</sub>O</span>
+                <span>
+                    e<sup><i>i</i>&pi;</sup> + 1 = 0
+                </span>
+                <math>
+                    <mrow>
+                        <mi>letterspacing</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow>
+                                <mn>1</mn>
+                            </mrow>
+                            <mrow>
+                                <mn>10</mn>
+                                <mo></mo>
+                                <mi>&phi;</mi>
+                            </mrow>
+                        </mfrac>
+                        <mo>(</mo>
+                        <mfrac>
+                            <mrow>
+                                <mn>1</mn>
+                                <mo></mo>
+                                <mi>ch</mi>
+                            </mrow>
+                            <mrow>
+                                <msup>
+                                    <mi>rem</mi>
+                                    <mi>e</mi>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                        <mi>ch</mi>
+                        <mo>)</mo>
+                    </mrow>
+                </math>
+            </p>
             <p><q>Quote</q></p>
             <blockquote>
                 <p>Blockquote</p>
             </blockquote>
             <p><cite>Citation</cite></p>
+            <ol>
+                <li>Ordered lists</li>
+                <li>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Hic, laboriosam laudantium. Culpa saepe quod quaerat
+                    reprehenderit aperiam totam eum voluptatum.
+                </li>
+            </ol>
+            <ul>
+                <li>Unordered lists</li>
+                <li>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Hic, laboriosam laudantium. Culpa saepe quod quaerat
+                    reprehenderit aperiam totam eum voluptatum.
+                </li>
+            </ul>
             <div style="display: flex; justify-content: space-between">
                 <p>Vertical</p>
                 <div role="separator" aria-orientation="vertical"></div>
@@ -93,18 +149,38 @@
             <dl>
                 <dt>Data <dfn>term</dfn></dt>
                 <dd>Data term description</dd>
+                <dd>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Iste officiis numquam animi modi ex libero at vel voluptatum
+                    aliquam voluptas.
+                </dd>
             </dl>
             <figure>
                 <img
                     src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg"
                     alt="image"
                 />
-                <figcaption>Figure captions</figcaption>
+                <figcaption>
+                    Figure captions: Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Hic aliquam assumenda sint fugit. Ipsum,
+                    officiis neque voluptatibus reiciendis minus commodi?
+                </figcaption>
             </figure>
-            <pre>Pre-formatted text</pre>
-            <code>Code</code>
-            <kbd>Enter</kbd>
-            <time datetime="2000-01-01">Date</time>
+            <pre>
+Pre-formatted text:
+Lorem ipsum dolor sit amet
+consectetur adipisicing elit.
+
+Voluptates quasi optio
+inventore iusto vitae
+doloribus vel omnis mollitia
+et alias.</pre
+            >
+            <p><code>Code</code></p>
+            <p><kbd>Keyboard</kbd></p>
+            <p>
+                <time datetime="2000-01-01">Date</time>
+            </p>
             <hr />
             <h2 data-font-size="large5">Utilities</h2>
             <h3 data-font-size="large4">
@@ -132,7 +208,7 @@
             <p data-font-size="small1">small1</p>
             <p data-font-size="small2">small2</p>
             <p data-font-size="small3">small3</p>
-            <h3 data-font-size="large4">Transitions</h3>
+            <h3 data-font-size="large4">Transitions (using Alpine.js)</h3>
             <div class="transitions" x-data="{visible: false}">
                 <button @click="visible = !visible">Toggle visibility</button>
                 <div

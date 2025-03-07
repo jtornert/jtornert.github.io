@@ -9,7 +9,7 @@ select,
 textarea,
 [data-font-size] {
     font-size: calc(var(--rem) * 1rem);
-    letter-spacing: calc(1 / pow(var(--rem), 2.71828) * 0.061803ch - 0.061803ch);
+    letter-spacing: calc(0.061803 * (1ch / pow(var(--rem), 2.71828) - 1ch));
 }
 
 [data-font-size="large6"] {
@@ -62,11 +62,12 @@ sup,
 }
 
 .print-width {
-    max-width: min(50rem, 100% - 16px);
+    max-width: min(50rem, 100% - 24px);
+    margin-inline: auto;
 }
 
 div[role="separator"][aria-orientation="vertical"] {
-    border-left: 1px solid;
+    border-left: 1px solid gray;
 }
 
 .transition {
