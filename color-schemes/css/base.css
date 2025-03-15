@@ -1,7 +1,7 @@
-@import url("css/color-scheme-light.css") layer(theme) (scripting: none) and
+@import url("color-scheme-light.css") layer(theme) (scripting: none) and
         (prefers-color-scheme: light),
     (scripting: enabled);
-@import url("css/color-scheme-dark.css") layer(theme) (scripting: none) and
+@import url("color-scheme-dark.css") layer(theme) (scripting: none) and
         (prefers-color-scheme: dark),
     (scripting: enabled);
 
