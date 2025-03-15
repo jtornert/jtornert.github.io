@@ -1,0 +1,33 @@
+html,
+[data-color-scheme="light"] {
+    --neutral: oklch(0.85 0.02 75);
+    --neutral-hover: color-mix(in oklab, var(--neutral), black 10%);
+    --neutral-active: color-mix(in oklab, var(--neutral), black 20%);
+    --neutral-outline: color-mix(in oklab, var(--neutral), black 10%);
+    --neutral-contrast: var(--strong-text);
+    --neutral-shadow: oklch(
+        from color-mix(in oklab, var(--neutral), black 20%) l c h / 0.5
+    );
+    --primary: oklch(0.45 0.35 350);
+    --primary-hover: color-mix(in oklab, var(--primary), black 10%);
+    --primary-active: color-mix(in oklab, var(--primary), black 30%);
+    --primary-outline: color-mix(in oklab, var(--primary), black 10%);
+    --primary-contrast: color-mix(in oklab, var(--primary), white 95%);
+    --primary-shadow: oklch(
+        from color-mix(in oklab, var(--primary), black 80%) l c h / 0.5
+    );
+    --secondary: oklch(0.5 0.35 180);
+    --secondary-hover: color-mix(in oklab, var(--secondary), black 10%);
+    --secondary-active: color-mix(in oklab, var(--secondary), black 30%);
+    --secondary-outline: color-mix(in oklab, var(--secondary), black 10%);
+    --secondary-contrast: color-mix(in oklab, var(--secondary), white 95%);
+    --secondary-shadow: oklch(
+        from color-mix(in oklab, var(--secondary), black 20%) l c h / 0.5
+    );
+    --surface-3: color-mix(in oklab, var(--neutral), white 40%);
+    --surface-2: color-mix(in oklab, var(--surface-3), white 30%);
+    --surface-1: color-mix(in oklab, var(--surface-2), white 50%);
+    --body-text: color-mix(in oklab, var(--neutral), black 45%);
+    --strong-text: color-mix(in oklab, var(--neutral), black 50%);
+    --selection: color-mix(in oklab, var(--primary), white 30%);
+}

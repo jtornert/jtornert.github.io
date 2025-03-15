@@ -1,60 +1,13 @@
+@import url("css/color-scheme-light.css") layer(theme) (scripting: none) and
+        (prefers-color-scheme: light),
+    (scripting: enabled);
+@import url("css/color-scheme-dark.css") layer(theme) (scripting: none) and
+        (prefers-color-scheme: dark),
+    (scripting: enabled);
+
 :root {
     --shadow-size: 0.0625rem 0.125rem 0.375rem -0.125rem;
     --border-radius: 3px;
-}
-
-[data-color-scheme=light] {
-    --neutral: oklch(0.85 0.02 75);
-    --neutral-hover: color-mix(in oklab, var(--neutral), black 10%);
-    --neutral-active: color-mix(in oklab, var(--neutral), black 20%);
-    --neutral-outline: color-mix(in oklab, var(--neutral), black 10%);
-    --neutral-contrast: var(--strong-text);
-    --neutral-shadow: oklch(from color-mix(in oklab, var(--neutral), black 20%) l c h / 0.5);
-    --primary: oklch(0.45 0.35 350);
-    --primary-hover: color-mix(in oklab, var(--primary), black 10%);
-    --primary-active: color-mix(in oklab, var(--primary), black 30%);
-    --primary-outline: color-mix(in oklab, var(--primary), black 10%);
-    --primary-contrast: color-mix(in oklab, var(--primary), white 95%);
-    --primary-shadow: oklch(from color-mix(in oklab, var(--primary), black 80%) l c h / 0.5);
-    --secondary: oklch(0.5 0.35 180);
-    --secondary-hover: color-mix(in oklab, var(--secondary), black 10%);
-    --secondary-active: color-mix(in oklab, var(--secondary), black 30%);
-    --secondary-outline: color-mix(in oklab, var(--secondary), black 10%);
-    --secondary-contrast: color-mix(in oklab, var(--secondary), white 95%);
-    --secondary-shadow: oklch(from color-mix(in oklab, var(--secondary), black 20%) l c h / 0.5);
-    --surface-3: color-mix(in oklab, var(--neutral), white 40%);
-    --surface-2: color-mix(in oklab, var(--surface-3), white 30%);
-    --surface-1: color-mix(in oklab, var(--surface-2), white 50%);
-    --body-text: color-mix(in oklab, var(--neutral), black 45%);
-    --strong-text: color-mix(in oklab, var(--neutral), black 50%);
-    --selection: color-mix(in oklab, var(--primary), white 30%);
-}
-
-[data-color-scheme=dark] {
-    --neutral: oklch(0.35 0.02 75);
-    --neutral-hover: color-mix(in oklab, var(--neutral), white 15%);
-    --neutral-active: color-mix(in oklab, var(--neutral), black 15%);
-    --neutral-outline: color-mix(in oklab, var(--neutral), white 40%);
-    --neutral-contrast: var(--strong-text);
-    --neutral-shadow: oklch(from color-mix(in oklab, var(--neutral), black 60%) l c h / 0.5);
-    --primary: oklch(0.45 0.35 350);
-    --primary-hover: color-mix(in oklab, var(--primary), black 10%);
-    --primary-active: color-mix(in oklab, var(--primary), black 30%);
-    --primary-outline: color-mix(in oklab, var(--primary), white 15%);
-    --primary-contrast: color-mix(in oklab, var(--primary), white 95%);
-    --primary-shadow: oklch(from color-mix(in oklab, var(--primary), black 40%) l c h / 0.5);
-    --secondary: oklch(0.42 0.35 180);
-    --secondary-hover: color-mix(in oklab, var(--secondary), black 10%);
-    --secondary-active: color-mix(in oklab, var(--secondary), black 30%);
-    --secondary-outline: color-mix(in oklab, var(--secondary), white 40%);
-    --secondary-contrast: color-mix(in oklab, var(--secondary), white 90%);
-    --secondary-shadow: oklch(from color-mix(in oklab, var(--secondary), black 40%) l c h / 0.5);
-    --surface-3: color-mix(in oklab, oklch(0.5 0.01 75), black 37%);
-    --surface-2: color-mix(in oklab, var(--surface-3), black 15%);
-    --surface-1: color-mix(in oklab, var(--surface-2), black 15%);
-    --body-text: color-mix(in oklab, oklch(0.5 0.02 75), white 60%);
-    --strong-text: color-mix(in oklab, oklch(0.5 0.02 75), white 70%);
-    --selection: oklch(from var(--primary) l calc(c * 0.35) h);
 }
 
 ::selection {
@@ -149,7 +102,7 @@ button {
         background: var(--neutral-active);
     }
 
-    &[data-color=primary] {
+    &[data-color="primary"] {
         background: var(--primary);
         color: var(--primary-contrast);
         border-color: oklch(from var(--primary-outline) l c h / 0.5);
@@ -164,7 +117,7 @@ button {
         }
     }
 
-    &[data-color=secondary] {
+    &[data-color="secondary"] {
         background: var(--secondary);
         color: var(--secondary-contrast);
         border-color: oklch(from var(--secondary-outline) l c h / 0.5);
@@ -179,7 +132,7 @@ button {
         }
     }
 
-    &[data-color=transparent] {
+    &[data-color="transparent"] {
         --a: 0;
         background: oklch(from var(--body-text) l c h / var(--a));
         color: var(--strong-text);
@@ -212,7 +165,7 @@ input {
     }
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
     appearance: none;
     height: 1.5em;
     width: 1.5em;
@@ -264,7 +217,7 @@ input[type=checkbox] {
         }
     }
 
-    &[data-color=secondary]:checked {
+    &[data-color="secondary"]:checked {
         background: var(--secondary);
         border-color: oklch(from var(--secondary-outline) l c h / 0.4);
         box-shadow: var(--shadow-size) var(--secondary-shadow);
@@ -301,7 +254,7 @@ label {
     user-select: none;
 }
 
-header[role=banner] {
+header[role="banner"] {
     background: var(--primary);
     box-shadow: var(--shadow-size) var(--primary-shadow);
     position: sticky;
@@ -333,7 +286,7 @@ header[role=banner] {
     select {
         padding-block: 1rem;
 
-        &[data-color=transparent] {
+        &[data-color="transparent"] {
             background: var(--primary);
             color: var(--primary-contrast);
             border-color: transparent;
