@@ -29,11 +29,8 @@ systemColorScheme.addEventListener("change", (e) => {
 function setColorSchemePreference(preference) {
     if (preference === "auto") {
         localStorage.removeItem("colorScheme");
-        if (matchMedia("(prefers-color-scheme: dark)").matches) {
-            document.documentElement.dataset.colorScheme = "dark";
-        } else {
-            document.documentElement.dataset.colorScheme = "light";
-        }
+        const isDarkMode = matchMedia("(prefers-color-scheme: dark)").matches;
+        setAutoDocumentColorScheme(isDarkMode);
     } else {
         localStorage.setItem("colorScheme", preference);
         document.documentElement.dataset.colorScheme = preference;
