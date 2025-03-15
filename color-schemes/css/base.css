@@ -162,14 +162,17 @@ textarea {
     }
 }
 
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
     appearance: none;
     height: 1.5em;
     width: 1.5em;
     position: relative;
     cursor: pointer;
+}
+
+input[type="checkbox"] {
     color: var(--primary-contrast);
-    background: var(--neutral);
 
     &::before {
         content: "\2713";
@@ -188,14 +191,12 @@ input[type="checkbox"] {
         opacity: 1;
     }
 
-    &:not(:disabled) {
-        &:hover {
-            background: var(--neutral-hover);
-        }
+    &:hover {
+        background: var(--neutral-hover);
+    }
 
-        &:active {
-            background: var(--neutral-active);
-        }
+    &:active {
+        background: var(--neutral-active);
     }
 
     &:checked {
@@ -227,6 +228,47 @@ input[type="checkbox"] {
 
             &:active {
                 background: var(--secondary-active);
+            }
+        }
+    }
+}
+
+input[type="radio"] {
+    position: relative;
+    border-radius: 9999px;
+
+    &:hover {
+        background: var(--neutral-hover);
+    }
+
+    &:active {
+        background: var(--neutral-active);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        right: 0.25rem;
+        bottom: 0.25rem;
+        border-radius: 9999px;
+    }
+
+    &:checked {
+        border-color: var(--primary-outline);
+
+        &::before {
+            background: var(--primary-outline);
+        }
+    }
+
+    &[data-color="secondary"] {
+        &:checked {
+            border-color: var(--secondary-outline);
+
+            &::before {
+                background: var(--secondary-outline);
             }
         }
     }
