@@ -21,7 +21,9 @@
                         <option value="dark">Dark</option>
                     </select>
                     <script>
-                        colorSchemeSwitcher(document.querySelector("select"));
+                        colorSchemeSwitcher(
+                            document.currentScript.previousElementSibling
+                        );
                     </script>
                 </nav>
             </div>
@@ -53,7 +55,7 @@
                 <button data-color="primary">Button</button>
                 <button data-color="secondary">Button</button>
                 <button data-color="transparent">Button</button>
-                <a href="#non-existent">Link</a>
+                <a href="#nonexistent">Link</a>
                 <input type="text" placeholder="Email..." />
                 <input type="checkbox" checked />
                 <input type="checkbox" data-color="secondary" checked />

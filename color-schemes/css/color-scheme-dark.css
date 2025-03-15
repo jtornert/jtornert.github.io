@@ -11,7 +11,7 @@ html,
     --primary: oklch(0.45 0.35 350);
     --primary-hover: color-mix(in oklab, var(--primary), black 10%);
     --primary-active: color-mix(in oklab, var(--primary), black 30%);
-    --primary-outline: color-mix(in oklab, var(--primary), white 15%);
+    --primary-outline: color-mix(in oklab, var(--primary), white 40%);
     --primary-contrast: color-mix(in oklab, var(--primary), white 95%);
     --primary-shadow: oklch(
         from color-mix(in oklab, var(--primary), black 40%) l c h / 0.5
