@@ -315,9 +315,3 @@ header[role="banner"] {
 .surface-3 {
     background: var(--surface-3);
 }
-
-.auto-width {
-    width: calc(100% - 2rem);
-    max-width: 60rem;
-    margin-inline: auto;
-}
