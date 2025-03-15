@@ -5,85 +5,90 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Color schemes</title>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="/reset/reset.css" />
+        <link rel="stylesheet" href="/reset/utilities.css" />
         <link rel="stylesheet" href="css/base.css" />
     </head>
 
     <body>
-        <header role="banner">
-            <div class="auto-width">
-                <a href="#">Brand</a>
-                <nav>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                    <select data-color="transparent">
-                        <option value="auto">Auto</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                    </select>
-                    <script>
-                        colorSchemeSwitcher(
-                            document.currentScript.previousElementSibling
-                        );
-                    </script>
-                </nav>
-            </div>
-        </header>
-        <main class="auto-width">
-            <h1>Color schemes</h1>
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus qui maiores velit quae est laborum doloribus, esse nisi
-                magni ullam! Ea similique distinctio molestias veritatis commodi
-                optio doloremque obcaecati minima!
-            </p>
-            <h2>Heading</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga,
-                explicabo optio quae, temporibus commodi ut
-                <a href="#">magnam</a> fugit suscipit consequuntur beatae rerum
-                eos reprehenderit provident hic illo. Nobis qui quos distinctio!
-            </p>
-            <div
-                style="
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                    align-items: center;
-                "
-            >
-                <button>Button</button>
-                <button data-color="primary">Button</button>
-                <button data-color="secondary">Button</button>
-                <button data-color="transparent">Button</button>
-                <a href="#nonexistent">Link</a>
-                <input type="text" placeholder="Email..." />
-                <input type="checkbox" checked />
-                <input type="checkbox" data-color="secondary" checked />
-            </div>
-            <div class="surface-1">
+        <div id="root">
+            <header role="banner">
+                <div class="auto-width">
+                    <a href="#">Brand</a>
+                    <nav>
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <select data-color="transparent">
+                            <option value="auto">Auto</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                        <script>
+                            colorSchemeSwitcher(
+                                document.currentScript.previousElementSibling
+                            );
+                        </script>
+                    </nav>
+                </div>
+            </header>
+            <main class="auto-width">
+                <h1 data-font-size="large5">Color schemes</h1>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                    suscipit. Commodi repudiandae autem expedita, iure nemo quo
-                    officiis, quaerat explicabo dignissimos mollitia in dolor
-                    itaque vitae quasi, id adipisci quod.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Possimus qui maiores velit quae est laborum doloribus, esse
+                    nisi magni ullam! Ea similique distinctio molestias
+                    veritatis commodi optio doloremque obcaecati minima!
                 </p>
-            </div>
-            <div class="surface-2">
+                <h2 data-font-size="large3">Heading</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                    suscipit. Commodi repudiandae autem expedita, iure nemo quo
-                    officiis, quaerat explicabo dignissimos mollitia in dolor
-                    itaque vitae quasi, id adipisci quod.
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Fuga, explicabo optio quae, temporibus commodi ut
+                    <a href="#">magnam</a> fugit suscipit consequuntur beatae
+                    rerum eos reprehenderit provident hic illo. Nobis qui quos
+                    distinctio!
                 </p>
-            </div>
-            <div class="surface-3">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                    suscipit. Commodi repudiandae autem expedita, iure nemo quo
-                    officiis, quaerat explicabo dignissimos mollitia in dolor
-                    itaque vitae quasi, id adipisci quod.
-                </p>
-            </div>
-        </main>
+                <div
+                    style="
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        align-items: center;
+                    "
+                >
+                    <button>Button</button>
+                    <button data-color="primary">Button</button>
+                    <button data-color="secondary">Button</button>
+                    <button data-color="transparent">Button</button>
+                    <a href="#nonexistent">Link</a>
+                    <input type="text" placeholder="Email..." />
+                    <input type="checkbox" checked />
+                    <input type="checkbox" data-color="secondary" checked />
+                </div>
+                <div class="surface-1">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ea, suscipit. Commodi repudiandae autem expedita, iure
+                        nemo quo officiis, quaerat explicabo dignissimos
+                        mollitia in dolor itaque vitae quasi, id adipisci quod.
+                    </p>
+                </div>
+                <div class="surface-2">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ea, suscipit. Commodi repudiandae autem expedita, iure
+                        nemo quo officiis, quaerat explicabo dignissimos
+                        mollitia in dolor itaque vitae quasi, id adipisci quod.
+                    </p>
+                </div>
+                <div class="surface-3">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ea, suscipit. Commodi repudiandae autem expedita, iure
+                        nemo quo officiis, quaerat explicabo dignissimos
+                        mollitia in dolor itaque vitae quasi, id adipisci quod.
+                    </p>
+                </div>
+            </main>
+        </div>
     </body>
 </html>

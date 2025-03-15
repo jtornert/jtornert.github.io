@@ -27,16 +27,8 @@ html {
     accent-color: var(--primary);
 }
 
-body {
-    margin: 0;
-    margin-bottom: 3rem;
-}
-
-html,
-button,
-input,
-select {
-    letter-spacing: calc(0.07 * (1rem - 1em) + 0.03rem);
+#root {
+    margin-bottom: 1rem;
 }
 
 h1,
