@@ -4,11 +4,16 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>jtornert</title>
+        <link rel="preconnect" href="https://rsms.me/" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="reset/reset.css" />
+        <link rel="stylesheet" href="reset/utilities.css" />
         <link rel="stylesheet" href="styles/icons.css" />
         <style>
             html {
                 color-scheme: dark;
-                font-family: sans-serif;
+                font-family: "Inter", sans-serif;
+                background: #222;
             }
 
             body {
@@ -17,60 +22,174 @@
                 margin-top: 2rem;
                 padding-inline: 1rem;
             }
+
+            .tag {
+                display: inline-block;
+                padding-inline: 1ch;
+                border-radius: 9999px;
+            }
+
+            .tag::before {
+                content: attr(data-label);
+            }
+
+            .tag[data-label="htmx"] {
+                background: oklch(56.93% 0.1653 261.81);
+            }
+
+            .tag[data-label="alpine.js"] {
+                background: oklch(76.87% 0.0775 213.99);
+                color: #2d3441;
+            }
+
+            .tag[data-label="a11y"] {
+                background: oklch(35.23% 0 0);
+                color: #eed009;
+            }
+
+            .tag[data-label="css"] {
+                background: oklch(44.03% 0.1603 303.37);
+            }
+
+            .tag[data-label="svg"] {
+                background: oklch(81.97% 0.1563 74.37);
+                color: black;
+            }
         </style>
     </head>
 
     <body>
-        <h1 style="font: inherit"><small>jtornert code stash</small></h1>
-        <p>
-            <a
-                href="https://github.com/jtornert/jtornert.github.io"
-                target="_blank"
-                referrerpolicy="no-referrer"
-            >
-                Source <i class="icon new-tab"></i>
-            </a>
-        </p>
-        <h2>htmx</h2>
-        <p>
-            <a href="lazy-tables/index.html">Lazy tables</a>
-        </p>
-        <p>
-            <a href="spa/index.html">SPA layouts</a>
-        </p>
-        <p>
-            <a href="sidestep/index.html">Sidestepping links</a>
-        </p>
-        <h2>Alpine.js</h2>
-        <p>
-            <a href="todo-list/index.html">Sortable todo list (WIP)</a>
-        </p>
-        <p>
-            <a href="modals/index.html">Modals</a>
-        </p>
-        <h2>JavaScript</h2>
-        <p>
-            <a href="headless/index.html">Headless JavaScript</a>
-        </p>
-        <h2>CSS</h2>
-        <p>
-            <a href="color-schemes/index.html">Color schemes</a>
-        </p>
-        <p>
-            <a href="color-scheme-generator/index.html">
-                Color scheme generator
-            </a>
-        </p>
-        <p>
-            <a href="reset/index.html">CSS reset</a>
-        </p>
-        <h2>SVG</h2>
-        <p>
-            <a href="icons/index.html">Icons</a>
-        </p>
-        <h2>Accessibility</h2>
-        <p>
-            <a href="accessibility/landmarks.html">Landmarks</a>
-        </p>
+        <div>
+            <h1 style="font: inherit"><small>jtornert code stash</small></h1>
+            <p>
+                <a
+                    href="https://github.com/jtornert/jtornert.github.io"
+                    target="_blank"
+                    referrerpolicy="no-referrer"
+                >
+                    Source <i class="icon new-tab"></i>
+                </a>
+            </p>
+            <hr />
+            <h2 data-font-size="large1">Examples</h2>
+            <p>
+                <a href="color-scheme-generator/index.html">
+                    Color scheme generator
+                </a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="alpine.js"
+                ></span>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="css"
+                ></span>
+            </p>
+            <p>
+                <a href="color-schemes/index.html">Color schemes</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="a11y"
+                ></span>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="css"
+                ></span>
+            </p>
+            <p>
+                <a href="reset/index.html">CSS reset</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="css"
+                ></span>
+            </p>
+            <p>
+                <a href="headless/index.html">Headless JavaScript</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="a11y"
+                ></span>
+            </p>
+            <p>
+                <a href="icons/index.html">Icons</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="css"
+                ></span>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="svg"
+                ></span>
+            </p>
+            <p>
+                <a href="accessibility/landmarks.html">Landmarks</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="svg"
+                ></span>
+            </p>
+            <p>
+                <a href="lazy-tables/index.html">Lazy tables</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="htmx"
+                ></span>
+            </p>
+            <p>
+                <a href="modals/index.html">Modals</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="alpine.js"
+                ></span>
+            </p>
+            <p>
+                <a href="sidestep/index.html">Sidestepping links</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="htmx"
+                ></span>
+            </p>
+            <p>
+                <a href="todo-list/index.html">Sortable todo list (WIP)</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="alpine.js"
+                ></span>
+            </p>
+            <p>
+                <a href="spa/index.html">SPA layouts</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="htmx"
+                ></span>
+            </p>
+            <p>
+                <a href="prototyping/index.html">Ultra fast prototyping</a>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="htmx"
+                ></span>
+                <span
+                    class="tag"
+                    data-font-size="small1"
+                    data-label="alpine.js"
+                ></span>
+            </p>
+        </div>
     </body>
 </html>
