@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta
+            name="htmx-config"
+            content='{
+                "scrollIntoViewOnBoost": false
+            }'
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demo Prototype</title>
+        <link rel="stylesheet" href="/reset/reset.css" />
+        <link rel="stylesheet" href="/reset/utilities.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            src="https://unpkg.com/htmx.org@2.0.4"
+            integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <div id="root">
+            <div id="page">
+                <header class="topbar">
+                    <div class="content print-width" hx-swap="outerHTML">
+                        <a
+                            href="pages/home.html"
+                            hx-boost="true"
+                            hx-target="#topbar-layout-slot"
+                            hx-push-url="false"
+                        >
+                            Brand
+                        </a>
+                        <nav>
+                            <a
+                                href="pages/about.html"
+                                hx-boost="true"
+                                hx-target="#topbar-layout-slot"
+                                hx-push-url="false"
+                            >
+                                About
+                            </a>
+                            <a
+                                href="pages/contact.html"
+                                hx-boost="true"
+                                hx-target="#topbar-layout-slot"
+                                hx-push-url="false"
+                            >
+                                Contact
+                            </a>
+                            <button
+                                hx-get="api/topbar/login.html"
+                                hx-swap="outerHTML"
+                                hx-trigger="load delay:500"
+                            >
+                                <i data-icon="spinner"></i>
+                            </button>
+                        </nav>
+                    </div>
+                </header>
+                <main
+                    id="topbar-layout-slot"
+                    class="print-width"
+                    hx-get="pages/home.html"
+                    hx-trigger="load delay:800"
+                    hx-swap="outerHTML"
+                >
+                    <div style="text-align: center; margin-top: 4rem">
+                        <i data-icon="spinner"></i>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

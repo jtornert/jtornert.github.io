@@ -1,0 +1,46 @@
+<div
+    class="topbar-user"
+    x-data="{visible: false}"
+    @click.outside="visible = false"
+    @keydown.escape="visible = false"
+    @keydown.escape.outside="visible = false"
+>
+    <button @click="visible = !visible">User One</button>
+    <ul x-show="visible" x-trap.inert="visible">
+        <li>
+            <button
+                hx-get="pages/app.html"
+                hx-target="#topbar-layout-slot"
+                hx-swap="outerHTML"
+                @click="visible = false"
+            >
+                Go to app
+            </button>
+        </li>
+        <hr />
+        <li>
+            <button
+                hx-get="pages/app/profile.html"
+                hx-target="#topbar-layout-slot"
+                hx-swap="outerHTML"
+                @click="visible = false"
+            >
+                Profile
+            </button>
+        </li>
+        <li>
+            <button
+                hx-get="pages/app/settings.html"
+                hx-target="#topbar-layout-slot"
+                hx-swap="outerHTML"
+                @click="visible = false"
+            >
+                Settings
+            </button>
+        </li>
+        <hr />
+        <li>
+            <button onclick="window.location.reload()">Log out</button>
+        </li>
+    </ul>
+</div>
