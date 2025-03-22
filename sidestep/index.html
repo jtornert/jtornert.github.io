@@ -14,6 +14,10 @@
                 color-scheme: dark;
                 font-family: sans-serif;
             }
+
+            #slot {
+                padding: 0;
+            }
         </style>
         <script>
             htmx.defineExtension("sidestep", {
@@ -40,28 +44,32 @@
             location.
         </p>
         <p>
-            <a href="/headless" hx-swap="none">This link goes to /headless</a>
-        </p>
-        <p>
-            <a
-                href="/headless"
-                hx-get="/modals"
-                hx-push-url="/headless"
-                hx-swap="none"
-            >
-                This link goes to /headless but sidestepped to /modals
+            <a href="page.html" hx-target="#slot" hx-push-url="false">
+                This link goes to page.html
             </a>
         </p>
         <p>
             <a
-                href="/headless"
-                hx-get="/modals"
-                hx-ext="sidestep"
-                hx-swap="none"
+                href="page.html"
+                hx-get="api.html"
+                hx-target="#slot"
+                hx-push-url="false"
             >
-                This link goes to /headless but sidestepped to /modals and is
+                This link goes to page.html but sidestepped to api.html
+            </a>
+        </p>
+        <p>
+            <a
+                href="page.html"
+                hx-get="api.html"
+                hx-ext="sidestep"
+                hx-target="#slot"
+                hx-push-url="false"
+            >
+                This link goes to page.html but sidestepped to api.html and is
                 controlled by htmx extension
             </a>
         </p>
+        <ul id="slot"></ul>
     </body>
 </html>
