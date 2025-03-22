@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <link rel="stylesheet" href="reset/reset.css" />
         <link rel="stylesheet" href="reset/utilities.css" />
-        <link rel="stylesheet" href="styles/icons.css" />
         <style>
             html {
                 color-scheme: dark;
@@ -20,6 +19,19 @@
                 max-width: 50ch;
                 margin: auto;
                 padding-inline: 1rem;
+            }
+
+            i.icon {
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                vertical-align: -0.125em;
+                background: currentColor;
+                mask-size: contain;
+            }
+
+            i.icon.new-tab {
+                mask-image: url("/svg/new-tab.svg");
             }
 
             .tag {
