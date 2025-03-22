@@ -86,6 +86,13 @@ html {
     }
 }
 
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: start;
+}
+
 .list {
     display: flex;
     flex-direction: column;

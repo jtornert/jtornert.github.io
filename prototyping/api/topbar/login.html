@@ -1,1 +1,8 @@
-<button hx-get="api/topbar/user.html" hx-swap="outerHTML">Log in</button>
+<button
+    id="topbar-user"
+    hx-get="pages/login.html"
+    hx-target="#topbar-layout-slot"
+    hx-swap="outerHTML"
+>
+    Log in
+</button>
