@@ -64,12 +64,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/css.min.js"></script>
         <script>
             window.addEventListener("load", () => {
-                const rules = Array.from(document.styleSheets[1].cssRules).map(
-                    (r) =>
-                        r.cssText
-                            .replaceAll("{ ", "{\n    ")
-                            .replaceAll("; ", ";\n    ")
-                            .replaceAll("  }", "}")
+                const stylesheet = Array.prototype.find.call(
+                    document.styleSheets,
+                    (ss) =>
+                        ss.href
+                            ? new URL(ss.href).pathname.endsWith(
+                                  "/headless/style.css"
+                              )
+                            : false
+                );
+                const rules = Array.from(stylesheet.cssRules).map((r) =>
+                    r.cssText
+                        .replaceAll("{ ", "{\n    ")
+                        .replaceAll("; ", ";\n    ")
+                        .replaceAll("  }", "}")
                 );
                 const tags = document.querySelectorAll("pre>code");
                 for (const tag of tags) {
