@@ -1,210 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>jtornert</title>
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link rel="stylesheet" href="reset/reset.css" />
-        <link rel="stylesheet" href="reset/utilities.css" />
-        <style>
-            html {
-                color-scheme: dark;
-                font-family: "Inter", sans-serif;
-                background: #222;
-            }
 
-            body {
-                max-width: 50ch;
-                margin: auto;
-                padding-inline: 1rem;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jtornert</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="reset/reset.css" />
+    <link rel="stylesheet" href="reset/utilities.css" />
+    <style>
+        html {
+            color-scheme: dark;
+            font-family: "Inter", sans-serif;
+            background: #222;
+        }
 
-            i.icon {
-                display: inline-block;
-                width: 1em;
-                height: 1em;
-                vertical-align: -0.125em;
-                background: currentColor;
-                mask-size: contain;
-            }
+        body {
+            max-width: 50ch;
+            margin: auto;
+            padding-inline: 1rem;
+        }
 
-            i.icon.new-tab {
-                mask-image: url("/svg/new-tab.svg");
-            }
+        i.icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.125em;
+            background: currentColor;
+            mask-size: contain;
+        }
 
-            .tag {
-                display: inline-block;
-                padding-inline: 1ch;
-                border-radius: 9999px;
-            }
+        i.icon.new-tab {
+            mask-image: url("/svg/new-tab.svg");
+        }
 
-            .tag::before {
-                content: attr(data-label);
-            }
+        .tag {
+            display: inline-block;
+            padding-inline: 1ch;
+            border-radius: 9999px;
+        }
 
-            .tag[data-label="a11y"] {
-                background: oklch(35.23% 0 0);
-                color: #eed009;
-            }
+        .tag::before {
+            content: attr(data-label);
+        }
 
-            .tag[data-label="alpine.js"] {
-                background: oklch(76.87% 0.0775 213.99);
-                color: #2d3441;
-            }
+        .tag[data-label="a11y"] {
+            background: oklch(35.23% 0 0);
+            color: #eed009;
+        }
 
-            .tag[data-label="css"] {
-                background: oklch(44.03% 0.1603 303.37);
-                color: white;
-            }
+        .tag[data-label="alpine.js"] {
+            background: oklch(76.87% 0.0775 213.99);
+            color: #2d3441;
+        }
 
-            .tag[data-label="htmx"] {
-                background: oklch(56.93% 0.1653 261.81);
-                color: #f5f5f5;
-            }
+        .tag[data-label="css"] {
+            background: oklch(44.03% 0.1603 303.37);
+            color: white;
+        }
 
-            .tag[data-label="svg"] {
-                background: oklch(81.97% 0.1563 74.37);
-                color: black;
-            }
-        </style>
-    </head>
+        .tag[data-label="htmx"] {
+            background: oklch(56.93% 0.1653 261.81);
+            color: #f5f5f5;
+        }
 
-    <body>
-        <div>
-            <h1 style="font: inherit; margin-top: 2rem">
-                <small>jtornert code stash</small>
-            </h1>
-            <p>
-                <a
-                    href="https://github.com/jtornert/jtornert.github.io"
-                    target="_blank"
-                    referrerpolicy="no-referrer"
-                >
-                    Source <i class="icon new-tab"></i>
-                </a>
-            </p>
-            <hr />
-            <h2 data-font-size="large1">Examples</h2>
-            <p>
-                <a href="click-latency/index.html">Click latency</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="a11y"
-                ></span>
-            </p>
-            <p>
-                <a href="color-scheme-generator/index.html">
-                    Color scheme generator
-                </a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="alpine.js"
-                ></span>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="css"
-                ></span>
-            </p>
-            <p>
-                <a href="color-schemes/index.html">Color schemes</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="a11y"
-                ></span>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="css"
-                ></span>
-            </p>
-            <p>
-                <a href="reset/index.html">CSS reset</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="css"
-                ></span>
-            </p>
-            <p>
-                <a href="headless/index.html">Headless JavaScript</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="a11y"
-                ></span>
-            </p>
-            <p>
-                <a href="icons/index.html">Icons</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="css"
-                ></span>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="svg"
-                ></span>
-            </p>
-            <p>
-                <a href="accessibility/landmarks.html">Landmarks</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="a11y"
-                ></span>
-            </p>
-            <p>
-                <a href="lazy-tables/index.html">Lazy tables</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="htmx"
-                ></span>
-            </p>
-            <p>
-                <a href="modals/index.html">Modals</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="alpine.js"
-                ></span>
-            </p>
-            <p>
-                <a href="sidestep/index.html">Sidestepping links</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="htmx"
-                ></span>
-            </p>
-            <p>
-                <a href="spa/index.html">SPA layouts</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="htmx"
-                ></span>
-            </p>
-            <p>
-                <a href="prototyping/index.html">Ultra fast prototyping</a>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="htmx"
-                ></span>
-                <span
-                    class="tag"
-                    data-font-size="small1"
-                    data-label="alpine.js"
-                ></span>
-            </p>
-        </div>
-    </body>
+        .tag[data-label="svg"] {
+            background: oklch(81.97% 0.1563 74.37);
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 style="font: inherit; margin-top: 2rem">
+            <small>jtornert code stash</small>
+        </h1>
+        <p>
+            <a href="https://github.com/jtornert/jtornert.github.io" target="_blank" referrerpolicy="no-referrer">
+                Source <i class="icon new-tab"></i>
+            </a>
+        </p>
+        <hr />
+        <h2 data-font-size="large1">Examples</h2>
+        <p>
+            <a href="accessibility/click-latency.html">Click latency</a>
+            <span class="tag" data-font-size="small1" data-label="a11y"></span>
+        </p>
+        <p>
+            <a href="color-scheme-generator/index.html">
+                Color scheme generator
+            </a>
+            <span class="tag" data-font-size="small1" data-label="alpine.js"></span>
+            <span class="tag" data-font-size="small1" data-label="css"></span>
+        </p>
+        <p>
+            <a href="color-schemes/index.html">Color schemes</a>
+            <span class="tag" data-font-size="small1" data-label="a11y"></span>
+            <span class="tag" data-font-size="small1" data-label="css"></span>
+        </p>
+        <p>
+            <a href="reset/index.html">CSS reset</a>
+            <span class="tag" data-font-size="small1" data-label="css"></span>
+        </p>
+        <p>
+            <a href="headless/index.html">Headless JavaScript</a>
+            <span class="tag" data-font-size="small1" data-label="a11y"></span>
+        </p>
+        <p>
+            <a href="icons/index.html">Icons</a>
+            <span class="tag" data-font-size="small1" data-label="css"></span>
+            <span class="tag" data-font-size="small1" data-label="svg"></span>
+        </p>
+        <p>
+            <a href="accessibility/landmarks.html">Landmarks</a>
+            <span class="tag" data-font-size="small1" data-label="a11y"></span>
+        </p>
+        <p>
+            <a href="lazy-tables/index.html">Lazy tables</a>
+            <span class="tag" data-font-size="small1" data-label="htmx"></span>
+        </p>
+        <p>
+            <a href="modals/index.html">Modals</a>
+            <span class="tag" data-font-size="small1" data-label="alpine.js"></span>
+        </p>
+        <p>
+            <a href="sidestep/index.html">Sidestepping links</a>
+            <span class="tag" data-font-size="small1" data-label="htmx"></span>
+        </p>
+        <p>
+            <a href="spa/index.html">SPA layouts</a>
+            <span class="tag" data-font-size="small1" data-label="htmx"></span>
+        </p>
+        <p>
+            <a href="prototyping/index.html">Ultra fast prototyping</a>
+            <span class="tag" data-font-size="small1" data-label="htmx"></span>
+            <span class="tag" data-font-size="small1" data-label="alpine.js"></span>
+        </p>
+    </div>
+</body>
+
 </html>
