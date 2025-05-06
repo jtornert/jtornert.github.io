@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better borders</title>
+    <link rel="stylesheet" href="/reset/reset.css">
+    <link rel="stylesheet" href="/reset/utilities.css">
+    <style>
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+        }
+
+        .box {
+            height: 4rem;
+            border-radius: 3px;
+        }
+
+        .border {
+            border: 1px dashed #808080a0;
+        }
+
+        .border-dashed {
+            background-image: url("/svg/border.svg");
+        }
+    </style>
+</head>
+
+<body>
+    <main class="print-width">
+        <h1 data-font-size="large3">Better borders</h1>
+        <p>Here is a box with the default CSS dashed border:</p>
+        <div class="box border"></div>
+        <p>It will change appearance for every browser, and it is also not configurable.</p>
+        <p>But with SVG, we can create custom dasharrays and use those as background images:</p>
+        <div class="box border-dashed"></div>
+        <p><em>NOTE: It is important to remember to update the border radius of the SVG when changing it for a
+                container.</em>
+        </p>
+    </main>
+</body>
+
+</html>
