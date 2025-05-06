@@ -165,7 +165,7 @@ window.addEventListener("alpine:init", () => {
                     this.data.light.background.l,
                     this.data.h
                 )
-                    .set("oklch.c", `*${this.data.dark.background.c}`)
+                    .set("oklch.c", `*${this.data.light.background.c}`)
                     .css("oklch"),
                 "--surface-light-2": table(
                     this.data.light.background.l -
