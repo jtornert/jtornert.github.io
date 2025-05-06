@@ -37,7 +37,7 @@ function memo(fn, maxEntries = -1) {
         }
         const result = fn.apply(undefined, arguments);
         if (
-            (maxEntries >= 0 && Object.keys(cache).length < maxEntries) ||
+            (maxEntries > 0 && Object.keys(cache).length < maxEntries) ||
             maxEntries === -1
         ) {
             cache[key] = result;
