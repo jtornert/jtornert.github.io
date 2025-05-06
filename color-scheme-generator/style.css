@@ -5,13 +5,26 @@ html {
     accent-color: oklch(0.5 0.2 0);
 }
 
-form {
+.accent-form {
     margin-block: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+
+.theme-form {
+    max-width: 60rem;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+
+    > fieldset {
+        flex-basis: 28rem;
+        flex-grow: 1;
+    }
 }
 
 input[type="number"] {
@@ -64,43 +77,48 @@ label {
 }
 
 [data-color-scheme="light"] {
-    --surface-1: oklch(1 0.004 var(--h));
-    --surface-2: oklch(0.94 0.004 var(--h));
-    --surface-3: oklch(0.85 0.004 var(--h));
-    --weak-text: oklch(0.6 0.004 var(--h));
-    --body-text: oklch(0.4 0.01 var(--h));
-    --strong-text: oklch(0.25 0.01 var(--h));
-    --accent: oklch(var(--l) var(--c) var(--h));
+    --surface-1: var(--surface-light-1);
+    --surface-2: var(--surface-light-2);
+    --surface-3: var(--surface-light-3);
+    --weak-text: oklch(from var(--accent) 0.6 0.004 h);
+    --body-text: oklch(from var(--accent) 0.4 0.01 h);
+    --strong-text: oklch(from var(--accent) 0.25 0.01 h);
     --accent-hover: color-mix(in oklab, var(--accent), white 15%);
     --accent-active: color-mix(in oklab, var(--accent), black 15%);
-    --accent-contrast: oklch(var(--z) 0.004 var(--h));
     --accent-border: color-mix(in oklab, var(--accent), black 10%);
-    --neutral: oklch(0.85 0.01 var(--h));
+    --neutral: oklch(from var(--accent) 0.85 0.01 h);
     --neutral-hover: color-mix(in oklab, var(--neutral), black 10%);
     --neutral-active: color-mix(in oklab, var(--neutral), black 20%);
     --neutral-border: color-mix(in oklab, var(--neutral), black 10%);
-    --neutral-shadow: oklch(from color-mix(in oklab, var(--neutral), black 50%) l c h / 0.5);
-    --selection: oklch(from color-mix(in oklab, var(--accent), white 30%) l c h / 0.5);
+    --neutral-shadow: oklch(
+        from color-mix(in oklab, var(--neutral), black 50%) l c h / 0.5
+    );
+    --selection: oklch(
+        from color-mix(in oklab, var(--accent), white 30%) l c h / 0.5
+    );
 }
 
 [data-color-scheme="dark"] {
-    --surface-1: oklch(0.24 0.002 var(--h));
-    --surface-2: oklch(0.28 0.002 var(--h));
-    --surface-3: oklch(0.37 0.002 var(--h));
-    --weak-text: oklch(0.6 0.004 var(--h));
-    --body-text: oklch(0.85 0.01 var(--h));
-    --strong-text: oklch(0.95 0.01 var(--h));
+    --surface-1: var(--surface-dark-1);
+    --surface-2: var(--surface-dark-2);
+    --surface-3: var(--surface-dark-3);
+    --weak-text: oklch(from var(--accent) 0.6 0.004 h);
+    --body-text: oklch(from var(--accent) 0.85 0.01 h);
+    --strong-text: oklch(from var(--accent) 0.95 0.01 h);
     --accent: color-mix(in oklab, var(--accent-border), black 10%);
     --accent-hover: color-mix(in oklab, var(--accent), white 15%);
     --accent-active: color-mix(in oklab, var(--accent), black 15%);
-    --accent-contrast: oklch(var(--z) 0.004 var(--h));
-    --accent-border: oklch(var(--l) var(--c) var(--h));
-    --neutral: oklch(0.4 0.01 var(--h));
+    --accent-border: color-mix(in oklab, var(--accent), white 10%);
+    --neutral: oklch(from var(--accent) 0.4 0.01 h);
     --neutral-hover: color-mix(in oklab, var(--neutral), white 15%);
     --neutral-active: color-mix(in oklab, var(--neutral), black 15%);
     --neutral-border: color-mix(in oklab, var(--neutral), white 10%);
-    --neutral-shadow: oklch(from color-mix(in oklab, var(--neutral), black 50%) l c h / 0.5);
-    --selection: oklch(from color-mix(in oklab, var(--accent), white 30%) l c h / 0.5);
+    --neutral-shadow: oklch(
+        from color-mix(in oklab, var(--neutral), black 50%) l c h / 0.5
+    );
+    --selection: oklch(
+        from color-mix(in oklab, var(--accent), white 30%) l c h / 0.5
+    );
 }
 
 .demo-area {
@@ -113,11 +131,12 @@ label {
     grid-template-areas:
         "header header"
         "sidebar main";
+    grid-template-columns: auto 1fr;
     flex-basis: 30ch;
     flex-grow: 1;
     box-shadow: 0 0.25rem 2rem -0.25rem var(--neutral-shadow);
 
-    >* {
+    > * {
         padding-inline: 0.5rem;
     }
 
@@ -143,6 +162,7 @@ label {
     aside {
         grid-area: sidebar;
         background: var(--surface-2);
+        white-space: nowrap;
         border-right: 1px solid var(--neutral-border);
     }
 
