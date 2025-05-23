@@ -13,25 +13,6 @@
             integrity="sha384-gpIh5aLQ0qmX8kZdyhsd6jA24uKLkqIr1WAGtantR4KsS97l/NRBvh8/8OYGThAf"
             crossorigin="anonymous"
         ></script>
-        <script>
-            function style(element) {
-                const existingStyles = document.head.querySelector(
-                    "style#" + element.id
-                );
-                const node = element.cloneNode(true);
-                node.removeAttribute("x-init");
-                if (existingStyles) {
-                    existingStyles.replaceWith(node);
-                } else {
-                    document.head.appendChild(node);
-                }
-                element.remove();
-            }
-
-            function script(element) {
-                element.remove();
-            }
-        </script>
     </head>
 
     <body>
