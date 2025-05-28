@@ -1,61 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Click latency</title>
-        <link rel="stylesheet" href="/reset/reset.css" />
-        <link rel="stylesheet" href="/reset/utilities.css" />
-        <style>
-            html {
-                color-scheme: dark;
-                font-family: sans-serif;
-            }
-        </style>
-        <script>
-            window.addEventListener("load", () => {
-                const button = document.querySelector("button");
-                const latency = document.getElementById("latency");
 
-                let cache = new Date();
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click latency</title>
+    <link rel="stylesheet" href="/reset/reset.css" />
+    <link rel="stylesheet" href="/reset/utilities.css" />
+    <style>
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const button = document.querySelector("button");
+            const latency = document.getElementById("latency");
 
-                button.addEventListener("mousedown", () => {
-                    cache = new Date();
-                });
+            let mouseenter = new Date();
+            let mousedown = new Date();
+            let mouseup = new Date();
 
-                button.addEventListener("mouseup", () => {
-                    const duration = new Date() - cache;
-                    latency.innerText = `${duration}ms`;
-                });
+            button.addEventListener("mouseenter", () => {
+                mouseenter = new Date();
             });
-        </script>
-    </head>
-    <body>
-        <div class="print-width">
-            <h1 data-font-size="large3">Click latency</h1>
+
+            button.addEventListener("mousedown", () => {
+                mousedown = new Date();
+            });
+
+            button.addEventListener("mouseup", () => {
+                mouseup = new Date();
+                latency.innerText = `time to click: ${mousedown - mouseenter}ms, time to release: ${mouseup - mousedown}ms, total: ${mouseup - mouseenter}ms`;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="print-width">
+        <h1 data-font-size="large3">Click latency</h1>
+        <p>
+            Click the button below to measure your click latency (the time
+            between hovering an element, clicking it, and releasing the mouse button).
+        </p>
+        <button>Measure click latency</button>
+        <p>Latency: <span id="latency"></span></p>
+        <h2 data-font-size="large1">Purpose</h2>
+        <p>
+            Most people have a click latency between 100-200
+            milliseconds<sup>[1]</sup>, which is a good time to spend
+            fetching some data or hypermedia. Pre-loading like this may
+            improve user experience due to faster load times.
+        </p>
+        <footer>
             <p>
-                Click the button below to measure your click latency (the time
-                between clicking and releasing the mouse button).
+                <small>
+                    [1]
+                    <a href="https://htmx.org/extensions/preload/">
+                        The htmx Preload Extension
+                    </a>
+                </small>
             </p>
-            <button>Measure click latency</button>
-            <p>Latency: <span id="latency"></span></p>
-            <h2 data-font-size="large1">Purpose</h2>
-            <p>
-                Most people have a click latency between 100-200
-                milliseconds<sup>[1]</sup>, which is a good time to spend
-                fetching some data or hypermedia. Pre-loading like this may
-                improve user experience due to faster load times.
-            </p>
-            <footer>
-                <p>
-                    <small>
-                        [1]
-                        <a href="https://htmx.org/extensions/preload/">
-                            The htmx Preload Extension
-                        </a>
-                    </small>
-                </p>
-            </footer>
-        </div>
-    </body>
+        </footer>
+    </div>
+</body>
+
 </html>
