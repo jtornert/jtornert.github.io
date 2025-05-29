@@ -1,0 +1,12 @@
+<div id="events">
+    <script>
+        window.dispatchEvent(new CustomEvent("app:createresource"));
+        if (window.clearEventsTimeout) {
+            clearTimeout(window.clearEventsTimeout);
+            window.clearEventsTimeout = null;
+        }
+        window.clearEventsTimeout = setTimeout(() => {
+            document.getElementById("events").replaceChildren([]);
+        }, 1000);
+    </script>
+</div>

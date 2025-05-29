@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX patterns</title>
+    <style nonce="a23gbfz9e">
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            max-height: 10rem;
+            overflow: auto;
+        }
+
+        #notifications {
+            list-style: none;
+            margin: 0;
+            padding: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            min-width: 15rem;
+            width: 33svw;
+            gap: 0.25rem;
+        }
+
+        [x-data="notification"] {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding-block: 0.25rem;
+            padding-inline: 0.5rem;
+            background: #444;
+            border-radius: 3px;
+        }
+
+        #rows {
+            height: calc(10rem + 1px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        table {
+            display: grid;
+            grid-template-columns: auto auto;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #777;
+        }
+
+        thead,
+        tbody,
+        tr {
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 1 / -1;
+        }
+
+        thead {
+            z-index: 2;
+            margin-bottom: 1px;
+        }
+
+        thead tr {
+            outline: 1px solid #777;
+        }
+
+        tbody tr:not([x-data="table-loader"]):nth-child(2n + 1) {
+            background: #222;
+        }
+
+        tbody tr:not([x-data="table-loader"]):hover {
+            outline: 1px solid #777;
+            z-index: 1;
+            background: #444;
+        }
+
+        th,
+        td {
+            text-align: start;
+            padding-inline: 0.25rem;
+        }
+    </style>
+    <script defer src="intersect.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@imacrayon/alpine-ajax@0.12.2/dist/cdn.min.js"></script>
+    <script defer nonce="a23gbfz9e" src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="/reset/reset.css">
+    <link rel="stylesheet" href="/reset/utilities.css">
+    <script>
+        window.addEventListener("alpine:init", () => {
+            Alpine.data("resource", () => ({
+                init() {
+                    Alpine.bind(this.$el, this.bindings);
+                },
+                bindings: {
+                    "@app:createresource.window"() {
+                        this.$ajax("resource.html", { sync: true });
+                    }
+                }
+            }));
+
+            Alpine.data("notification", () => ({
+                init() {
+                    this.$el.querySelector("[data-action=remove]").addEventListener("click", (e) => {
+                        this.$el.remove();
+                    });
+                }
+            }));
+
+            Alpine.data("table-loader", () => ({
+                init() {
+                    Alpine.bind(this.$el, this.bindings);
+                },
+                bindings: {
+                    "x-intersect.margin.100px.root.rows"() {
+                        console.debug("loading");
+                        const page = this.$el.dataset.page;
+                        this.$ajax(`data-${page}.html`, { target: "rows" }).then(() => {
+                            this.$el.remove();
+                        });
+
+                    }
+                }
+            }));
+        })
+    </script>
+</head>
+
+<body>
+    <div id="events" x-merge="append" style="display: none;"></div>
+    <div id="root">
+        <main class="print-width" style="width: calc(100% - 1.5rem);">
+            <h1 data-font-size="large3">AJAX patterns</h1>
+
+            <hr>
+
+            <h2 data-font-size="large1">Event driven AJAX with synced targets</h2>
+            <p>
+                <a href="event.html" x-target="events">Get server event</a>
+                (fires event, gets resource, and appends notification)
+            </p>
+            <p id="resource" x-data="resource">
+                <span style="color: gray;">Recource will be loaded here</span>
+            </p>
+
+            <hr>
+
+            <h2 data-font-size="large1">Lazy loaded table</h2>
+            <table data-font-size="small1">
+                <thead>
+                    <tr>
+                        <th>First</th>
+                        <th>Second</th>
+                    </tr>
+                </thead>
+                <tbody id="rows" x-merge="append">
+                    <tr x-data="table-loader" data-page="1">
+                        <td style="grid-column: 1 / -1;text-align: center;">
+                            Loading...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <div id="overlay">
+        <ul id="notifications" x-sync x-merge="append"></ul>
+    </div>
+</body>
+
+</html>
