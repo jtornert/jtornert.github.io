@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="/color-schemes/colorScheme.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Components</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/reset/reset.css" />
+    <link rel="stylesheet" href="/reset/utilities.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/icons/icons.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/chroma-js@3.1.2/dist/chroma.min.cjs"></script>
+    <script src="js/components.js"></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="print-width">
+            <h1 data-font-size="large1">Components</h1>
+            <div>
+                <select class="select" data-variant="transparent" data-size="small">
+                    <option value="auto">Auto</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <script>
+                    colorSchemeSwitcher(
+                        document.currentScript.previousElementSibling
+                    );
+                </script>
+                <select class="select" data-variant="transparent" data-size="small">
+                    <option value="neutral">Neutral</option>
+                    <option value="primary">Primary</option>
+                </select>
+                <script>
+                    const select =
+                        document.currentScript.previousElementSibling;
+                    select.value =
+                        localStorage.getItem("color") || "neutral";
+                    window.addEventListener("load", () => {
+                        const main = document.querySelector("main.main");
+                        main.dataset.color = select.value;
+                        select.addEventListener("change", (e) => {
+                            const value = e.currentTarget.value;
+                            if (value === "neutral") {
+                                localStorage.removeItem("color");
+                            } else {
+                                localStorage.setItem("color", value);
+                            }
+                            main.dataset.color = value;
+                        });
+                    });
+                </script>
+                <button class="button" data-variant="transparent" x-data="ui:trigger" aria-controls="table-of-contents"
+                        data-trigger-value="show" data-size="small">
+                    Show
+                </button>
+                <button class="button" data-variant="transparent" x-data="ui:trigger" aria-controls="table-of-contents"
+                        data-trigger-value="hide" data-size="small">
+                    Hide
+                </button>
+            </div>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <div class="print-width">
+            <h2 data-font-size="large1">Table of contents</h2>
+            <button class="button" data-variant="transparent" data-size="small" data-rounded x-data="ui:trigger"
+                    aria-controls="table-of-contents" aria-label="Toggle table of contents">
+                <i class="icon chevron"></i>
+            </button>
+            <ul id="table-of-contents" x-data="el:show" aria-label="Table of contents">
+                <li><a href="#button">Button</a></li>
+                <li><a href="#select">Select</a></li>
+            </ul>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="print-width">
+            <h2 data-font-size="large5">About</h2>
+            <p>
+                This page showcases the use of clever CSS together with
+                Alpine.js to support an entire library of UI components.
+            </p>
+            <p>
+                You can change the color scheme and UI color in the top bar.
+            </p>
+            <h2 data-font-size="large3">Components</h2>
+            <h3 id="button" data-font-size="large3">Button</h3>
+            <hr />
+            <button class="button">Button</button>
+            <h4 data-font-size="large1">Variants</h4>
+            <button class="button" data-variant="filled">Filled</button>
+            <button class="button" data-variant="outlined">Outlined</button>
+            <button class="button" data-variant="transparent">
+                Transparent
+            </button>
+            <h4 data-font-size="large1">Sizes</h4>
+            <button class="button" data-size="small">Small</button>
+            <button class="button" data-size="normal">Normal</button>
+            <button class="button" data-size="large">Large</button>
+            <h4 data-font-size="large1">Rounded</h4>
+            <button class="button" data-size="small" data-rounded>
+                Rounded
+            </button>
+            <button class="button" data-size="normal" data-rounded>
+                Rounded
+            </button>
+            <button class="button" data-size="large" data-rounded>
+                Rounded
+            </button>
+            <h4 data-font-size="large1">Disabled</h4>
+            <button class="button" disabled>Disabled</button>
+            <button class="button" data-variant="outlined" disabled>
+                Disabled
+            </button>
+            <button class="button" data-variant="transparent" disabled>
+                Disabled
+            </button>
+            <h3 id="select" data-font-size="large3">Select</h3>
+            <hr />
+            <select class="select">
+                <option>Select</option>
+            </select>
+            <h4 data-font-size="large1">Variants</h4>
+            <select class="select" data-variant="filled">
+                <option>Filled</option>
+            </select>
+            <select class="select" data-variant="outlined">
+                <option>Outlined</option>
+            </select>
+            <select class="select" data-variant="transparent">
+                <option>Transparent</option>
+            </select>
+            <h4 data-font-size="large1">Sizes</h4>
+            <select class="select" data-size="small">
+                <option>Small</option>
+            </select>
+            <select class="select" data-size="normal">
+                <option>Normal</option>
+            </select>
+            <select class="select" data-size="large">
+                <option>Large</option>
+            </select>
+            <h4 data-font-size="large1">Rounded</h4>
+            <select class="select" data-size="small" data-rounded>
+                <option>Rounded</option>
+            </select>
+            <select class="select" data-size="normal" data-rounded>
+                <option>Rounded</option>
+            </select>
+            <select class="select" data-size="large" data-rounded>
+                <option>Rounded</option>
+            </select>
+            <h4 data-font-size="large1">Disabled</h4>
+            <select class="select" disabled>
+                <option>Disabled</option>
+            </select>
+            <select class="select" data-variant="outlined" disabled>
+                <option>Disabled</option>
+            </select>
+            <select class="select" data-variant="transparent" disabled>
+                <option>Disabled</option>
+            </select>
+        </div>
+    </main>
+</body>
+
+</html>

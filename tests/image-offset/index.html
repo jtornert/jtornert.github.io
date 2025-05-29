@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image offset picker</title>
+        <link rel="stylesheet" href="/reset/reset.css" />
+        <link rel="stylesheet" href="/reset/utilities.css" />
+        <style>
+            html {
+                color-scheme: dark;
+                font-family: sans-serif;
+            }
+
+            main {
+                width: 100%;
+            }
+
+            [x-data="image-offsetter"] {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            [x-bind="image-offsetter.image"] {
+                flex: 100%;
+                aspect-ratio: 1/1;
+                background-image: url("https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg");
+                background-repeat: no-repeat;
+                cursor: move;
+                border: 1px solid;
+            }
+        </style>
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("image-offsetter", () => ({
+                    init() {
+                        // Alpine.bind(this.$el, this.bindings);
+                        this.calculateOffset = this.calculateOffset.bind(this);
+                    },
+                    zoom: Alpine.$persist(1).as("zoom"),
+                    offset: {
+                        x: Alpine.$persist(0).as("offsetX"),
+                        y: Alpine.$persist(0).as("offsetY"),
+                    },
+                    start: { x: 0, y: 0 },
+                    calculateOffset(e) {
+                        const stop = { x: e.clientX, y: e.clientY };
+                        this.offset = {
+                            x: stop.x - this.start.x,
+                            y: stop.y - this.start.y,
+                        };
+                    },
+                    "image-offsetter": {
+                        image: {
+                            "x-effect"() {
+                                this.$el.style.backgroundSize = `${
+                                    this.zoom * 100
+                                }%`;
+                                this.$el.style.backgroundPosition = `${this.offset.x}px ${this.offset.y}px`;
+                            },
+                            "@mousedown"(e) {
+                                this.start = {
+                                    x: e.clientX - this.offset.x,
+                                    y: e.clientY - this.offset.y,
+                                };
+                                document.body.style.cursor = "move";
+                                document.body.style.userSelect = "none";
+                                this.$el.addEventListener(
+                                    "mousemove",
+                                    this.calculateOffset
+                                );
+                            },
+                            "@mouseup.window"() {
+                                this.$el.removeEventListener(
+                                    "mousemove",
+                                    this.calculateOffset
+                                );
+                                document.body.style.cursor = null;
+                                document.body.style.userSelect = null;
+                            },
+                        },
+                        "zoom-ctl": {
+                            ":value"() {
+                                return this.zoom;
+                            },
+                            "@input"(e) {
+                                this.zoom = e.currentTarget.value;
+                            },
+                            ":min"() {
+                                return "1";
+                            },
+                            ":max"() {
+                                return "2";
+                            },
+                            ":step"() {
+                                return "0.1";
+                            },
+                        },
+                        debug: {
+                            "x-text"() {
+                                return `zoom: ${this.zoom}, x: ${this.offset.x}, y: ${this.offset.y}`;
+                            },
+                        },
+                    },
+                }));
+            });
+        </script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"
+        ></script>
+    </head>
+    <body>
+        <main class="print-width">
+            <h1 data-font-size="large3">Image offset picker</h1>
+            <div x-data="image-offsetter">
+                <div x-bind="image-offsetter.image"></div>
+                <input type="range" x-bind="image-offsetter.zoom-ctl" />
+                <span x-bind="image-offsetter.debug"></span>
+            </div>
+        </main>
+    </body>
+</html>

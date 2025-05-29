@@ -1,0 +1,116 @@
+@layer components {
+    .select,
+    .button {
+        user-select: none;
+        text-decoration: none;
+        padding-block: 0;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius);
+
+        &:disabled {
+            pointer-events: none;
+        }
+
+        &[data-rounded]:has(.icon:only-child) {
+            --rounded-inline-padding: 0ch;
+        }
+
+        &[data-size="small"] {
+            --height: 1.5em;
+            padding-inline: calc(var(--rounded-inline-padding, 0.5em));
+            height: var(--height);
+            min-width: var(--height);
+        }
+
+        &:not([data-size]),
+        &[data-size="normal"] {
+            --height: 2em;
+            padding-inline: calc(var(--rounded-inline-padding, 0.625em));
+            height: var(--height);
+            min-width: var(--height);
+        }
+
+        &[data-size="large"] {
+            --height: 2.5em;
+            padding-inline: calc(var(--rounded-inline-padding, 0.75em));
+            height: var(--height);
+            min-width: var(--height);
+        }
+
+        &:not([data-variant]),
+        &[data-variant="filled"] {
+            background: var(--color);
+            border-color: var(--color-hover);
+            color: var(--color-contrast);
+
+            &:hover {
+                background: var(--color-hover);
+            }
+
+            &:active {
+                background: var(--color-active);
+            }
+
+            &:disabled {
+                background: color-mix(
+                    in oklab,
+                    var(--color),
+                    var(--surface-3) 50%
+                );
+                border-color: color-mix(
+                    in oklab,
+                    var(--color-hover),
+                    var(--surface-3) 50%
+                );
+                color: color-mix(
+                    in oklab,
+                    var(--color-contrast),
+                    color-mix(in oklab, var(--color), var(--surface-3) 50%) 50%
+                );
+            }
+        }
+
+        &[data-variant="outlined"] {
+            background: oklch(from var(--color-outline) l c h / var(--a, 0));
+            border-color: currentColor;
+            color: var(--color-outline);
+
+            &:hover {
+                --a: 0.15;
+            }
+
+            &:active {
+                --a: 0.3;
+            }
+
+            &:disabled {
+                color: color-mix(
+                    in oklab,
+                    var(--color-outline),
+                    var(--surface-3) 50%
+                );
+            }
+        }
+
+        &[data-variant="transparent"] {
+            background: oklch(from var(--color-outline) l c h / var(--a, 0));
+            color: var(--color-outline);
+
+            &:hover {
+                --a: 0.15;
+            }
+
+            &:active {
+                --a: 0.3;
+            }
+
+            &:disabled {
+                color: color-mix(
+                    in oklab,
+                    var(--color-outline),
+                    var(--surface-3) 50%
+                );
+            }
+        }
+    }
+}

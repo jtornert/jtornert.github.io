@@ -1,0 +1,22 @@
+html,
+[data-color-scheme="light"] {
+    color-scheme: light;
+
+    --primary: oklch(0.59 0.3 264);
+    --primary-hover: color-mix(in oklab, var(--primary), white 15%);
+    --primary-active: color-mix(in oklab, var(--primary), black 15%);
+    --primary-contrast: color-mix(in oklab, var(--primary), white 90%);
+    --primary-outline: color-mix(in oklab, var(--primary), black 10%);
+
+    --neutral: oklch(0.9 0.01 264);
+    --neutral-hover: color-mix(in oklab, var(--neutral), black 10%);
+    --neutral-active: color-mix(in oklab, var(--neutral), black 20%);
+    --neutral-contrast: var(--strong-text);
+    --neutral-outline: var(--strong-text);
+
+    --surface-1: color-mix(in oklab, var(--surface-2), white 99%);
+    --surface-2: color-mix(in oklab, var(--surface-3), white 50%);
+    --surface-3: color-mix(in oklab, var(--neutral), white 7%);
+    --body-text: color-mix(in oklab, var(--neutral), black 60%);
+    --strong-text: color-mix(in oklab, var(--body-text), black 30%);
+}

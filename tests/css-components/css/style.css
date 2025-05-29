@@ -1,0 +1,151 @@
+@import url("color-scheme-light.css") layer(theme) (scripting: none) and
+        (prefers-color-scheme: light),
+    (scripting: enabled);
+@import url("color-scheme-dark.css") layer(theme) (scripting: none) and
+        (prefers-color-scheme: dark),
+    (scripting: enabled);
+
+:root {
+    --border-radius: 3px;
+}
+
+html {
+    font-family: "Inter", sans-serif;
+    background: var(--surface-1);
+    color: var(--body-text);
+}
+
+body {
+    grid-template-areas:
+        "topbar"
+        "main"
+        "sidebar";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100svh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--strong-text);
+
+    &:has(+ hr) {
+        margin-bottom: 0.25em;
+    }
+}
+
+:is(h1, h2, h3, h4, h5, h6) + hr {
+    margin-bottom: 2rem;
+}
+
+.topbar {
+    grid-area: topbar;
+    background: var(--surface-3);
+    padding-block: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > h1 {
+            margin: 0;
+        }
+    }
+}
+
+.sidebar {
+    grid-area: sidebar;
+    padding-inline: 1rem;
+    background: var(--surface-2);
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+
+    &[aria-expanded="true"] {
+        height: 75svh;
+    }
+
+    > div {
+        display: grid;
+        grid-template-areas:
+            "heading control"
+            "list list";
+        grid-template-rows: auto 1fr;
+        justify-content: space-between;
+        padding-block: 1rem;
+
+        > h2 {
+            grid-area: heading;
+            margin: 0;
+        }
+
+        > button {
+            grid-area: control;
+            align-self: center;
+
+            &:not([aria-expanded="true"]) .icon {
+                rotate: 180deg;
+            }
+        }
+
+        > ul {
+            grid-area: list;
+            overflow: auto;
+            max-height: 40svh;
+            margin-bottom: 0;
+            list-style: none;
+            padding: 0;
+
+            &:not([aria-hidden="false"]) {
+                display: none;
+            }
+        }
+    }
+}
+
+.main {
+    grid-area: main;
+
+    > div {
+        margin-bottom: 2rem;
+
+        > [id] {
+            scroll-margin: 5rem;
+        }
+    }
+}
+
+[data-rounded] {
+    border-radius: 9999px;
+}
+
+[x-cloak] {
+    display: none;
+}
+
+html:not([data-color]),
+[data-color="neutral"] {
+    --color: var(--neutral);
+    --color-hover: var(--neutral-hover);
+    --color-active: var(--neutral-active);
+    --color-border: var(--neutral-border);
+    --color-outline: var(--neutral-outline);
+    --color-contrast: var(--neutral-contrast);
+}
+
+[data-color="primary"] {
+    --color: var(--primary);
+    --color-hover: var(--primary-hover);
+    --color-active: var(--primary-active);
+    --color-border: var(--primary-border);
+    --color-outline: var(--primary-outline);
+    --color-contrast: var(--primary-contrast);
+}
