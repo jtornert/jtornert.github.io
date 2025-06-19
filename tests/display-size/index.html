@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display size</title>
+    <style>
+        :root {
+            --display-scale: 1;
+            --font-scale: 1;
+        }
+
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+            font-size: calc(var(--font-scale) * 1rem);
+        }
+
+        body {
+            margin: 16px;
+        }
+
+        button {
+            font-size: 0.75rem;
+            padding-block: calc(var(--display-scale) * 2px);
+            padding-inline: calc(var(--display-scale) * 4px);
+        }
+    </style>
+</head>
+
+<body>
+    <label for="display-scale">Display scale:</label>
+    <input type="range" id="display-scale" min="1" max="4" value="1" step="1">
+    <label for="font-scale">Font scale:</label>
+    <input type="range" id="font-scale" min="1" max="2" value="1" step="0.25">
+    <br><br>
+    <button>Button</button>
+
+    <script>
+        const displayScale = document.getElementById("display-scale");
+        const fontScale = document.getElementById("font-scale");
+
+        function setupHandler(el, name) {
+            el.addEventListener("change", (e) => {
+                document.documentElement.style.setProperty(name, e.currentTarget.value);
+            });
+        }
+
+        setupHandler(displayScale, "--display-scale");
+        setupHandler(fontScale, "--font-scale");
+    </script>
+</body>
+
+</html>
