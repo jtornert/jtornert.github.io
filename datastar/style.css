@@ -159,13 +159,13 @@ ui-icon {
     display: grid;
     align-items: center;
     background: var(--surface-3);
-    padding-block: 0.25rem;
-    padding-inline: 0.5rem;
+    padding-inline: 0.75rem;
     border-radius: 3px;
     grid-template-areas: "heading action" "message message";
     width: calc(100% - 24px);
     box-sizing: border-box;
     max-width: 40ch;
+    box-shadow: 0 0.5rem 3rem -0.5rem black;
 }
 
 #overlay {
@@ -179,7 +179,7 @@ ui-icon {
 
     &:has(.alert) {
         pointer-events: all;
-        background: #2228;
+        background: #222a;
         backdrop-filter: blur(2px);
     }
 }
