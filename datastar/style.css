@@ -8,8 +8,6 @@
     --neutral-active: #333;
     --neutral-border: #777;
     --neutral-disabled: #888;
-    --danger: #e44;
-    --danger-hover: #f77;
 }
 
 :focus-visible {
@@ -67,14 +65,6 @@ menu[role="menu"] {
 
 .textfield {
     background: var(--surface-3);
-
-    &[aria-invalid="true"] {
-        border-color: var(--danger);
-
-        &:not(:disabled):hover {
-            border-color: var(--danger-hover);
-        }
-    }
 }
 
 .button {

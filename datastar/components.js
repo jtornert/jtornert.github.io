@@ -6,10 +6,6 @@ function id(el) {
     }
 }
 
-function outside(el, e) {
-    return !el.contains(e.target);
-}
-
 const baseURL = "/svg";
 const icons = {};
 
@@ -186,8 +182,10 @@ class Menu extends HTMLElement {
         }
 
         if (activeItemId === "") {
+            this.querySelector("[data-ui='menu.trigger']").tabIndex = null;
             window.removeEventListener("click", this.handleOutsideClick, { capture: true });
         } else {
+            this.querySelector("[data-ui='menu.trigger']").tabIndex = -1;
             window.addEventListener("click", this.handleOutsideClick, { capture: true });
         }
     }
@@ -201,7 +199,7 @@ class Menu extends HTMLElement {
     }
 
     handleFocusOut(e) {
-        if (outside(this, e) && !this.contains(e.relatedTarget)) {
+        if (this.contains(e.target) && !this.contains(e.relatedTarget)) {
             this.setAttribute("aria-activedescendant", "");
         }
     }
@@ -274,6 +272,8 @@ class Menu extends HTMLElement {
                 switch (e.target.dataset.ui) {
                     case "menu.item":
                     case "menu.submenu": {
+                        e.preventDefault();
+
                         const actionables = this.querySelectorAll(
                             ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
@@ -292,6 +292,8 @@ class Menu extends HTMLElement {
                     }
 
                     case "menu.trigger":
+                        e.preventDefault();
+
                         const firstItem = this.querySelector(
                             ":is([data-ui='menu.item']:last-of-kind, [data-ui='menu.submenu']):not(:disabled)"
                         );
@@ -309,6 +311,8 @@ class Menu extends HTMLElement {
             case "ArrowDown": {
                 switch (e.target.dataset.ui) {
                     case "menu.trigger":
+                        e.preventDefault();
+
                         const firstItem = this.querySelector(
                             ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
@@ -318,6 +322,8 @@ class Menu extends HTMLElement {
 
                     case "menu.item":
                     case "menu.submenu": {
+                        e.preventDefault();
+
                         const actionables = this.querySelectorAll(
                             ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
@@ -368,7 +374,7 @@ class Menu extends HTMLElement {
     }
 
     handleOutsideClick(e) {
-        if (outside(this, e)) {
+        if (!this.contains(e.target)) {
             this.setAttribute("aria-activedescendant", "");
         }
     }
