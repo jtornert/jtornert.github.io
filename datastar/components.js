@@ -8,30 +8,6 @@ function id(el) {
 
 const baseURL = "/svg";
 const icons = {};
-
-async function createIcon(name) {
-    if (!icons[name]) {
-        icons[name] = fetch(`${baseURL}/${name}.svg`)
-            .then((res) => res.text())
-            .then((text) => {
-                const svg = new DOMParser().parseFromString(text, "image/svg+xml");
-
-                svg.querySelector("script")?.remove();
-
-                const g = svg.querySelector("g");
-
-                g.removeAttribute("stroke");
-                g.removeAttribute("stroke-width");
-
-                return svg.firstElementChild;
-            });
-    }
-
-    const svg = await icons[name];
-
-    return svg.cloneNode(true);
-}
-
 const debounceDurationIn = 250;
 const debounceDurationOut = 100;
 let debounceTimer = null;
@@ -51,7 +27,6 @@ class Popover extends HTMLElement {
 
     invariant() {
         const anchorId = this.getAttribute("anchor");
-
         const popoverEl = this;
         const anchorEl = anchorId ? document.getElementById(anchorId) : this.previousElementSibling;
         const isVisible = this.getAttribute("visible") === "";
@@ -92,7 +67,27 @@ class Icon extends HTMLElement {
     }
 
     async invariant() {
-        const svg = await createIcon(this.getAttribute("icon"));
+        const name = this.getAttribute("icon");
+
+        if (!icons[name]) {
+            icons[name] = fetch(`${baseURL}/${name}.svg`)
+                .then((res) => res.text())
+                .then((text) => {
+                    const svg = new DOMParser().parseFromString(text, "image/svg+xml");
+
+                    svg.querySelector("script")?.remove();
+
+                    const g = svg.querySelector("g");
+
+                    g.removeAttribute("stroke");
+                    g.removeAttribute("stroke-width");
+
+                    return svg.firstElementChild;
+                });
+        }
+
+        const svg = (await icons[name]).cloneNode(true);
+
         this.replaceChildren(svg);
     }
 }
@@ -112,7 +107,6 @@ class Menu extends HTMLElement {
         id(trigger);
 
         const popovers = this.querySelectorAll("[data-ui='menu.popover']");
-
         const items = this.querySelectorAll("[data-ui='menu.item']");
 
         for (const item of items) {
