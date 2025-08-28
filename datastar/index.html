@@ -26,6 +26,7 @@
         <p id="response-html"></p>
 
         <h2 data-font-size="large3">Backend-synced signals</h2>
+        <h3 data-font-size="large1">Counter</h3>
         <p>Click this button to increment the counter inside the browser only:</p>
         <button
                 class="button tabular"
@@ -34,12 +35,14 @@
                 data-text="$_count"
                 data-on-click="++$_count"></button>
         <p>Click this button to sync the counter with the backend (15):</p>
-        <button class="button" data-on-click="@get('responses/signals.json')">Sync</button>
+        <button class="button" data-on-click="@get('responses/set-counter.json')">Sync</button>
 
-        <h2 data-font-size="large3">Show and hide</h2>
+        <h3 data-font-size="large1">Show and hide</h3>
         <p>Click this button to toggle the panel below:</p>
         <button class="button" data-on-click="$_visible = !$_visible">Toggle panel</button>
         <p data-show="$_visible">I'm hiding in plain sight</p>
+        <p>Click this button to make the backend force show the panel:</p>
+        <button class="button" data-on-click="@get('responses/show-panel.json')">Show panel via backend</button>
 
         <h2 data-font-size="large3">Custom elements</h2>
         <p>Choose an option in the menu and see the input update:</p>
