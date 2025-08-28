@@ -174,7 +174,6 @@ ui-icon {
     bottom: 0;
     display: grid;
     pointer-events: none;
-    z-index: 1;
 
     &:has(.alert) {
         pointer-events: all;
