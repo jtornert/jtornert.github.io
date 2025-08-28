@@ -209,7 +209,7 @@ class Menu extends HTMLElement {
     handleMouseOver(e) {
         const actionable = e.target.closest(":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)");
 
-        if (!actionable || !e.target.contains(actionable)) return;
+        if (!actionable) return;
 
         clearTimeout(debounceTimer);
 
@@ -218,7 +218,7 @@ class Menu extends HTMLElement {
         if (actionable.dataset.ui === "menu.submenu") {
             debounceTimer = setTimeout(() => {
                 const firstItem = actionable.nextElementSibling.querySelector(
-                    ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                    ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                 );
                 this.setAttribute("aria-activedescendant", firstItem.id);
                 actionable.focus();
@@ -237,7 +237,7 @@ class Menu extends HTMLElement {
                     this.setAttribute("aria-activedescendant", "");
                 } else {
                     const firstItem = popover.querySelector(
-                        ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                        ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                     );
                     this.setAttribute("aria-activedescendant", firstItem.id);
                 }
@@ -275,7 +275,7 @@ class Menu extends HTMLElement {
                     case "menu.item":
                     case "menu.submenu": {
                         const actionables = this.querySelectorAll(
-                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
                         const index = Array.prototype.indexOf.call(actionables, e.target);
                         const nextActionable = actionables[index - 1];
@@ -293,7 +293,7 @@ class Menu extends HTMLElement {
 
                     case "menu.trigger":
                         const firstItem = this.querySelector(
-                            ":is([data-ui='menu.item']:last-of-kind, [data-ui='menu.submenu']):not(:disabled)",
+                            ":is([data-ui='menu.item']:last-of-kind, [data-ui='menu.submenu']):not(:disabled)"
                         );
                         this.setAttribute("aria-activedescendant", firstItem.id);
 
@@ -310,7 +310,7 @@ class Menu extends HTMLElement {
                 switch (e.target.dataset.ui) {
                     case "menu.trigger":
                         const firstItem = this.querySelector(
-                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
                         this.setAttribute("aria-activedescendant", firstItem.id);
 
@@ -319,7 +319,7 @@ class Menu extends HTMLElement {
                     case "menu.item":
                     case "menu.submenu": {
                         const actionables = this.querySelectorAll(
-                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                            ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                         );
                         const index = Array.prototype.indexOf.call(actionables, e.target);
                         const nextActionable = actionables[index + 1];
@@ -356,7 +356,7 @@ class Menu extends HTMLElement {
             case "ArrowRight": {
                 if (e.target.dataset.ui === "menu.submenu") {
                     const firstItem = e.target.nextElementSibling.querySelector(
-                        ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)",
+                        ":is([data-ui='menu.item'], [data-ui='menu.submenu']):not(:disabled)"
                     );
                     this.setAttribute("aria-activedescendant", firstItem.id);
                 }

@@ -23,10 +23,6 @@ html {
     line-height: 1.5;
 }
 
-body > :last-child {
-    margin-bottom: 4rem;
-}
-
 menu {
     list-style: none;
     margin: 0;

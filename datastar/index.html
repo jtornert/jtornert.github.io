@@ -1,80 +1,81 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Datastar</title>
-        <link rel="stylesheet" href="/reset/reset.css" />
-        <link rel="stylesheet" href="/reset/utilities.css" />
-        <link rel="stylesheet" href="style.css" />
-        <script type="module" src="components.js"></script>
-        <script
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datastar</title>
+    <link rel="stylesheet" href="/reset/reset.css" />
+    <link rel="stylesheet" href="/reset/utilities.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script
             type="module"
-            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"
-        ></script>
-    </head>
-    <body>
-        <div class="print-width">
-            <h1 data-font-size="large6">Datastar 🚀</h1>
+            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
+    <script type="module" src="components.js"></script>
+</head>
 
-            <h2 data-font-size="large3">Load HTML</h2>
-            <p>Click this button to load a response with HTML:</p>
-            <button class="button" id="response-html" data-on-click="@get('responses/markup.html')">Load HTML</button>
+<body>
+    <div class="print-width" style="margin-bottom: 4rem;">
+        <h1 data-font-size="large6">Datastar 🚀</h1>
 
-            <h2 data-font-size="large3">Backend-synced signals</h2>
-            <p>Click this button to increment the counter inside the browser only:</p>
-            <button
+        <h2 data-font-size="large3">Load HTML</h2>
+        <p>Click this button to load a response with HTML:</p>
+        <button class="button" id="response-html" data-on-click="@get('responses/markup.html')">Load HTML</button>
+
+        <h2 data-font-size="large3">Backend-synced signals</h2>
+        <p>Click this button to increment the counter inside the browser only:</p>
+        <button
                 class="button tabular"
                 style="width: 100%"
                 data-signals="{_count: 0}"
                 data-text="$_count"
-                data-on-click="++$_count"
-            ></button>
-            <p>Click this button to sync the counter with the backend (15):</p>
-            <button class="button" data-on-click="@get('responses/signals.json')">Sync</button>
+                data-on-click="++$_count"></button>
+        <p>Click this button to sync the counter with the backend (15):</p>
+        <button class="button" data-on-click="@get('responses/signals.json')">Sync</button>
 
-            <h2 data-font-size="large3">Show and hide</h2>
-            <p>Click this button to toggle the panel below:</p>
-            <button class="button" data-on-click="$_visible = !$_visible">Toggle panel</button>
-            <p data-show="$_visible">I'm hiding in plain sight</p>
+        <h2 data-font-size="large3">Show and hide</h2>
+        <p>Click this button to toggle the panel below:</p>
+        <button class="button" data-on-click="$_visible = !$_visible">Toggle panel</button>
+        <p data-show="$_visible">I'm hiding in plain sight</p>
 
-            <h2 data-font-size="large3">Custom elements</h2>
-            <p>Choose an option in the menu and see the input update:</p>
-            <ui-menu data-on-ui:itemselect="evt.target.value && ($value = evt.target.value)">
-                <button class="button" data-ui="menu.trigger">Menu <ui-icon icon="chevron"></ui-icon></button>
-                <ui-popover data-ui="menu.popover">
-                    <menu role="menu">
-                        <li><button data-ui="menu.item" value="1" disabled>Option 1</button></li>
-                        <li><a href="#" data-ui="menu.item">Link</a></li>
-                        <li><button data-ui="menu.item" value="2">Option 2</button></li>
-                        <li><button data-ui="menu.item" value="3">Option 3</button></li>
-                        <li>
-                            <button data-ui="menu.submenu">
-                                Submenu <ui-icon icon="chevron" style="rotate: -90deg"></ui-icon>
-                            </button>
-                            <ui-popover data-ui="menu.popover">
-                                <menu role="menu">
-                                    <li><button data-ui="menu.item" value="4">Option 4</button></li>
-                                    <li><button data-ui="menu.item" value="5">Option 5</button></li>
-                                    <li>
-                                        <button data-ui="menu.submenu">
-                                            Submenu <ui-icon icon="chevron" style="rotate: -90deg"></ui-icon>
-                                        </button>
-                                        <ui-popover data-ui="menu.popover">
-                                            <menu role="menu">
-                                                <li><button data-ui="menu.item" value="6">Option 6</button></li>
-                                                <li><button data-ui="menu.item" value="7">Option 7</button></li>
-                                                <li><button data-ui="menu.item" value="8">Option 8</button></li>
-                                            </menu>
-                                        </ui-popover>
-                                    </li>
-                                </menu>
-                            </ui-popover>
-                        </li>
-                    </menu>
-                </ui-popover>
-            </ui-menu>
-            <input class="textfield" type="text" data-bind-value />
-        </div>
-    </body>
+        <h2 data-font-size="large3">Custom elements</h2>
+        <p>Choose an option in the menu and see the input update:</p>
+        <ui-menu data-on-ui:itemselect="evt.target.value && ($value = evt.target.value)">
+            <button class="button" data-ui="menu.trigger">Menu <ui-icon icon="chevron"></ui-icon></button>
+            <ui-popover data-ui="menu.popover">
+                <menu role="menu">
+                    <li><button data-ui="menu.item" value="1" disabled>Option 1</button></li>
+                    <li><a href="#" data-ui="menu.item">Link</a></li>
+                    <li><button data-ui="menu.item" value="2">Option 2</button></li>
+                    <li><button data-ui="menu.item" value="3">Option 3</button></li>
+                    <li>
+                        <button data-ui="menu.submenu">
+                            Submenu <ui-icon icon="chevron" style="rotate: -90deg"></ui-icon>
+                        </button>
+                        <ui-popover data-ui="menu.popover">
+                            <menu role="menu">
+                                <li><button data-ui="menu.item" value="4">Option 4</button></li>
+                                <li><button data-ui="menu.item" value="5">Option 5</button></li>
+                                <li>
+                                    <button data-ui="menu.submenu">
+                                        Submenu <ui-icon icon="chevron" style="rotate: -90deg"></ui-icon>
+                                    </button>
+                                    <ui-popover data-ui="menu.popover">
+                                        <menu role="menu">
+                                            <li><button data-ui="menu.item" value="6">Option 6</button></li>
+                                            <li><button data-ui="menu.item" value="7">Option 7</button></li>
+                                            <li><button data-ui="menu.item" value="8">Option 8</button></li>
+                                        </menu>
+                                    </ui-popover>
+                                </li>
+                            </menu>
+                        </ui-popover>
+                    </li>
+                </menu>
+            </ui-popover>
+        </ui-menu>
+        <input class="textfield" type="text" data-bind-value />
+    </div>
+</body>
+
 </html>
