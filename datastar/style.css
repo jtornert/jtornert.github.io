@@ -156,6 +156,7 @@ ui-icon {
     box-sizing: border-box;
     max-width: 40ch;
     box-shadow: 0 0.5rem 3rem -0.5rem black;
+    animation: scale-in 200ms ease;
 }
 
 #overlay {
@@ -168,8 +169,18 @@ ui-icon {
     pointer-events: none;
 
     &:has(.alert) {
+        transition-property: backdrop-filter, background;
+        transition-duration: 200ms;
+        transition-timing-function: ease;
         pointer-events: all;
         background: #222a;
         backdrop-filter: blur(2px);
+    }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        scale: 0.9;
     }
 }
