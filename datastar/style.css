@@ -23,6 +23,10 @@ html {
     line-height: 1.5;
 }
 
+body:has(#overlay .alert) {
+    overflow: hidden;
+}
+
 menu {
     list-style: none;
     margin: 0;
@@ -146,4 +150,34 @@ ui-icon {
 .tabular {
     font-feature-settings: "tnum" 1;
     letter-spacing: -0.0625ch;
+}
+
+.alert {
+    place-self: center;
+    display: grid;
+    align-items: center;
+    background: var(--surface-3);
+    padding-block: 0.25rem;
+    padding-inline: 0.5rem;
+    border-radius: 3px;
+    grid-template-areas: "heading action" "message message";
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    max-width: 40ch;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    pointer-events: none;
+
+    &:has(.alert) {
+        pointer-events: all;
+        background: #2228;
+        backdrop-filter: blur(2px);
+    }
 }

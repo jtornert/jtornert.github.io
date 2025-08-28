@@ -1,1 +1,17 @@
 <p id="response-html">I was loaded by Datastar ^^</p>
+
+<div id="overlay">
+    <div class="alert" data-signals-focus="document.activeElement" data-ref="alert"
+         data-on-load="$alert.focus(); root.inert = true">
+        <h2>Alert</h2>
+        <button data-on-click="$alert.remove(); root.inert = false; $focus?.focus()">&cross;</button>
+        <div>
+            <p>This message is from Datastar.</p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis reiciendis hic molestias ipsam
+                aliquam
+                asperiores nisi necessitatibus obcaecati, magnam officiis.
+            </p>
+        </div>
+    </div>
+</div>

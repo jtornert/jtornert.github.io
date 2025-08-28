@@ -15,12 +15,13 @@
 </head>
 
 <body>
-    <div class="print-width" style="margin-bottom: 4rem;">
+    <div id="root" class="print-width" style="margin-bottom: 4rem;">
         <h1 data-font-size="large6">Datastar 🚀</h1>
 
         <h2 data-font-size="large3">Load HTML</h2>
         <p>Click this button to load a response with HTML:</p>
-        <button class="button" id="response-html" data-on-click="@get('responses/markup.html')">Load HTML</button>
+        <button class="button" data-on-click="@get('responses/markup.html')">Load HTML</button>
+        <p id="response-html"></p>
 
         <h2 data-font-size="large3">Backend-synced signals</h2>
         <p>Click this button to increment the counter inside the browser only:</p>
@@ -76,6 +77,7 @@
         </ui-menu>
         <input class="textfield" type="text" data-bind-value />
     </div>
+    <div id="overlay"></div>
 </body>
 
 </html>
