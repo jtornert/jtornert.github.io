@@ -8,6 +8,8 @@
     --neutral-active: #333;
     --neutral-border: #777;
     --neutral-disabled: #888;
+    --weak-text: #888;
+    --transition-duration: 200ms;
 }
 
 :focus-visible {
@@ -19,6 +21,7 @@ html {
     font-family: "Inter", sans-serif;
     background: var(--surface-1);
     line-height: 1.5;
+    scrollbar-gutter: stable;
 }
 
 body:has(#overlay .alert) {
@@ -144,6 +147,10 @@ ui-icon {
     letter-spacing: -0.0625ch;
 }
 
+.weak {
+    color: var(--weak-text);
+}
+
 .alert {
     place-self: center;
     display: grid;
@@ -156,7 +163,7 @@ ui-icon {
     box-sizing: border-box;
     max-width: 40ch;
     box-shadow: 0 0.5rem 3rem -0.5rem black;
-    animation: scale-in 200ms ease;
+    animation: scale-in var(--transition-duration) ease;
 }
 
 #overlay {
@@ -170,7 +177,7 @@ ui-icon {
 
     &:has(.alert) {
         transition-property: backdrop-filter, background;
-        transition-duration: 200ms;
+        transition-duration: var(--transition-duration);
         transition-timing-function: ease;
         pointer-events: all;
         background: #222a;
@@ -182,5 +189,11 @@ ui-icon {
     from {
         opacity: 0;
         scale: 0.9;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --transition-duration: 0ms;
     }
 }
