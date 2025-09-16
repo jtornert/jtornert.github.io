@@ -1,4 +1,5 @@
 {
     "html.format.wrapAttributes": "preserve-aligned",
-    "html.format.wrapLineLength": 120
+    "html.format.wrapLineLength": 120,
+    "liveServer.settings.NoBrowser": true
 }
