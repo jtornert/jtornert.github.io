@@ -21,7 +21,7 @@
             }, duration));
         }
 
-        function cloneTemplate(id, args) {
+        function renderTemplate(id, args) {
             const template = document.getElementById(id).cloneNode(true);
 
             for (const key in args) {
@@ -36,16 +36,16 @@
         }
 
         async function mockget(url) {
-            const send = (i) => {
+            const sendElement = (i) => {
                 sendEvent("datastar-patch-elements", {
-                    elements: cloneTemplate("messages", { index: i, hash: Math.random().toString(36).slice(2) })
+                    elements: renderTemplate("messages", { index: i, hash: Math.random().toString(36).slice(2) })
                 });
             };
 
-            send(1);
+            sendElement(1);
             for (let i = 1; i < 100; ++i) {
                 await sleep(10);
-                send(i + 1);
+                sendElement(i + 1);
             }
         }
     </script>
@@ -85,7 +85,7 @@
 
         <h2 data-font-size="large3">Custom elements</h2>
         <p>Choose an option in the menu and see the input update:</p>
-        <ui-menu data-on-ui:itemselect="evt.target.value && ($value = evt.target.value)">
+        <ui-menu data-on-ui:itemselect="evt.target.value && ($_value = evt.target.value)">
             <button class="button" data-ui="menu.trigger">Menu <ui-icon icon="chevron"></ui-icon></button>
             <ui-popover data-ui="menu.popover">
                 <menu role="menu">
@@ -119,7 +119,7 @@
                 </menu>
             </ui-popover>
         </ui-menu>
-        <input class="textfield" type="text" data-bind-value />
+        <input class="textfield" type="text" data-bind="_value" />
     </div>
     <div id="overlay"></div>
     <template id="messages">

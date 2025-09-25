@@ -24,7 +24,7 @@ html {
     scrollbar-gutter: stable;
 }
 
-body:has(#overlay .alert) {
+html:has(#overlay .alert) {
     overflow: hidden;
 }
 

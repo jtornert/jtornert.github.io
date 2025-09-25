@@ -1,10 +1,10 @@
 <span id="response-html">I was loaded by Datastar 🚀</span>
 
 <div id="overlay">
-    <div class="alert" data-signals-focus="document.activeElement" data-ref="alert"
-         data-on-load="$alert.focus(); root.inert = true">
+    <div class="alert" data-signals="{_focus: document.activeElement}" data-ref="_alert"
+         data-on-load="$_alert.focus(); root.inert = true">
         <h2>Alert</h2>
-        <button class="button" data-on-click="$alert.remove(); root.inert = false; $focus?.focus()"
+        <button class="button" data-on-click="$_alert.remove(); root.inert = false; $_focus?.focus()"
                 style="padding-inline: 0;">
             <ui-icon icon="cross"></ui-icon>
         </button>
