@@ -11,8 +11,7 @@ async function create(name) {
     const svg = new DOMParser().parseFromString(text, "image/svg+xml");
     svg.querySelector("script")?.remove();
     const g = svg.querySelector("g");
-    g.removeAttribute("stroke");
-    g.removeAttribute("stroke-width");
+    g.removeAttribute("style");
     icons[name] = svg.firstElementChild;
 
     return svg.firstElementChild.cloneNode(true);

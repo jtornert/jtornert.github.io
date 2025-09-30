@@ -9,7 +9,7 @@ p {
     gap: 1rem;
 }
 
-p:has([data-icon]){
+p:has([data-icon]) {
     border-top: 1px dashed #fff8;
     border-bottom: 1px dashed #fff8;
 }
@@ -64,6 +64,7 @@ label {
 [data-icon] {
     width: 2em;
     height: 2em;
+    fill: transparent;
     stroke-width: calc(0.0625rem * 1 / var(--rem, 1) * 0.618 + 1px);
     stroke: currentColor;
 }

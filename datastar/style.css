@@ -140,6 +140,12 @@ ui-icon {
     vertical-align: -0.125em;
     stroke: currentColor;
     stroke-width: 3;
+    fill: transparent;
+
+    &.checked {
+        stroke: tomato;
+        fill: coral;
+    }
 }
 
 .tabular {
@@ -183,6 +189,11 @@ ui-icon {
         background: #222a;
         backdrop-filter: blur(2px);
     }
+}
+
+#timestamps {
+    display: grid;
+    gap: 0.25rem;
 }
 
 @keyframes scale-in {

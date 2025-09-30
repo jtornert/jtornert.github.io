@@ -79,8 +79,7 @@ class Icon extends HTMLElement {
 
                     const g = svg.querySelector("g");
 
-                    g.removeAttribute("stroke");
-                    g.removeAttribute("stroke-width");
+                    g.removeAttribute("style");
 
                     return svg.firstElementChild;
                 });
