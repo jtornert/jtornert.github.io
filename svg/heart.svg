@@ -1,6 +1,7 @@
-<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="stroke-linecap:square">
+<svg viewBox="0 -1 32 32" xmlns="http://www.w3.org/2000/svg" style="stroke-linecap:square">
     <g style="fill:none;stroke:#ccc;stroke-width:2">
-        <path d="M16,8A1,1,0,0,1,24,16L16,24" />
-        <path d="M16,24L8,16A1,1,0,0,1,16,8" />
+        <path d="M16,8L24,16L16,24L8,16Z" stroke="none" />
+        <path d="M16,8L17,7A1,1,0,0,1,25,15L16,24" />
+        <path d="M16,24L7,15A1,1,0,0,1,15,7L16,8" />
     </g>
 </svg>
