@@ -194,6 +194,8 @@ ui-icon {
 #timestamps {
     display: grid;
     gap: 0.25rem;
+    list-style: none;
+    padding: 0;
 }
 
 @keyframes scale-in {

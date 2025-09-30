@@ -154,18 +154,18 @@
     </template>
     <template id="timestamp">
         <li style="display: flex;justify-content: space-between;">
-            <div>
+            <span>
                 <time data-time__date.medium__time.medium="'{{timestamp}}'"></time>
                 -
                 <time data-time__relative="'{{timestamp}}'"></time>
-            </div>
-            <div style="display: flex;gap: 0.25rem;">
+            </span>
+            <span style="display: flex;gap: 0.25rem;">
                 <button class="button" style="padding: 0;" onclick="this.firstElementChild.classList.toggle('checked')">
                     <ui-icon icon="heart"></ui-icon></button>
                 <button class="button" style="padding: 0;" onclick="this.closest('li').remove()">
                     <ui-icon icon="cross"></ui-icon>
                 </button>
-            </div>
+            </span>
         </li>
     </template>
 </body>
