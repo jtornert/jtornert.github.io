@@ -13,8 +13,7 @@ load({
         if (mods.has("relative")) {
             const update = () => {
                 const now = new Date();
-                const formatted = formatRelativeTime(date, now);
-                el.innerText = formatted;
+                el.innerText = formatRelativeTime(date, now);
             };
             plugin.effects.push({ el, update });
             for (const e of plugin.effects) {
@@ -28,8 +27,8 @@ load({
                 }, 15 * 1000);
             }
         } else {
-            let dateStyle = mods.get("date")?.values().next().value ?? "short";
-            let timeStyle = mods.get("time")?.values().next().value ?? "short";
+            const dateStyle = mods.get("date")?.values().next().value ?? "short";
+            const timeStyle = mods.get("time")?.values().next().value ?? "short";
             const formatter = new Intl.DateTimeFormat(undefined, {
                 dateStyle,
                 timeStyle,
@@ -50,11 +49,11 @@ load({
 const units = ["milliseconds", "seconds", "minutes", "hours", "days", "months", "years"];
 
 function wrappingSubtract(lhs, rhs, modulo) {
-    const result = lhs - (lhs > rhs ? rhs + modulo : rhs);
-    return result;
+    return lhs - (lhs > rhs ? rhs + modulo : rhs);
 }
 
 function formatRelativeTime(date, now) {
+    // find unit of time
     const longerSinceUnits = [];
     let compare = new Date(now);
     compare.setUTCSeconds(compare.getUTCSeconds() - 1);
@@ -75,11 +74,12 @@ function formatRelativeTime(date, now) {
     compare.setUTCFullYear(compare.getUTCFullYear() - 1);
     longerSinceUnits.push(date <= compare);
     longerSinceUnits.push(false);
-    let unitIndex = longerSinceUnits.findIndex((lsu) => !lsu);
+    const unitIndex = longerSinceUnits.findIndex((unit) => !unit);
     let unit = units[unitIndex];
-    let diffUnits = [];
+    // find time difference (duration) for each unit of time
+    const diffUnits = [];
     compare = new Date(now);
-    compare.setUTCDate(0);
+    compare.setUTCDate(0); // check number of days in previous month to render same date as "1 month ago"
     const moduloUnits = [1000, 60, 60, 24, compare.getUTCDate(), 12];
     diffUnits.push(wrappingSubtract(date.getUTCMilliseconds(), now.getUTCMilliseconds(), moduloUnits[0]));
     diffUnits.push(wrappingSubtract(date.getUTCSeconds(), now.getUTCSeconds(), moduloUnits[1]));
@@ -89,6 +89,7 @@ function formatRelativeTime(date, now) {
     diffUnits.push(wrappingSubtract(date.getUTCMonth(), now.getUTCMonth(), moduloUnits[5]));
     diffUnits.push(date.getUTCFullYear() - now.getUTCFullYear());
     let duration = diffUnits[unitIndex];
+    // correct time difference calculation for entire duration
     compare = new Date(now);
     let wrappingUnit = false;
     if (unit !== "year") wrappingUnit = true;
@@ -116,11 +117,10 @@ function formatRelativeTime(date, now) {
     }
     if (unit === "milliseconds") {
         duration = Math.ceil(duration / 1000);
-        unit = "seconds";
+        unit = "seconds"; // seconds is smallest unit allowed in formatter
     }
-    if (wrappingUnit && date < compare && duration === 0) {
-        duration = -moduloUnits[unitIndex] + 1;
-    }
+    if (wrappingUnit && date < compare && duration === 0) duration = -moduloUnits[unitIndex] + 1;
+    // finally format duration
     const formatter = new Intl.RelativeTimeFormat(undefined, {
         numeric: unit === "seconds" ? "auto" : "always",
         style: "long",
