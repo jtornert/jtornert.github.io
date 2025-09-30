@@ -157,7 +157,9 @@ class Menu extends HTMLElement {
                 popover;
                 popover = popover.parentElement.closest("[data-ui='menu.popover']")
             ) {
-                popover.setAttribute("visible", "");
+                if (popover.getAttribute("visible") === null) {
+                    popover.setAttribute("visible", "");
+                }
                 visited.push(popover);
             }
 
