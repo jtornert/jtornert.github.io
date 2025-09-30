@@ -1,0 +1,53 @@
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+html {
+    color-scheme: dark;
+    font-family: sans-serif;
+}
+
+main {
+    width: calc(100% - 24px);
+    max-width: 40ch;
+    margin-inline: auto;
+    display: grid;
+    grid-template-rows: repeat(3, max-content);
+    place-items: center;
+}
+
+label {
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.box {
+    height: 10rem;
+    width: 10rem;
+    background: #f008;
+    display: grid;
+    place-items: center;
+    transform: rotate3d(var(--rotate-x), var(--rotate-y), var(--rotate-z), var(--angle));
+    user-select: none;
+}
+
+body:has(input[type="checkbox"]:checked) .box {
+    animation: rotate 1000ms linear infinite;
+}
+
+.controls {
+    display: grid;
+    width: max-content;
+    margin-bottom: 3rem;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}

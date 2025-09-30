@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transforms</title>
+    <link rel="stylesheet" href="/reset/reset.css">
+    <link rel="stylesheet" href="/reset/utilities.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module"
+            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.5/bundles/datastar.js"></script>
+</head>
+
+<body>
+    <main>
+        <h1 data-font-size="large3">Transforms</h1>
+        <form class="controls">
+            <label>X-axis: <input type="range" min="-1" max="1" step="0.1" data-bind-rotate-x></label>
+            <label>Y-axis: <input type="range" min="-1" max="1" step="0.1" data-bind-rotate-y></label>
+            <label>Z-axis: <input type="range" min="-1" max="1" step="0.1" data-bind-rotate-z></label>
+            <label>Animate: <input type="checkbox"></label>
+            <button type="reset" data-on-click="@setAll(0, {include: /^rotate/})">Reset</button>
+        </form>
+        <div class="box"
+             data-style="{'--rotate-x': $rotateX, '--rotate-y': $rotateY, '--rotate-z': $rotateZ}">
+            <span>Hello</span>
+        </div>
+    </main>
+</body>
+
+</html>
