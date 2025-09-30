@@ -4,11 +4,11 @@ load({
     type: "attribute",
     name: "time",
     valReq: "must",
-    returnsValue: true,
+    shouldEvaluate: false,
     interval: null,
     effects: [],
-    onLoad({ el, mods, rx, plugin }) {
-        const datetime = rx();
+    onLoad({ el, mods, value, plugin }) {
+        const datetime = value;
         const date = new Date(datetime);
         if (mods.has("relative")) {
             const update = () => {
