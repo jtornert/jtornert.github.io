@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="/reset/reset.css" />
     <link rel="stylesheet" href="/reset/utilities.css" />
     <link rel="stylesheet" href="style.css" />
-    <script
-            type="module"
-            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
+    <script type="module" src="plugins.js"></script>
     <script type="module" src="components.js"></script>
     <script>
         function sleep(duration) {
@@ -25,7 +23,7 @@
             const template = document.getElementById(id).cloneNode(true);
 
             for (const key in args) {
-                template.innerHTML = template.innerHTML.replace(`{{${key}}}`, args[key]);
+                template.innerHTML = template.innerHTML.replaceAll(`{{${key}}}`, args[key]);
             }
 
             return template.innerHTML.trim();
@@ -36,16 +34,40 @@
         }
 
         async function mockget(url) {
-            const sendElement = (i) => {
-                sendEvent("datastar-patch-elements", {
-                    elements: renderTemplate("messages", { index: i, hash: Math.random().toString(36).slice(2) })
-                });
-            };
+            const id = url.replace("/", "");
 
-            sendElement(1);
-            for (let i = 1; i < 100; ++i) {
-                await sleep(10);
-                sendElement(i + 1);
+            switch (id) {
+                case "messages": {
+                    const sendElement = (i) => {
+                        sendEvent("datastar-patch-elements", {
+                            elements: renderTemplate(id, { index: i, hash: Math.random().toString(36).slice(2) })
+                        });
+                    };
+
+                    sendElement(1);
+
+                    for (let i = 1; i < 100; ++i) {
+                        await sleep(10);
+                        sendElement(i + 1);
+                    }
+
+                    break;
+                }
+
+                case "timestamp": {
+                    const now = new Date();
+
+                    sendEvent("datastar-patch-elements", {
+                        elements: renderTemplate(id, { timestamp: now.toISOString() }),
+                        selector: "#timestamps",
+                        mode: "append"
+                    });
+
+                    break;
+                }
+
+                default:
+                    break;
             }
         }
     </script>
@@ -82,6 +104,11 @@
         <p data-show="$_visible">I'm hiding in plain sight</p>
         <p>Click this button to make the backend force show the panel:</p>
         <button class="button" data-on-click="@get('responses/show-panel.json')">Show panel via backend</button>
+
+        <h2 data-font-size="large3">Custom plugins</h2>
+        <p>Click this button to generate a new timestamp and display it in your own timezone and locale:</p>
+        <button class="button" data-on-click="mockget('/timestamp')">Generate timestamp</button>
+        <ul id="timestamps"></ul>
 
         <h2 data-font-size="large3">Custom elements</h2>
         <p>Choose an option in the menu and see the input update:</p>
@@ -124,6 +151,16 @@
     <div id="overlay"></div>
     <template id="messages">
         <span id="response-html">Generated #{{index}}: {{hash}}</span>
+    </template>
+    <template id="timestamp">
+        <li style="display: flex;justify-content: space-between;">
+            <div>
+                <time data-time__date.medium__time.medium="'{{timestamp}}'"></time>
+                -
+                <time data-time__relative="'{{timestamp}}'"></time>
+            </div>
+            <button class="button" style="float: right;" onclick="this.parentElement.remove()">&cross;</button>
+        </li>
     </template>
 </body>
 
