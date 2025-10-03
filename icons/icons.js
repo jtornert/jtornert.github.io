@@ -21,7 +21,7 @@ window.addEventListener("load", async () => {
     for (const element of document.querySelectorAll("i[data-icon]")) {
         const svg = await create(element.dataset.icon);
         svg.dataset.icon = element.dataset.icon;
-        svg.setAttribute("style", element.style.cssText);
+        Object.assign(svg.style, element.style);
         element.replaceWith(svg);
         document.body.dispatchEvent(new CustomEvent("icons:load"));
     }
