@@ -157,6 +157,11 @@ ui-icon {
     color: var(--weak-text);
 }
 
+dialog {
+    border: none;
+    padding: 0;
+}
+
 .alert {
     place-self: center;
     display: grid;
@@ -165,6 +170,7 @@ ui-icon {
     padding-inline: 0.75rem;
     border-radius: 3px;
     grid-template-areas: "heading action" "message message";
+    grid-template-columns: 1fr auto;
     width: calc(100% - 24px);
     box-sizing: border-box;
     max-width: 40ch;

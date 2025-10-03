@@ -1,16 +1,17 @@
 <span id="response-html">I was loaded by Datastar 🚀</span>
 
 <div id="overlay">
-    <div class="alert" data-signals="{_focus: document.activeElement}" data-ref="_alert"
-         data-on-load="$_alert.focus(); root.inert = true">
+    <dialog data-on-load="el.showModal()" class="alert">
         <h2>Alert</h2>
-        <button class="button" data-on-click="$_alert.remove(); root.inert = false; $_focus?.focus()"
-                style="padding-inline: 0;">
-            <ui-icon icon="cross"></ui-icon>
-        </button>
+        <form method="dialog">
+            <button class="button" data-on-click="requestAnimationFrame(()=>{el.closest('dialog').remove()})"
+                    style="padding-inline: 0;">
+                <ui-icon icon="cross"></ui-icon>
+            </button>
+        </form>
         <div>
             <p>This message is from Datastar.</p>
             <p>You can send multiple fragments to different areas of your DOM.</p>
         </div>
-    </div>
+    </dialog>
 </div>
