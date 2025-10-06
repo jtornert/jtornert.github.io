@@ -6,8 +6,7 @@ function id(el) {
     }
 }
 
-const baseURL = "/svg";
-const icons = {};
+const iconsBaseURL = "/svg";
 const debounceDurationIn = 250;
 const debounceDurationOut = 100;
 let debounceTimer = null;
@@ -68,24 +67,19 @@ class Icon extends HTMLElement {
 
     async invariant() {
         const name = this.getAttribute("icon");
+        const svg = await fetch(`${iconsBaseURL}/${name}.svg`, { cache: "default" })
+            .then((res) => res.text())
+            .then((text) => {
+                const svg = new DOMParser().parseFromString(text, "image/svg+xml");
 
-        if (!icons[name]) {
-            icons[name] = fetch(`${baseURL}/${name}.svg`)
-                .then((res) => res.text())
-                .then((text) => {
-                    const svg = new DOMParser().parseFromString(text, "image/svg+xml");
+                svg.querySelector("script")?.remove();
 
-                    svg.querySelector("script")?.remove();
+                const g = svg.querySelector("g");
 
-                    const g = svg.querySelector("g");
+                g.removeAttribute("style");
 
-                    g.removeAttribute("style");
-
-                    return svg.firstElementChild;
-                });
-        }
-
-        const svg = (await icons[name]).cloneNode(true);
+                return svg.firstElementChild.cloneNode(true);
+            });
 
         this.replaceChildren(svg);
     }
