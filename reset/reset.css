@@ -1,5 +1,4 @@
 html {
-    scroll-behavior: smooth;
     line-height: 1.5;
 }
 
@@ -45,8 +44,8 @@ textarea {
     font-family: inherit;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
     html {
-        scroll-behavior: auto;
+        scroll-behavior: smooth;
     }
 }
