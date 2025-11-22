@@ -2,132 +2,148 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; style-src-attr 'unsafe-inline'; script-src 'nonce-a23gbfz9e'" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color scheme generator</title>
-    <script defer nonce="a23gbfz9e" src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <script nonce="a23gbfz9e" src="https://unpkg.com/chroma-js/dist/chroma.min.cjs"></script>
-    <script nonce="a23gbfz9e" src="script.js"></script>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/reset/reset.css">
+    <link rel="stylesheet" href="/reset/utilities.css">
+    <link rel="stylesheet" href="/icons/icons.css">
+    <script type="module" src="script.js"></script>
 </head>
 
-<body>
-    <h1 style="text-align: center">Color scheme generator</h1>
-
-    <main x-data="app">
-        <form @submit.prevent="handleFormSubmit">
-            <h2 style="font-size: 1rem; font-weight: normal; text-align: center">
-                Choose an accent color:
-            </h2>
-            <div class="accent-form">
-                <div class="slider-grid">
-                    <label for="lightness">Lightness</label>
-                    <input id="lightness" name="lightness" type="range" min="0.3" max="0.8" step="0.01" :value="data.l"
-                           @input="handleUpdateLightness" />
-                    <input type="number" min="0.3" max="0.8" step="0.01" :value="data.l"
-                           @input.debounce="handleUpdateLightness" />
-                    <label for="chroma">Chroma</label>
-                    <input id="chroma" name="chroma" type="range" min="0.05" :max="maxC" step="0.01" :value="clippedC"
-                           @input="handleUpdateChroma" />
-                    <input type="number" min="0.05" :max="maxC" step="0.01" :value="clippedC"
-                           @input.debounce="handleUpdateChroma" />
-                    <label for="hue">Hue</label>
-                    <input id="hue" name="hue" type="range" min="0" max="360" step="1" :value="data.h"
-                           @input="handleUpdateHue" />
-                    <input type="number" min="0" max="360" step="1" :value="data.h" @input.debounce="handleUpdateHue" />
-                </div>
-                <button type="submit" style="width: 8ch" x-text="submitText">
-                    + Add
-                </button>
-            </div>
-            <h2 style="font-size: 1rem; font-weight: normal; text-align: center">
-                Choose background and text colors:
-            </h2>
-            <div class="theme-form">
-                <fieldset class="slider-grid">
-                    <legend>Light mode</legend>
-                    <label for="light-background-lightness">Background lightness</label>
-                    <input id="light-background-lightness" type="range" min="0.9" max="1" step="0.01"
-                           :value="data.light.background.l" @input="handleUpdateLightBackgroundLightness">
-                    <input type="number" min="0.9" max="1" step="0.01" :value="data.light.background.l"
-                           @input.debounce="handleUpdateLightBackgroundLightness">
-                    <label for="light-background-chroma">Background chroma scale</label>
-                    <input id="light-background-chroma" type="range" min="0" max="1" step="0.01"
-                           :value="data.light.background.c" @input="handleUpdateLightBackgroundChroma">
-                    <input type="number" min="0" max="1" step="0.01" :value="data.light.background.c"
-                           @input.debounce="handleUpdateLightBackgroundChroma">
-                    <label for="light-background-spread">Background spread</label>
-                    <input id="light-background-spread" type="range" min="0" max="0.2" step="0.01"
-                           :value="data.light.background.d" @input="handleUpdateLightBackgroundSpread">
-                    <input type="number" min="0" max="0.2" step="0.01" :value="data.light.background.d"
-                           @input.debounce="handleUpdateDarkBackgroundSpread">
+<body data-init="@get(location.pathname)">
+    <div style="display: grid;place-content: center;justify-items: center;" data-remove>
+        <p data-font-size="large1">Loading...</p>
+        <i class="icon spinner spin" data-font-size="large4"></i>
+    </div>
+    <main data-cloak>
+        <h1 data-font-size="large3" class="print-width">Color scheme generator</h1>
+        <div role="form" class="print-width">
+            <fieldset data-init="@updateMaxC()" data-on:input="@updateMaxC()">
+                <legend>Accent color</legend>
+                <label>
+                    <span>Lightness: <span data-text="$accentL.toFixed(2)"></span></span>
+                    <input type="range" min="0.3" max="0.8" step="0.01" data-bind="accentL">
+                </label>
+                <label>
+                    <span>Chroma: <span data-text="$accentC.toFixed(3)"></span></span>
+                    <input type="range"
+                           min="0" max="0.4"
+                           step="0.001" data-bind="accentC">
+                </label>
+                <label>
+                    <span>Hue: <span data-text="$accentH.toFixed(0)"></span></span>
+                    <input type="range" min="0" max="359" step="1" data-bind="accentH">
+                </label>
+            </fieldset>
+            <fieldset style="display: block;">
+                <legend>Global</legend>
+                <fieldset>
+                    <legend>Backgrounds</legend>
+                    <fieldset>
+                        <legend>Light</legend>
+                        <label>
+                            <span>Chroma: <span data-text="$lightBackgroundChromaScale.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="1" step="0.01" data-bind="lightBackgroundChromaScale">
+                        </label>
+                        <label>
+                            <span>Lightness: <span data-text="$lightBackgroundLightness.toFixed(2)"></span></span>
+                            <input type="range" min="0.9" max="1" step="0.01" data-bind="lightBackgroundLightness">
+                        </label>
+                        <label>
+                            <span>Spread: <span data-text="$lightBackgroundSpread.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="0.2" step="0.01" data-bind="lightBackgroundSpread">
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Dark</legend>
+                        <label>
+                            <span>Chroma: <span data-text="$darkBackgroundChromaScale.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="1" step="0.01" data-bind="darkBackgroundChromaScale">
+                        </label>
+                        <label>
+                            <span>Lightness: <span data-text="$darkBackgroundLightness.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="0.3" step="0.01" data-bind="darkBackgroundLightness">
+                        </label>
+                        <label>
+                            <span>Spread: <span data-text="$darkBackgroundSpread.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="0.2" step="0.01" data-bind="darkBackgroundSpread">
+                        </label>
+                    </fieldset>
                 </fieldset>
-                <fieldset class="slider-grid">
-                    <legend>Dark mode</legend>
-                    <label for="dark-background-lightness">Background lightness</label>
-                    <input id="dark-background-lightness" type="range" min="0" max="0.3" step="0.01"
-                           :value="data.dark.background.l" @input="handleUpdateDarkBackgroundLightness">
-                    <input type="number" min="0" max="0.3" step="0.01" :value="data.dark.background.l"
-                           @input.debounce="handleUpdateDarkBackgroundLightness">
-                    <label for="dark-background-chroma">Background chroma scale</label>
-                    <input id="dark-background-chroma" type="range" min="0" max="1" step="0.01"
-                           :value="data.dark.background.c" @input="handleUpdateDarkBackgroundChroma">
-                    <input type="number" min="0" max="1" step="0.01" :value="data.dark.background.c"
-                           @input.debounce="handleUpdateDarkBackgroundChroma">
-                    <label for="dark-background-spread">Background spread</label>
-                    <input id="dark-background-spread" type="range" min="0" max="0.2" step="0.01"
-                           :value="data.dark.background.d" @input="handleUpdateDarkBackgroundSpread">
-                    <input type="number" min="0" max="0.2" step="0.01" :value="data.dark.background.d"
-                           @input.debounce="handleUpdateDarkBackgroundSpread">
+                <fieldset>
+                    <legend>Texts</legend>
+                    <fieldset>
+                        <legend>Light</legend>
+                        <label>
+                            <span>Chroma: <span data-text="$lightTextChromaScale.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="1" step="0.01" data-bind="lightTextChromaScale">
+                        </label>
+                        <label>
+                            <span>Lightness: <span data-text="$lightTextStrong.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="0.4" step="0.01" data-bind="lightTextStrong">
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Dark</legend>
+                        <label>
+                            <span>Chroma: <span data-text="$darkTextChromaScale.toFixed(2)"></span></span>
+                            <input type="range" min="0" max="1" step="0.01" data-bind="darkTextChromaScale">
+                        </label>
+                        <label>
+                            <span>Lightness: <span data-text="$darkTextStrong.toFixed(2)"></span></span>
+                            <input type="range" min="0.8" max="1" step="0.01" data-bind="darkTextStrong">
+                        </label>
+                    </fieldset>
                 </fieldset>
-            </div>
-            <h2 style="font-size: 1rem; font-weight: normal; text-align: center; margin-top: 2rem;">
-                Preview:
-            </h2>
-        </form>
-
-        <div class="demos">
-            <template x-for="color in colors" :key="color.id">
-                <div class="demo" :data-color-id="color.id">
-                    <div class="demo-actions">
-                        <button @click="handleEditColor">Edit</button>
-                        <button @click="handleRemoveColor">Remove</button>
-                    </div>
-                    <div class="demo-areas">
-                        <template x-for="theme in themes">
-                            <div class="demo-area" x-init="colorStyle" :data-color-scheme="theme">
-                                <header>
-                                    <h2>Top bar</h2>
-                                    <button data-variant="accent">
-                                        Button
-                                    </button>
-                                </header>
-                                <aside>
-                                    <h2>Side bar</h2>
-                                    <small>v1.0</small>
-                                </aside>
-                                <div>
-                                    <p>
-                                        Lorem ipsum, dolor sit amet
-                                        consectetur adipisicing elit.
-                                        Consequatur mollitia voluptatem quo
-                                        quia necessitatibus hic in at minus
-                                        sapiente tempore.
-                                    </p>
-                                    <fieldset>
-                                        <input type="text" placeholder="Type something..." />
-                                        <button>Button</button>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </template>
+            </fieldset>
+            <button data-on:click="@post('/accent')">+ Add</button>
+            <button data-on:click="$showCss = !$showCss"
+                    data-text="$showCss ? 'Hide CSS' : 'Show CSS'"></button>
         </div>
+        <pre class="print-width"
+             data-show="$showCss"><button data-on:click="@copyToClipboard(el.nextElementSibling.innerText)"></button><code data-text="$showCss && $accents.map((accent, i) => `/* color scheme ${i + 1} */\n${document.getElementById(accent.id).style.cssText}`).join('\n\n').replaceAll('; ', ';\n')"></code></pre>
+        <ul id="colors"></ul>
     </main>
+    <template id="color">
+        <li id="{{id}}" class="color">
+            <div class="actions">
+                <button
+                        data-on:click="$current.id === '{{id}}' ? @put('/accent/' + $current.id) : @edit()"
+                        data-text="$current.id === '{{id}}' ? 'Confirm edits' : 'Edit accent color'"></button>
+                <button data-on:click="@remove()">Remove</button>
+            </div>
+            <div data-color-scheme="light">
+                {{content}}
+            </div>
+            <div data-color-scheme="dark">
+                {{content}}
+            </div>
+        </li>
+    </template>
+    <template id="content">
+        <header>
+            <strong>Strong</strong>
+            <button>Button</button>
+        </header>
+        <aside>
+            <div class="menu-main">
+                <h2>Menu</h2>
+                <a href="#">Link</a>
+            </div>
+            <small>v0.1</small>
+        </aside>
+        <main>
+            <h2 data-font-size="large2">Heading</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab iusto ipsum hic repellendus in
+                praesentium numquam soluta voluptatum quo mollitia.
+            </p>
+        </main>
+    </template>
 </body>
 
 </html>

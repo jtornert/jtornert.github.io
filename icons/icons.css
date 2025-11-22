@@ -11,6 +11,14 @@ i.icon.chevron {
     mask-image: url("/svg/chevron.svg");
 }
 
+i.icon.copy {
+    mask-image: url("/svg/copy.svg");
+}
+
+i.icon.check {
+    mask-image: url("/svg/check.svg");
+}
+
 i.icon.hamburger {
     mask-image: url("/svg/hamburger.svg");
 }
