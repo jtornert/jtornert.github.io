@@ -359,7 +359,7 @@ action({
         navigator.clipboard.writeText(value);
         const update = () => {
             el.classList.add("copied");
-            setTimeout(() => {
+            copiedTimeout = setTimeout(() => {
                 el.classList.remove("copied");
             }, 3000);
         };
