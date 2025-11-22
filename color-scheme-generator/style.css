@@ -102,6 +102,17 @@ pre {
             }
         }
     }
+
+    .form-columns {
+        display: flex;
+        flex-wrap: wrap;
+
+        > fieldset {
+            flex-basis: 30ch;
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+    }
 }
 
 #colors {
@@ -113,6 +124,7 @@ pre {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    container: list / inline-size;
 
     .color {
         display: grid;
@@ -215,15 +227,15 @@ pre {
     animation: copied 3000ms;
 }
 
+.spin {
+    animation: spin 2000ms linear infinite;
+}
+
 @keyframes copied {
     from {
         border-color: lime;
         box-shadow: 0 0.125rem 1rem oklch(from lime l c h / 0.25);
     }
-}
-
-.spin {
-    animation: spin 2000ms linear infinite;
 }
 
 @keyframes spin {
@@ -232,5 +244,15 @@ pre {
     }
     to {
         rotate: 360deg;
+    }
+}
+
+@container (width < 718px) {
+    #colors .color {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "actions"
+            "light"
+            "dark";
     }
 }
