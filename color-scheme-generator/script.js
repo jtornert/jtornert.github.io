@@ -366,7 +366,7 @@ action({
         if (el.classList.contains("copied")) {
             clearTimeout(copiedTimeout);
             el.classList.remove("copied");
-            setTimeout(update);
+            requestIdleCallback(update);
         } else {
             update();
         }
