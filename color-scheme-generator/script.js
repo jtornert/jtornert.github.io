@@ -8,68 +8,7 @@ import {
     endBatch,
 } from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
 import chroma from "https://unpkg.com/chroma-js@3.1.2/index.js";
-
-const __fetch = window.fetch;
-window.fetch = __fetch_with_mocks;
-const router = {
-    GET: [],
-    POST: [],
-    PUT: [],
-};
-
-function matchRoute(input, init) {
-    const url = new URL(input);
-    const urlFragments = url.pathname.split("/").filter((str) => str.length);
-    for (const route of router[init.method]) {
-        if (route.fragments.length !== urlFragments.length) continue;
-        const params = {};
-        for (let i = 0; i < urlFragments.length; ++i) {
-            const match = route.fragments[i].match(/<([\w]+)>/);
-            if (match) {
-                params[match[1]] = urlFragments[i];
-            } else if (route.fragments[i] !== urlFragments[i]) {
-                break;
-            }
-            if (i === urlFragments.length - 1) {
-                return { handler: route.handler?.bind(undefined, { params, init, url }) };
-            }
-        }
-    }
-}
-
-function __fetch_with_mocks(input, init) {
-    const route = matchRoute(input, init);
-    if (route) {
-        let body = route.handler?.();
-        if (!route.handler || !body) {
-            return new Promise((res) => res(new Response("")));
-        }
-        return new Promise((res) => {
-            let contentType = "text/html";
-            if (typeof body !== "string") {
-                contentType = "application/json";
-                body = JSON.stringify(body);
-            }
-            res(new Response(body, { headers: { "content-type": contentType } }));
-        });
-    }
-    return __fetch(input, init);
-}
-
-function mock(method, path, handler) {
-    router[method].push({
-        fragments: path.split("/").filter((str) => str.length),
-        handler,
-    });
-}
-
-/**
- * @param {"datastar-patch-elements" | "datastar-patch-signals"} name
- * @param {object} args
- */
-function datastar(name, args) {
-    document.dispatchEvent(new CustomEvent("datastar-fetch", { detail: { type: name, argsRaw: args } }));
-}
+import { datastarFetch, mock, template } from "/datastar/mock.js";
 
 function memo(fn, maxEntries = -1) {
     const cache = {};
@@ -120,7 +59,7 @@ mock("GET", location.pathname, () => {
                 const index = $accents.findIndex((accent) => accent.id === $current.id);
                 $accents[index].color = chroma.oklch(l, c, h);
             }
-            datastar("datastar-patch-elements", {
+            datastarFetch("datastar-patch-elements", {
                 mode: "inner",
                 selector: "#colors",
                 elements: $accents
@@ -288,18 +227,6 @@ mergePatch({
 mergePatch({
     current: getPath("accents")[0],
 });
-
-function template(id, params = {}) {
-    const fragment = document.getElementById(id).content.cloneNode(true);
-    let outerHTML = Array.prototype.map
-        .call(fragment.childNodes, (node) => node.outerHTML)
-        .filter((node) => node)
-        .join("");
-    for (const key in params) {
-        outerHTML = outerHTML.replaceAll(`{{${key}}}`, params[key]);
-    }
-    return outerHTML;
-}
 
 function id() {
     return "i" + Math.random().toString(36).slice(2);

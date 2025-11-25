@@ -8,6 +8,10 @@
     --neutral-active: #333;
     --neutral-border: #777;
     --neutral-disabled: #888;
+    --success: oklch(from var(--neutral) l 0.1 155);
+    --success-hover: oklch(from var(--neutral-hover) l 0.1 155);
+    --success-active: oklch(from var(--neutral-active) l 0.1 155);
+    --success-border: oklch(from var(--neutral-border) l 0.1 155);
     --weak-text: #888;
     --transition-duration: 200ms;
 }
@@ -43,6 +47,7 @@ menu[role="menu"] {
 }
 
 .button,
+.checkbox,
 .textfield {
     border: var(--border-width) solid var(--neutral-border);
     font-size: 0.875rem;
@@ -51,10 +56,14 @@ menu[role="menu"] {
     border-radius: 7px;
     padding-block: 0;
     padding-inline: 0.5em;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
     height: 1.875em;
     min-width: 1.875em;
     box-sizing: border-box;
+    position: relative;
 
     &:hover {
         background: var(--neutral-hover);
@@ -66,21 +75,62 @@ menu[role="menu"] {
     }
 }
 
+.checkbox {
+    appearance: none;
+    background: var(--surface-3);
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        mask-image: url("/svg/check.svg");
+        background: transparent;
+    }
+
+    &:hover {
+        background: var(--neutral-hover);
+    }
+
+    &:active {
+        background: var(--neutral-active);
+    }
+
+    &:checked {
+        background: var(--success);
+        border-color: var(--success-border);
+
+        &::before {
+            background: currentColor;
+        }
+
+        &:hover {
+            background: var(--success-hover);
+        }
+
+        &:active {
+            background: var(--success-active);
+        }
+    }
+}
+
 .textfield {
     background: var(--surface-3);
 }
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
     background: var(--neutral);
     user-select: none;
 
     &:active {
         background: var(--neutral-active);
     }
+}
+
+.code {
+    background: var(--surface-3);
+    padding: 0.25rem;
+    border-radius: 3px;
 }
 
 [data-ui="menu.item"],
@@ -127,6 +177,7 @@ ui-menu {
 ui-popover {
     display: none;
     position: absolute;
+    z-index: 1;
 
     &[visible] {
         display: grid;
@@ -202,6 +253,30 @@ dialog {
     gap: 0.25rem;
     list-style: none;
     padding: 0;
+}
+
+#tasklist {
+    max-width: 20rem;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    li {
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+
+        button[data-action="delete"]::before {
+            content: "";
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            background: currentColor;
+            mask-image: url("/svg/cross.svg");
+        }
+    }
 }
 
 @keyframes scale-in {

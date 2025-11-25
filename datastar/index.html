@@ -12,79 +12,20 @@
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="plugins.js"></script>
     <script type="module" src="components.js"></script>
-    <script>
-        function sleep(duration) {
-            return new Promise(res => setTimeout(() => {
-                res();
-            }, duration));
-        }
-
-        function renderTemplate(id, args) {
-            const template = document.getElementById(id).cloneNode(true);
-
-            for (const key in args) {
-                template.innerHTML = template.innerHTML.replaceAll(`{{${key}}}`, args[key]);
-            }
-
-            return template.innerHTML.trim();
-        }
-
-        async function sendEvent(type, detail) {
-            document.dispatchEvent(new CustomEvent("datastar-fetch", { detail: { type, argsRaw: detail } }));
-        }
-
-        async function mockget(url) {
-            const id = url.replace("/", "");
-
-            switch (id) {
-                case "messages": {
-                    const sendElement = (i) => {
-                        sendEvent("datastar-patch-elements", {
-                            elements: renderTemplate(id, { index: i, hash: Math.random().toString(36).slice(2) })
-                        });
-                    };
-
-                    sendElement(1);
-
-                    for (let i = 1; i < 100; ++i) {
-                        await sleep(10);
-                        sendElement(i + 1);
-                    }
-
-                    break;
-                }
-
-                case "timestamp": {
-                    const now = new Date();
-
-                    sendEvent("datastar-patch-elements", {
-                        elements: renderTemplate(id, { timestamp: now.toISOString() }),
-                        selector: "#timestamps",
-                        mode: "append"
-                    });
-
-                    break;
-                }
-
-                default:
-                    break;
-            }
-        }
-    </script>
 </head>
 
-<body>
+<body data-init="@get(location.pathname)">
     <div id="root" class="print-width" style="margin-bottom: 4rem;">
         <h1 data-font-size="large6">Datastar 🚀</h1>
 
         <h2 data-font-size="large3">Load HTML</h2>
         <p>Click this button to load a response with HTML:</p>
-        <button class="button" data-on-click="@get('responses/markup.html')">Load HTML</button>
+        <button class="button" data-on:click="@get('responses/markup.html')">Load HTML</button>
         <p>Message:
             <span id="response-html"><span class="weak">Datastar responses will be displayed here.</span></span>
         </p>
         <p>Click this button to generate 100 element updates 10 milliseconds apart:</p>
-        <button class="button" data-on-click="mockget('/messages')">Generate messages</button>
+        <button class="button" data-on:click="@get('/messages')">Generate messages</button>
 
         <h2 data-font-size="large3">Backend-synced signals</h2>
         <h3 data-font-size="large1">Counter</h3>
@@ -94,25 +35,25 @@
                 style="width: 100%"
                 data-signals="{_count: 0}"
                 data-text="$_count"
-                data-on-click="++$_count"></button>
+                data-on:click="++$_count"></button>
         <p>Click this button to sync the counter with the backend (15):</p>
-        <button class="button" data-on-click="@get('responses/set-counter.json')">Sync</button>
+        <button class="button" data-on:click="@get('responses/set-counter.json')">Sync</button>
 
         <h3 data-font-size="large1">Show and hide</h3>
         <p>Click this button to toggle the panel below:</p>
-        <button class="button" data-on-click="$_visible = !$_visible">Toggle panel</button>
+        <button class="button" data-on:click="$_visible = !$_visible">Toggle panel</button>
         <p data-show="$_visible">I'm hiding in plain sight</p>
         <p>Click this button to make the backend force show the panel:</p>
-        <button class="button" data-on-click="@get('responses/show-panel.json')">Show panel via backend</button>
+        <button class="button" data-on:click="@get('responses/show-panel.json')">Show panel via backend</button>
 
         <h2 data-font-size="large3">Custom plugins</h2>
         <p>Click this button to generate a new timestamp and display it in your own timezone and locale:</p>
-        <button class="button" data-on-click="mockget('/timestamp')">Generate timestamp</button>
+        <button class="button" data-on:click="@get('/timestamp')">Generate timestamp</button>
         <ul id="timestamps"></ul>
 
         <h2 data-font-size="large3">Custom elements</h2>
         <p>Choose an option in the menu and see the input update:</p>
-        <ui-menu data-on-ui:itemselect="evt.target.value && ($_value = evt.target.value)">
+        <ui-menu data-on:ui:itemselect="evt.target.value && ($_value = evt.target.value)">
             <button class="button" data-ui="menu.trigger">Menu <ui-icon icon="chevron"></ui-icon></button>
             <ui-popover data-ui="menu.popover">
                 <menu role="menu">
@@ -147,8 +88,28 @@
             </ui-popover>
         </ui-menu>
         <input class="textfield" type="text" data-bind="_value" />
+        <h2 data-font-size="large3">Prototyping</h2>
+        <p>
+            This page contains mocked API routes for handling datastar fetching. This allows us to create prototypes
+            directly in the browser which are then easily adapted for a real API.
+        </p>
+        <p>This task list is persisted in <code class="code">localStorage</code> to simulate database operations.</p>
+        <form style="display: flex;align-items: baseline;gap: 0.25rem;"
+              data-on:submit="$title.trim() && @post('/todo')">
+            <input class="textfield" type="text" placeholder="Add task..." data-bind:title>
+            <button class="button" type="submit">+ Add</button>
+            <small data-text="`Tasks: ${$_length}`"></small>
+        </form>
+        <ul id="tasklist" data-on:click="@handleClick()" data-on:change="@handleChange()"></ul>
     </div>
     <div id="overlay"></div>
+    <template id="task">
+        <li id="{{id}}">
+            <input class="textfield" type="text" name="title" value="{{title}}">
+            <input class="checkbox" type="checkbox" name="completed" data-attr:checked="{{completed}}">
+            <button class="button" data-action="delete"></button>
+        </li>
+    </template>
     <template id="messages">
         <span id="response-html">Generated #{{index}}: {{hash}}</span>
     </template>

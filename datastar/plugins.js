@@ -1,13 +1,192 @@
-import { load } from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.5/bundles/datastar.js";
+import {
+    action,
+    actions,
+    attribute,
+    effect,
+    getPath,
+    mergePatch,
+    beginBatch,
+    endBatch,
+} from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
+import { template, datastarFetch, mock, sleep } from "./mock.js";
 
-load({
-    type: "attribute",
+(function beginMock() {
+    mock("GET", "/messages", async () => {
+        datastarFetch("datastar-patch-elements", {
+            elements: template("messages", {
+                index: 1,
+                hash: Math.random().toString(36).slice(2),
+            }),
+        });
+        for (let i = 2; i <= 100; ++i) {
+            await sleep(10);
+            datastarFetch("datastar-patch-elements", {
+                elements: template("messages", {
+                    index: i,
+                    hash: Math.random().toString(36).slice(2),
+                }),
+            });
+        }
+    });
+    mock("GET", "/timestamp", () => {
+        datastarFetch("datastar-patch-elements", {
+            elements: template("timestamp", { timestamp: new Date().toISOString() }),
+            selector: "#timestamps",
+            mode: "append",
+        });
+    });
+    mock("GET", location.pathname, () => {
+        requestIdleCallback(() => {
+            effect(() => {
+                datastarFetch("datastar-patch-elements", {
+                    selector: "#tasklist",
+                    mode: "inner",
+                    elements: getPath("tasks")
+                        .map((task) => template("task", task))
+                        .join(""),
+                });
+                mergePatch({
+                    _length: getPath("tasks").length,
+                });
+            });
+        });
+    });
+    mock("POST", "/todo", ({ body: { title } }) => {
+        getPath("addTask")(title);
+    });
+    mock("PUT", "/todo/<id>", ({ body }) => {
+        beginBatch();
+        for (const task of body.tasksUpdates) {
+            getPath("updateTask")(task);
+        }
+        endBatch();
+    });
+
+    mock("DELETE", "/todo/<id>", ({ params }) => {
+        getPath("deleteTask")(params.id);
+    });
+
+    beginBatch();
+    mergePatch({
+        id() {
+            return "i" + Math.random().toString(36).slice(2);
+        },
+    });
+    const MOCK_TASKS_STORAGE_KEY = "__mock_tasks";
+    let stored = localStorage.getItem(MOCK_TASKS_STORAGE_KEY);
+    if (stored) {
+        stored = JSON.parse(stored);
+        outer: for (const task of stored) {
+            for (const key of ["id", "title", "completed"]) {
+                if (!(key in task)) {
+                    stored = null;
+                    localStorage.removeItem(MOCK_TASKS_STORAGE_KEY);
+                    break outer;
+                }
+            }
+        }
+    }
+    mergePatch({
+        tasks: stored ?? [
+            { id: getPath("id")(), completed: true, title: "take out white trash" },
+            { id: getPath("id")(), completed: false, title: "make fat bank" },
+        ],
+        addTask(title) {
+            mergePatch({
+                tasks: [
+                    ...getPath("tasks"),
+                    {
+                        id: getPath("id")(),
+                        title: title.trim(),
+                    },
+                ],
+                title: "",
+            });
+        },
+        updateTask(update) {
+            mergePatch({
+                tasks: getPath("tasks").map((task) => (task.id === update.id ? { ...task, ...update } : task)),
+            });
+        },
+        deleteTask(id) {
+            mergePatch({
+                tasks: getPath("tasks").filter((task) => task.id !== id),
+            });
+        },
+    });
+    endBatch();
+    effect(() => {
+        localStorage.setItem(MOCK_TASKS_STORAGE_KEY, JSON.stringify(getPath("tasks")));
+    });
+})();
+
+action({
+    name: "handleClick",
+    apply(ctx) {
+        const { evt } = ctx;
+        switch (evt.target.closest("[data-action]")?.dataset.action) {
+            case "delete":
+                actions.delete(ctx, `/todo/${evt.target.closest("li").id}`);
+                break;
+
+            default:
+                break;
+        }
+    },
+});
+
+action({
+    name: "handleChange",
+    apply(ctx) {
+        const { evt } = ctx;
+        const id = evt.target.closest("li").id;
+        if (!id) return;
+        switch (evt.target.name) {
+            case "title": {
+                const title = evt.target.value;
+                mergePatch({
+                    tasksUpdates: [
+                        {
+                            id,
+                            title,
+                        },
+                    ],
+                });
+                actions.put(ctx, `/todo/${id}`).then(() => {
+                    mergePatch({ tasksUpdates: null });
+                });
+                break;
+            }
+
+            case "completed": {
+                const completed = evt.target.checked;
+                mergePatch({
+                    tasksUpdates: [
+                        {
+                            id,
+                            completed,
+                        },
+                    ],
+                });
+                actions.put(ctx, `/todo/${id}`).then(() => {
+                    mergePatch({ tasksUpdates: null });
+                });
+                break;
+            }
+
+            default:
+                break;
+        }
+    },
+});
+
+let interval = null;
+let effects = [];
+attribute({
     name: "time",
     valReq: "must",
     shouldEvaluate: false,
-    interval: null,
-    effects: [],
-    onLoad({ el, mods, value, plugin }) {
+    apply({ el, mods, value }) {
         const datetime = value;
         const date = new Date(datetime);
         if (mods.has("relative")) {
@@ -15,13 +194,13 @@ load({
                 const now = new Date();
                 el.innerText = formatRelativeTime(date, now);
             };
-            plugin.effects.push({ el, update });
-            for (const e of plugin.effects) {
+            effects.push({ el, update });
+            for (const e of effects) {
                 e.update();
             }
-            if (!plugin.interval) {
-                plugin.interval = setInterval(() => {
-                    for (const e of plugin.effects) {
+            if (!interval) {
+                interval = setInterval(() => {
+                    for (const e of effects) {
                         e.update();
                     }
                 }, 15 * 1000);
@@ -37,10 +216,10 @@ load({
         }
         el.setAttribute("datetime", datetime);
         return () => {
-            plugin.effects = plugin.effects.filter((e) => e.el !== el);
-            if (plugin.effects.length === 0) {
-                clearInterval(plugin.interval);
-                plugin.interval = null;
+            effects = effects.filter((e) => e.el !== el);
+            if (effects.length === 0) {
+                clearInterval(interval);
+                interval = null;
             }
         };
     },
