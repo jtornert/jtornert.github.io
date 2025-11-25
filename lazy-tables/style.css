@@ -1,0 +1,50 @@
+html {
+    color-scheme: dark;
+    font-family: sans-serif;
+}
+
+table {
+    --row-height: 1.5rem;
+    height: calc(var(--row-height) * 8);
+    overflow: hidden;
+    grid-template-columns: auto auto;
+    background: #222;
+    border: 1px solid #777;
+    border-radius: 7px;
+}
+
+thead tr,
+tbody tr:nth-child(2n) {
+    background: #333;
+}
+
+table,
+thead,
+tbody,
+tr {
+    display: grid;
+}
+
+thead,
+tbody,
+tr {
+    grid-template-columns: subgrid;
+    grid-column: span 2;
+}
+
+tbody {
+    overflow: auto;
+}
+
+th,
+td {
+    height: var(--row-height);
+    padding: 0.25rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+th {
+    border-bottom: 1px solid #777;
+}

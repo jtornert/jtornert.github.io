@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy tables</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+</head>
+
+<body>
+    <h1>Lazy tables</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Lorem</th>
+                <th>Ipsum</th>
+            </tr>
+        </thead>
+        <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.100px
+               data-on:scrollnearend="++$offset; !$end && @get(`/table-data-${$offset}.html`); if ($offset >= 9) { $end = true }">
+            <tr>
+                <td>Row</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>Row</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
