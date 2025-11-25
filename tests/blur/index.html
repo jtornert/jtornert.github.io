@@ -1,131 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Better transparency</title>
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link rel="stylesheet" href="/reset/reset.css" />
-        <link rel="stylesheet" href="/reset/utilities.css" />
-        <style>
-            html {
-                color-scheme: dark;
-                font-family: "Inter", sans-serif;
-                font-size: 3rem;
-            }
 
-            header {
-                padding-block: 1rem;
-                position: sticky;
-                top: 0;
-                isolation: isolate;
-                overflow: hidden;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Better blur</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/reset/reset.css" />
+    <link rel="stylesheet" href="/reset/utilities.css" />
+    <style>
+        html {
+            color-scheme: dark;
+            font-family: "Inter", sans-serif;
+            font-size: 3rem;
+        }
 
-            header div {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        header {
+            padding-block: 1rem;
+            position: sticky;
+            top: 0;
+            isolation: isolate;
+            overflow: hidden;
+        }
 
-            header::before {
-                --blur: 12px;
+        header div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-                content: "";
-                position: absolute;
-                backdrop-filter: blur(var(--blur));
-                z-index: -1;
-                inset: 0;
-            }
+        header::before {
+            --blur: 12px;
+            content: "";
+            position: absolute;
+            backdrop-filter: blur(var(--blur));
+            z-index: -1;
+            inset: 0;
+        }
 
-            header button {
-                border-radius: 3px;
-                border: 1px solid gray;
-                padding-block: 0.25ch;
-                padding-inline: 1ch;
-            }
+        header button {
+            border-radius: 3px;
+            border: 1px solid gray;
+            padding-block: 0.25ch;
+            padding-inline: 1ch;
+        }
 
-            header.good button {
-                background: darkgreen;
-                border-color: green;
-            }
+        header.good button {
+            background: darkgreen;
+            border-color: green;
+        }
 
-            header.good button:hover {
-                background: green;
-                border-color: green;
-            }
+        header.good button:hover {
+            background: green;
+            border-color: green;
+        }
 
-            header.good button:active {
-                background: darkgreen;
-                border-color: darkgreen;
-            }
+        header.good button:active {
+            background: darkgreen;
+            border-color: darkgreen;
+        }
 
-            header.good::before {
-                inset: calc(var(--blur) * -2);
-                clip-path: inset(
-                    var(--blur * 2) var(--blur * 2) var(--blur * 2)
-                        var(--blur * 2)
-                );
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class="print-width">
-                Header
-                <button
-                    onclick="document.querySelector('header').classList.toggle('good')"
-                >
-                    Better blur
-                </button>
-            </div>
-        </header>
-        <p class="print-width">
-            Scroll to see the effect of the naïve blur and the better blur.
-        </p>
-        <p class="print-width">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-            magnam? Optio eius unde perferendis error earum quo voluptas minima
-            dolorem voluptatem, quisquam reiciendis doloribus perspiciatis
-            fugiat iure delectus? Facere praesentium suscipit temporibus impedit
-            voluptatem quidem veritatis tempore, rerum asperiores distinctio
-            dignissimos accusantium fugit officiis debitis fuga? Veritatis
-            beatae adipisci voluptatibus voluptates, fugit pariatur nobis quam
-            quaerat ullam maxime, iure iste eaque saepe possimus reiciendis
-            reprehenderit maiores ipsum autem quidem ad rerum. Cupiditate optio
-            illo accusamus nemo. Quam inventore optio rerum voluptatum delectus,
-            velit recusandae? In et nisi, facere, quia commodi fuga provident
-            velit, sint minima voluptatum nesciunt quisquam. Ipsum, repellat!
-        </p>
-        <p class="print-width">
-            Magni, exercitationem. Quae autem doloremque assumenda eveniet eum
-            blanditiis provident neque, obcaecati ut quibusdam delectus earum,
-            incidunt similique quaerat officiis saepe laboriosam ullam numquam
-            repudiandae nemo, facere libero quo? Et quod odio itaque hic, culpa
-            alias dolorum excepturi eveniet, distinctio quos est repellat odit
-            fugiat quis voluptates! Temporibus nihil sapiente, veniam voluptatem
-            harum non quo, laudantium, vel repellat consectetur officiis atque
-            et distinctio at tempora quia sint. Excepturi ea animi cum,
-            repellendus quae laborum veniam tenetur voluptatibus! Sed placeat
-            voluptates non nostrum cum, amet dolores distinctio officia enim
-            dicta. Delectus repellendus eius dolorum officiis! Aperiam nemo
-            voluptates repellendus non quibusdam.
-        </p>
-        <p class="print-width">
-            Quo maxime dignissimos quibusdam, quaerat ducimus quidem minus,
-            fugit doloribus tenetur, veritatis inventore saepe? Commodi tempore
-            quaerat modi veritatis accusamus deleniti, ducimus earum optio rerum
-            dolor dolores nulla laborum minima enim eveniet temporibus sed neque
-            delectus, at cupiditate asperiores fugiat nam velit aut! Labore
-            ipsum eveniet dignissimos quaerat ipsam? Mollitia sapiente nemo non
-            eius accusantium, exercitationem ut alias ratione harum, quam in
-            eligendi officiis, molestias aliquam laudantium molestiae soluta
-            sequi quidem? Architecto officiis magni et quod quisquam consequatur
-            dolores tempora laudantium est unde aliquam cupiditate similique
-            enim alias sint, sapiente dolor fuga fugiat. Dolore consequuntur,
-            tempora nam quaerat reiciendis officiis.
-        </p>
-    </body>
+        header.good::before {
+            inset: calc(var(--blur) * -2);
+            clip-path: inset(var(--blur * 2) var(--blur * 2) var(--blur * 2) var(--blur * 2));
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="print-width">
+            Header
+            <button
+                    onclick="document.querySelector('header').classList.toggle('good')">
+                Better blur
+            </button>
+        </div>
+    </header>
+    <p class="print-width">
+        Scroll to see the effect of the naïve blur and the better blur.
+    </p>
+    <p class="print-width">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
+        magnam? Optio eius unde perferendis error earum quo voluptas minima
+        dolorem voluptatem, quisquam reiciendis doloribus perspiciatis
+        fugiat iure delectus? Facere praesentium suscipit temporibus impedit
+        voluptatem quidem veritatis tempore, rerum asperiores distinctio
+        dignissimos accusantium fugit officiis debitis fuga? Veritatis
+        beatae adipisci voluptatibus voluptates, fugit pariatur nobis quam
+        quaerat ullam maxime, iure iste eaque saepe possimus reiciendis
+        reprehenderit maiores ipsum autem quidem ad rerum. Cupiditate optio
+        illo accusamus nemo. Quam inventore optio rerum voluptatum delectus,
+        velit recusandae? In et nisi, facere, quia commodi fuga provident
+        velit, sint minima voluptatum nesciunt quisquam. Ipsum, repellat!
+    </p>
+    <p class="print-width">
+        Magni, exercitationem. Quae autem doloremque assumenda eveniet eum
+        blanditiis provident neque, obcaecati ut quibusdam delectus earum,
+        incidunt similique quaerat officiis saepe laboriosam ullam numquam
+        repudiandae nemo, facere libero quo? Et quod odio itaque hic, culpa
+        alias dolorum excepturi eveniet, distinctio quos est repellat odit
+        fugiat quis voluptates! Temporibus nihil sapiente, veniam voluptatem
+        harum non quo, laudantium, vel repellat consectetur officiis atque
+        et distinctio at tempora quia sint. Excepturi ea animi cum,
+        repellendus quae laborum veniam tenetur voluptatibus! Sed placeat
+        voluptates non nostrum cum, amet dolores distinctio officia enim
+        dicta. Delectus repellendus eius dolorum officiis! Aperiam nemo
+        voluptates repellendus non quibusdam.
+    </p>
+    <p class="print-width">
+        Quo maxime dignissimos quibusdam, quaerat ducimus quidem minus,
+        fugit doloribus tenetur, veritatis inventore saepe? Commodi tempore
+        quaerat modi veritatis accusamus deleniti, ducimus earum optio rerum
+        dolor dolores nulla laborum minima enim eveniet temporibus sed neque
+        delectus, at cupiditate asperiores fugiat nam velit aut! Labore
+        ipsum eveniet dignissimos quaerat ipsam? Mollitia sapiente nemo non
+        eius accusantium, exercitationem ut alias ratione harum, quam in
+        eligendi officiis, molestias aliquam laudantium molestiae soluta
+        sequi quidem? Architecto officiis magni et quod quisquam consequatur
+        dolores tempora laudantium est unde aliquam cupiditate similique
+        enim alias sint, sapiente dolor fuga fugiat. Dolore consequuntur,
+        tempora nam quaerat reiciendis officiis.
+    </p>
+</body>
+
 </html>
