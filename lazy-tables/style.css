@@ -84,6 +84,12 @@ th {
     place-content: center;
 }
 
+.weak {
+    color: #888;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
 @keyframes spin {
     to {
         rotate: 360deg;
