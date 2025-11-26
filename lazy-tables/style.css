@@ -18,6 +18,10 @@ tbody tr:nth-child(2n) {
     background: #333;
 }
 
+tbody tr:not(.loading):hover td {
+    background: #444;
+}
+
 table,
 thead,
 tbody,
@@ -47,4 +51,33 @@ td {
 
 th {
     border-bottom: 1px solid #777;
+}
+
+.loading {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.loading td {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.loading td::after {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background: currentColor;
+    mask-image: url("/svg/spinner.svg");
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        rotate: 360deg;
+    }
 }

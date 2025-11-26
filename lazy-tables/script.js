@@ -1,53 +1,77 @@
-import { attribute } from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
+import {
+    attribute,
+    getPath,
+    mergePatch,
+} from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
 import { mock, datastarFetch } from "/datastar/mock.js";
 
 (function beginMock() {
-    mock("GET", "/table-data-<id>.html", async ({ params, url }) => {
-        const offset = Number(params.id) * 10;
-        datastarFetch("datastar-patch-elements", {
-            selector: "tbody",
-            mode: "append",
-            elements: `<tr>
+    mock("GET", "/table-data-<id>.html", async () => {
+        const $offset = getPath("offset");
+        if ($offset === 9) {
+            mergePatch({
+                end: true,
+            });
+        }
+        const $end = getPath("end");
+        setTimeout(() => {
+            datastarFetch("datastar-patch-elements", {
+                selector: ".loading",
+                mode: "remove",
+            });
+            let data = `<tr>
     <td>Row</td>
-    <td>${offset + 1}</td>
+    <td>${$offset * 10 + 1}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 2}</td>
+    <td>${$offset * 10 + 2}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 3}</td>
+    <td>${$offset * 10 + 3}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 4}</td>
+    <td>${$offset * 10 + 4}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 5}</td>
+    <td>${$offset * 10 + 5}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 6}</td>
+    <td>${$offset * 10 + 6}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 7}</td>
+    <td>${$offset * 10 + 7}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 8}</td>
+    <td>${$offset * 10 + 8}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 9}</td>
+    <td>${$offset * 10 + 9}</td>
 </tr>
 <tr>
     <td>Row</td>
-    <td>${offset + 10}</td>
-</tr>`,
-        });
+    <td>${$offset * 10 + 10}</td>
+</tr>`;
+            if (!$end) {
+                data =
+                    data +
+                    `<tr class="loading">
+                <td>Loading...</td>
+            </tr>`;
+            }
+            datastarFetch("datastar-patch-elements", {
+                selector: "tbody",
+                mode: "append",
+                elements: data,
+            });
+        }, 400);
     });
 })();
 
@@ -56,7 +80,6 @@ function throttle(fn, duration = 200) {
     return function () {
         if (!timeout) {
             timeout = setTimeout(() => {
-                fn.apply(this, arguments);
                 timeout = null;
             }, duration);
             fn.apply(this, arguments);

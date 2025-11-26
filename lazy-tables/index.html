@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.100px
-               data-on:scrollnearend="!$end && @get(`/table-data-${++$offset}.html`); if ($offset >= 9) { $end = true }">
+               data-on:scrollnearend="!$end && @get(`/table-data-${++$offset}.html`)">
             <tr>
                 <td>Row</td>
                 <td>1</td>
@@ -61,6 +61,9 @@
             <tr>
                 <td>Row</td>
                 <td>10</td>
+            </tr>
+            <tr class="loading">
+                <td>Loading...</td>
             </tr>
         </tbody>
     </table>
