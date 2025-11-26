@@ -19,17 +19,12 @@ import { mock, datastarFetch } from "/datastar/mock.js";
                 selector: ".loading",
                 mode: "remove",
             });
-            let data = Array.from({ length: 20 })
-                .map(
-                    (_, i) => `<tr>
-    <td>Row</td>
-    <td>${$offset * 20 + 1 + i}</td>
-</tr>`
-                )
+            let elements = Array.from({ length: 20 })
+                .map((_, i) => `<tr><td>Row</td><td>${$offset * 20 + 1 + i}</td></tr>`)
                 .join("");
             if (!$end) {
-                data =
-                    data +
+                elements =
+                    elements +
                     `<tr class="loading">
                 <td>Loading...</td>
             </tr>`;
@@ -37,7 +32,7 @@ import { mock, datastarFetch } from "/datastar/mock.js";
             datastarFetch("datastar-patch-elements", {
                 selector: "tbody",
                 mode: "append",
-                elements: data,
+                elements,
             });
         }, 400);
     });
