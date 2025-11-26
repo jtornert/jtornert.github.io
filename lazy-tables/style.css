@@ -5,9 +5,11 @@ html {
 
 table {
     --row-height: 1.5rem;
-    height: calc(var(--row-height) * 8);
+    --rows: 14;
+    height: calc(var(--row-height) * (var(--rows) + 1));
     overflow: hidden;
     grid-template-columns: auto auto;
+    align-content: start;
     background: #222;
     border: 1px solid #777;
     border-radius: 7px;
@@ -38,6 +40,7 @@ tr {
 
 tbody {
     overflow: auto;
+    height: calc(var(--row-height) * var(--rows));
 }
 
 th,
@@ -74,6 +77,11 @@ th {
     background: currentColor;
     mask-image: url("/svg/spinner.svg");
     animation: spin 1s linear infinite;
+}
+
+.loading:only-child {
+    height: 100%;
+    place-content: center;
 }
 
 @keyframes spin {

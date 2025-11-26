@@ -19,46 +19,14 @@ import { mock, datastarFetch } from "/datastar/mock.js";
                 selector: ".loading",
                 mode: "remove",
             });
-            let data = `<tr>
+            let data = Array.from({ length: 20 })
+                .map(
+                    (_, i) => `<tr>
     <td>Row</td>
-    <td>${$offset * 10 + 1}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 2}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 3}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 4}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 5}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 6}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 7}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 8}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 9}</td>
-</tr>
-<tr>
-    <td>Row</td>
-    <td>${$offset * 10 + 10}</td>
-</tr>`;
+    <td>${$offset * 20 + 1 + i}</td>
+</tr>`
+                )
+                .join("");
             if (!$end) {
                 data =
                     data +

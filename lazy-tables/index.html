@@ -20,48 +20,9 @@
                 <th>Ipsum</th>
             </tr>
         </thead>
-        <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.100px
+        <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.200px
+               data-init="@get(`/table-data-${$offset}.html`)"
                data-on:scrollnearend="!$end && @get(`/table-data-${++$offset}.html`)">
-            <tr>
-                <td>Row</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>Row</td>
-                <td>10</td>
-            </tr>
             <tr class="loading">
                 <td>Loading...</td>
             </tr>
