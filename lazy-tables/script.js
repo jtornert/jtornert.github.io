@@ -1,16 +1,14 @@
-import {
-    attribute,
-    getPath,
-    mergePatch,
-} from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
+import { attribute, getPath } from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
 import { mock, datastarFetch } from "/datastar/mock.js";
 
 (function beginMock() {
     mock("GET", "/table-data-<id>.html", async () => {
         const $offset = getPath("offset");
         if ($offset === 9) {
-            mergePatch({
-                end: true,
+            datastarFetch("datastar-patch-signals", {
+                signals: JSON.stringify({
+                    end: true,
+                }),
             });
         }
         const $end = getPath("end");

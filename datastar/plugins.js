@@ -45,8 +45,10 @@ import { template, datastarFetch, mock, sleep } from "./mock.js";
                         .map((task) => template("task", task))
                         .join(""),
                 });
-                mergePatch({
-                    _length: getPath("tasks").length,
+                datastarFetch("datastar-patch-signals", {
+                    signals: JSON.stringify({
+                        _length: getPath("tasks").length,
+                    }),
                 });
             });
         });

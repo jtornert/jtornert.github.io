@@ -17,7 +17,9 @@ function matchRoute(input, init) {
         for (let i = 0; i < urlFragments.length; ++i) {
             const match = route.fragments[i].match(/<([\w]+)>/);
             if (match) {
-                params[match[1]] = urlFragments[i].slice(match.index, match.index + match.length - 1);
+                params[match[1]] = urlFragments[i]
+                    .slice(match.index)
+                    .replace(route.fragments[i].slice(match.index + match.length + 2), "");
             } else if (route.fragments[i] !== urlFragments[i]) {
                 break;
             }
