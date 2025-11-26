@@ -1,10 +1,10 @@
 <span id="response-html">I was loaded by Datastar 🚀</span>
 
 <div id="overlay">
-    <dialog data-on-load="el.showModal()" class="alert">
+    <dialog data-on:load="el.showModal()" class="alert">
         <h2>Alert</h2>
         <form method="dialog">
-            <button class="button" data-on-click="requestAnimationFrame(()=>{el.closest('dialog').remove()})"
+            <button class="button" data-on:click="requestAnimationFrame(()=>{el.closest('dialog').remove()})"
                     style="padding-inline: 0;">
                 <ui-icon icon="cross"></ui-icon>
             </button>
