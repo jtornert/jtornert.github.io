@@ -21,11 +21,7 @@ import { mock, datastarFetch } from "/datastar/mock.js";
                 .map((_, i) => `<tr><td>Row</td><td>${$offset * 20 + 1 + i}</td></tr>`)
                 .join("");
             if (!$end) {
-                elements =
-                    elements +
-                    `<tr class="loading">
-                <td>Loading...</td>
-            </tr>`;
+                elements += `<tr class="loading"><td>Loading...</td></tr>`;
             }
             datastarFetch("datastar-patch-elements", {
                 selector: "tbody",
