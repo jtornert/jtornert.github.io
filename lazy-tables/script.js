@@ -12,11 +12,6 @@ import { mock, datastarFetch } from "/datastar/mock.js";
             mergePatch({
                 end: true,
             });
-            datastarFetch("datastar-patch-elements", {
-                selector: "#message",
-                mode: "inner",
-                elements: "No more data.",
-            });
         }
         const $end = getPath("end");
         setTimeout(() => {
@@ -39,6 +34,13 @@ import { mock, datastarFetch } from "/datastar/mock.js";
                 mode: "append",
                 elements,
             });
+            if ($end) {
+                datastarFetch("datastar-patch-elements", {
+                    selector: "#message",
+                    mode: "inner",
+                    elements: "No more data.",
+                });
+            }
         }, 400);
     });
 })();
