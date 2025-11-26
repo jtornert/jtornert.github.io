@@ -7,30 +7,34 @@
     <title>Lazy tables</title>
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/reset/reset.css">
+    <link rel="stylesheet" href="/reset/utilities.css">
     <link rel="stylesheet" href="style.css">
     <script type="module" src="script.js"></script>
 </head>
 
 <body>
-    <div>
-        <h1 style="display: inline-block;">Lazy tables</h1>
-        <span id="message" class="weak"></span>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Lorem</th>
-                <th>Ipsum</th>
-            </tr>
-        </thead>
-        <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.200px
-               data-init="@get(`/table-data-${$offset}.html`)"
-               data-on:scrollnearend="!$end && @get(`/table-data-${++$offset}.html`)">
-            <tr class="loading">
-                <td>Loading...</td>
-            </tr>
-        </tbody>
-    </table>
+    <main class="print-width" style="width: 100%;">
+        <div>
+            <h1 data-font-size="large3" style="display: inline-block;">Lazy tables</h1>
+            <span id="message" class="weak"></span>
+        </div>
+        <table data-font-size="small1">
+            <thead>
+                <tr>
+                    <th>Lorem</th>
+                    <th>Ipsum</th>
+                </tr>
+            </thead>
+            <tbody data-signals="{offset: 0, end: false}" data-scroll-handler__offset.200px
+                   data-init="@get(`/table-data-${$offset}.html`)"
+                   data-on:scrollnearend="!$end && @get(`/table-data-${++$offset}.html`)">
+                <tr class="loading">
+                    <td>Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </body>
 
 </html>
