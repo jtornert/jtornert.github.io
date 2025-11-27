@@ -22,7 +22,7 @@ tbody tr:nth-child(2n) {
     background: #333;
 }
 
-tbody tr:not(.loading):hover td {
+tbody tr:not(.loading):hover {
     background: #444;
 }
 
