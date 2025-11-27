@@ -86,6 +86,7 @@ mock("GET", location.pathname, () => {
                 const accent = $accents[i].color;
                 const color = colors[i];
                 const accentL = accent.get("oklch.l");
+                const accentC = accent.get("oklch.c");
                 const accentH = accent.get("oklch.h");
                 color.style.setProperty("--accent", accent);
                 color.style.setProperty(
@@ -115,7 +116,10 @@ mock("GET", location.pathname, () => {
                     "--light-accent-active",
                     accentL >= 0.6 ? accent.mix("black", 0.3, "oklab") : accent.mix("black", 0.1, "oklab")
                 );
-                color.style.setProperty("--light-accent-outline", accent.mix("black", 0.1, "oklab"));
+                color.style.setProperty(
+                    "--light-accent-outline",
+                    table(0.5, accentH).set("oklch.c", `*${Math.min(accentC / 0.17, 1)}`)
+                );
                 color.style.setProperty(
                     "--light-strong-text",
                     table($lightTextStrong, accentH).set("oklch.c", `*${$lightTextChromaScale}`)
@@ -155,7 +159,10 @@ mock("GET", location.pathname, () => {
                     "--dark-accent-active",
                     accentL >= 0.6 ? accent.mix("black", 0.3, "oklab") : accent.mix("black", 0.1, "oklab")
                 );
-                color.style.setProperty("--dark-accent-outline", accent.mix("white", 0.35, "oklab"));
+                color.style.setProperty(
+                    "--dark-accent-outline",
+                    table(0.7, accentH).set("oklch.c", `*${Math.min(accentC / 0.2, 1)}`)
+                );
                 color.style.setProperty(
                     "--dark-strong-text",
                     table($darkTextStrong, accentH).set("oklch.c", `*${$darkTextChromaScale}`)
