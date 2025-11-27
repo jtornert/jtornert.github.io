@@ -191,6 +191,14 @@ pre {
             a {
                 color: var(--accent-outline);
                 text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &:active {
+                    color: var(--weak-text);
+                }
             }
 
             strong {
