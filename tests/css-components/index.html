@@ -8,19 +8,19 @@
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link rel="stylesheet" href="/reset/reset.css" />
-    <link rel="stylesheet" href="/reset/utilities.css" />
+    <link rel="stylesheet" href="css/utilities.css" />
+    <link rel="stylesheet" href="css/badge.css" />
     <link rel="stylesheet" href="css/forms.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="/icons/icons.css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/chroma-js@3.1.2/dist/chroma.min.cjs"></script>
-    <script src="js/components.js"></script>
+    <script type="module"
+            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.7/bundles/datastar.js"></script>
 </head>
 
 <body>
     <header class="topbar">
         <div class="print-width">
-            <h1 data-font-size="large1">Components</h1>
+            <h1 class="font-large1">Components</h1>
             <div>
                 <select class="select" data-variant="transparent" data-size="small">
                     <option value="auto">Auto</option>
@@ -55,117 +55,262 @@
                         });
                     });
                 </script>
-                <button class="button" data-variant="transparent" x-data="ui:trigger" aria-controls="table-of-contents"
-                        data-trigger-value="show" data-size="small">
-                    Show
-                </button>
-                <button class="button" data-variant="transparent" x-data="ui:trigger" aria-controls="table-of-contents"
-                        data-trigger-value="hide" data-size="small">
-                    Hide
-                </button>
             </div>
         </div>
     </header>
     <aside class="sidebar">
         <div class="print-width">
-            <h2 data-font-size="large1">Table of contents</h2>
-            <button class="button" data-variant="transparent" data-size="small" data-rounded x-data="ui:trigger"
-                    aria-controls="table-of-contents" aria-label="Toggle table of contents">
+            <h2 class="font-large1">Table of contents</h2>
+            <button class="button"
+                    data-variant="transparent"
+                    data-size="small"
+                    data-rounded
+                    aria-controls="table-of-contents"
+                    aria-label="Toggle table of contents"
+                    data-on:click="$_showToc = !$_showToc"
+                    data-attr:aria-expanded__case.camel="$_showToc ? 'true' : 'false'">
                 <i class="icon chevron"></i>
             </button>
-            <ul id="table-of-contents" x-data="el:show" aria-label="Table of contents">
-                <li><a href="#button">Button</a></li>
-                <li><a href="#select">Select</a></li>
-            </ul>
+            <nav id="table-of-contents"
+                 aria-label="Table of contents"
+                 data-attr:aria-hidden__case.camel="$_showToc ? 'true' : 'false'">
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="#badge">Badge</a></li>
+                    <li><a href="#button">Button</a></li>
+                    <li><a href="#select">Select</a></li>
+                </ul>
+                <h3>Utilities</h3>
+                <ul>
+                    <li><a href="#font-[size]"><code class="font-small1">.font-[size]</code></a></li>
+                    <li><a href="#tabular"><code class="font-small1">.tabular</code></a></li>
+                </ul>
+            </nav>
         </div>
     </aside>
     <main class="main">
         <div class="print-width">
-            <h2 data-font-size="large5">About</h2>
+            <h2 class="font-large5">About</h2>
             <p>
-                This page showcases the use of clever CSS together with
-                Alpine.js to support an entire library of UI components.
+                This page showcases the use of CSS to support an entire
+                library of UI components.
             </p>
             <p>
                 You can change the color scheme and UI color in the top bar.
             </p>
-            <h2 data-font-size="large3">Components</h2>
-            <h3 id="button" data-font-size="large3">Button</h3>
-            <hr />
-            <button class="button">Button</button>
-            <h4 data-font-size="large1">Variants</h4>
-            <button class="button" data-variant="filled">Filled</button>
-            <button class="button" data-variant="outlined">Outlined</button>
-            <button class="button" data-variant="transparent">
-                Transparent
-            </button>
-            <h4 data-font-size="large1">Sizes</h4>
-            <button class="button" data-size="small">Small</button>
-            <button class="button" data-size="normal">Normal</button>
-            <button class="button" data-size="large">Large</button>
-            <h4 data-font-size="large1">Rounded</h4>
-            <button class="button" data-size="small" data-rounded>
-                Rounded
-            </button>
-            <button class="button" data-size="normal" data-rounded>
-                Rounded
-            </button>
-            <button class="button" data-size="large" data-rounded>
-                Rounded
-            </button>
-            <h4 data-font-size="large1">Disabled</h4>
-            <button class="button" disabled>Disabled</button>
-            <button class="button" data-variant="outlined" disabled>
-                Disabled
-            </button>
-            <button class="button" data-variant="transparent" disabled>
-                Disabled
-            </button>
-            <h3 id="select" data-font-size="large3">Select</h3>
-            <hr />
-            <select class="select">
-                <option>Select</option>
-            </select>
-            <h4 data-font-size="large1">Variants</h4>
-            <select class="select" data-variant="filled">
-                <option>Filled</option>
-            </select>
-            <select class="select" data-variant="outlined">
-                <option>Outlined</option>
-            </select>
-            <select class="select" data-variant="transparent">
-                <option>Transparent</option>
-            </select>
-            <h4 data-font-size="large1">Sizes</h4>
-            <select class="select" data-size="small">
-                <option>Small</option>
-            </select>
-            <select class="select" data-size="normal">
-                <option>Normal</option>
-            </select>
-            <select class="select" data-size="large">
-                <option>Large</option>
-            </select>
-            <h4 data-font-size="large1">Rounded</h4>
-            <select class="select" data-size="small" data-rounded>
-                <option>Rounded</option>
-            </select>
-            <select class="select" data-size="normal" data-rounded>
-                <option>Rounded</option>
-            </select>
-            <select class="select" data-size="large" data-rounded>
-                <option>Rounded</option>
-            </select>
-            <h4 data-font-size="large1">Disabled</h4>
-            <select class="select" disabled>
-                <option>Disabled</option>
-            </select>
-            <select class="select" data-variant="outlined" disabled>
-                <option>Disabled</option>
-            </select>
-            <select class="select" data-variant="transparent" disabled>
-                <option>Disabled</option>
-            </select>
+            <h2 class="font-large5">Components</h2>
+            <section id="badge">
+                <h3 class="font-large3">Badge</h3>
+                <hr>
+                <div style="display: flex;column-gap: 1rem;row-gap: 1.5rem;flex-wrap: wrap;">
+                    <span class="badge">
+                        <span class="text tabular font-small2">1</span>
+                        <div style="height: 3rem;width: 3rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                    <span class="badge">
+                        <span class="text tabular font-small2">23</span>
+                        <div style="height: 3rem;width: 3rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                    <span class="badge">
+                        <span class="text tabular font-small2">456</span>
+                        <div style="height: 3rem;width: 3rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                    <span class="badge">
+                        <span class="text tabular font-small2">999+</span>
+                        <div style="height: 3rem;width: 3rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                    <span class="badge">
+                        <span class="text font-small2">Today</span>
+                        <div style="height: 3rem;width: 3rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                    <span class="badge">
+                        <span class="text font-small2">Tomorrow</span>
+                        <div style="height: 3rem;width: 5rem;background-image: url('/svg/border.svg');"></div>
+                    </span>
+                </div>
+                <h4 class="font-large1" style="margin-bottom: 3rem;">White space</h4>
+                <div style="display: flex;gap: 1.5rem;flex-wrap: wrap;">
+                    <span class="badge">
+                        <span class="text font-small2">Open for applications</span>
+                        <div
+                             style="height: 3rem;width: 8rem;background-image: url('/svg/border.svg');display: grid;place-content: center;">
+                            <code class="tabular font-small2">min-content</code>
+                        </div>
+                    </span>
+                    <span class="badge">
+                        <span class="text font-small2" style="width: fit-content;">Open for
+                            applications</span>
+                        <div
+                             style="height: 3rem;width: 8rem;background-image: url('/svg/border.svg');display: grid;place-content: center;">
+                            <code class="tabular font-small2">fit-content</code>
+                        </div>
+                    </span>
+                    <span class="badge">
+                        <span class="text font-small2" style="width: max-content;">Open for
+                            applications</span>
+                        <div
+                             style="height: 3rem;width: 8rem;background-image: url('/svg/border.svg');display: grid;place-content: center;">
+                            <code class="tabular font-small2">max-content</code>
+                        </div>
+                    </span>
+                </div>
+            </section>
+            <section id="button">
+                <h3 class="font-large3">Button</h3>
+                <hr>
+                <button class="button">Button</button>
+                <h4 class="font-large1">Variants</h4>
+                <button class="button" data-variant="filled">Filled</button>
+                <button class="button" data-variant="outlined">Outlined</button>
+                <button class="button" data-variant="transparent">
+                    Transparent
+                </button>
+                <h4 class="font-large1">Sizes</h4>
+                <button class="button" data-size="small">Small</button>
+                <button class="button" data-size="normal">Normal</button>
+                <button class="button" data-size="large">Large</button>
+                <h4 class="font-large1">Rounded</h4>
+                <button class="button" data-size="small" data-rounded>
+                    Rounded
+                </button>
+                <button class="button" data-size="normal" data-rounded>
+                    Rounded
+                </button>
+                <button class="button" data-size="large" data-rounded>
+                    Rounded
+                </button>
+                <h4 class="font-large1">Disabled</h4>
+                <button class="button" disabled>Disabled</button>
+                <button class="button" data-variant="outlined" disabled>
+                    Disabled
+                </button>
+                <button class="button" data-variant="transparent" disabled>
+                    Disabled
+                </button>
+            </section>
+            <section id="select">
+                <h3 class="font-large3">Select</h3>
+                <hr>
+                <select class="select">
+                    <option>Select</option>
+                </select>
+                <h4 class="font-large1">Variants</h4>
+                <select class="select" data-variant="filled">
+                    <option>Filled</option>
+                </select>
+                <select class="select" data-variant="outlined">
+                    <option>Outlined</option>
+                </select>
+                <select class="select" data-variant="transparent">
+                    <option>Transparent</option>
+                </select>
+                <h4 class="font-large1">Sizes</h4>
+                <select class="select" data-size="small">
+                    <option>Small</option>
+                </select>
+                <select class="select" data-size="normal">
+                    <option>Normal</option>
+                </select>
+                <select class="select" data-size="large">
+                    <option>Large</option>
+                </select>
+                <h4 class="font-large1">Rounded</h4>
+                <select class="select" data-size="small" data-rounded>
+                    <option>Rounded</option>
+                </select>
+                <select class="select" data-size="normal" data-rounded>
+                    <option>Rounded</option>
+                </select>
+                <select class="select" data-size="large" data-rounded>
+                    <option>Rounded</option>
+                </select>
+                <h4 class="font-large1">Disabled</h4>
+                <select class="select" disabled>
+                    <option>Disabled</option>
+                </select>
+                <select class="select" data-variant="outlined" disabled>
+                    <option>Disabled</option>
+                </select>
+                <select class="select" data-variant="transparent" disabled>
+                    <option>Disabled</option>
+                </select>
+            </section>
+            <h2 class="font-large5">Utilities</h2>
+            <section id="font-[size]">
+                <h3 class="font-large3"><code>.font-[size]</code></h3>
+                <hr>
+                <p>Fonts come with 10 sizes and automatically tailored letter spacing for each size.</p>
+                <ul style="list-style: none;">
+                    <li><code class="font-large6">.font-large6</code></li>
+                    <li><code class="font-large5">.font-large5</code></li>
+                    <li><code class="font-large4">.font-large4</code></li>
+                    <li><code class="font-large3">.font-large3</code></li>
+                    <li><code class="font-large2">.font-large2</code></li>
+                    <li><code class="font-large1">.font-large1</code></li>
+                    <li><code class="font-normal">.font-normal</code></li>
+                    <li><code class="font-small1">.font-small1</code></li>
+                    <li><code class="font-small2">.font-small2</code></li>
+                    <li><code class="font-small3">.font-small3</code></li>
+                </ul>
+            </section>
+            <section id="tabular">
+                <h3 class="font-large3"><code>.tabular</code></h3>
+                <hr>
+                <p>
+                    Used for enabling tabular numbers in fonts that support this feature and reduces the letter spacing
+                    slightly to compensate for the new digit width.
+                </p>
+                <div style="display: flex;gap: 1rem;">
+                    <div>
+                        <h4 class="font-large1">Normal</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Numbers</th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: end;">
+                                <tr>
+                                    <td class="font-normal">+0123456789</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal">123</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal">42</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal">1337</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h4 class="font-large1">Tabular</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Numbers</th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: end;">
+                                <tr>
+                                    <td class="font-normal tabular">+0123456789</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal tabular">123</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal tabular">42</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-normal tabular">1337</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 </body>

@@ -1,0 +1,23 @@
+@layer components {
+    .badge {
+        position: relative;
+
+        > .text {
+            position: absolute;
+            bottom: calc(100% - 0.75em);
+            right: -0.75em;
+            min-height: 1.75em;
+            min-width: 1.75em;
+            line-height: 1.75;
+            z-index: 1;
+            padding-inline: 0.5em;
+            width: min-content;
+            text-align: center;
+            box-sizing: border-box;
+            background: var(--color);
+            color: var(--color-contrast);
+            border-radius: 13px;
+            user-select: none;
+        }
+    }
+}

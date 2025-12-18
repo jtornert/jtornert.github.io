@@ -1,9 +1,9 @@
-@import url("color-scheme-light.css") layer(theme) (scripting: none) and
-        (prefers-color-scheme: light),
+@import url("color-scheme-light.css") layer(theme) (scripting: none) and (prefers-color-scheme: light),
     (scripting: enabled);
-@import url("color-scheme-dark.css") layer(theme) (scripting: none) and
-        (prefers-color-scheme: dark),
+@import url("color-scheme-dark.css") layer(theme) (scripting: none) and (prefers-color-scheme: dark),
     (scripting: enabled);
+
+@layer reset, components, utilities;
 
 :root {
     --border-radius: 3px;
@@ -13,6 +13,7 @@ html {
     font-family: "Inter", sans-serif;
     background: var(--surface-1);
     color: var(--body-text);
+    overflow: hidden;
 }
 
 body {
@@ -67,11 +68,8 @@ h6 {
     background: var(--surface-2);
     position: sticky;
     bottom: 0;
-    z-index: 1;
-
-    &[aria-expanded="true"] {
-        height: 75svh;
-    }
+    z-index: 2;
+    max-height: 75dvh;
 
     > div {
         display: grid;
@@ -80,32 +78,35 @@ h6 {
             "list list";
         grid-template-rows: auto 1fr;
         justify-content: space-between;
-        padding-block: 1rem;
+        padding-top: 1rem;
 
         > h2 {
             grid-area: heading;
-            margin: 0;
+            margin-top: 0;
+            margin-bottom: 1rem;
         }
 
         > button {
             grid-area: control;
-            align-self: center;
 
             &:not([aria-expanded="true"]) .icon {
                 rotate: 180deg;
             }
         }
 
-        > ul {
+        > nav {
             grid-area: list;
             overflow: auto;
             max-height: 40svh;
-            margin-bottom: 0;
-            list-style: none;
-            padding: 0;
 
-            &:not([aria-hidden="false"]) {
+            &:not([aria-hidden="true"]) {
                 display: none;
+            }
+
+            > ul {
+                list-style: none;
+                padding-left: 1rem;
+                margin-top: 0;
             }
         }
     }
@@ -113,12 +114,13 @@ h6 {
 
 .main {
     grid-area: main;
+    overflow: auto;
 
     > div {
         margin-bottom: 2rem;
 
         > [id] {
-            scroll-margin: 5rem;
+            scroll-margin: 1rem;
         }
     }
 }
@@ -136,7 +138,6 @@ html:not([data-color]),
     --color: var(--neutral);
     --color-hover: var(--neutral-hover);
     --color-active: var(--neutral-active);
-    --color-border: var(--neutral-border);
     --color-outline: var(--neutral-outline);
     --color-contrast: var(--neutral-contrast);
 }
@@ -145,7 +146,13 @@ html:not([data-color]),
     --color: var(--primary);
     --color-hover: var(--primary-hover);
     --color-active: var(--primary-active);
-    --color-border: var(--primary-border);
     --color-outline: var(--primary-outline);
     --color-contrast: var(--primary-contrast);
+}
+
+table {
+    th,
+    td {
+        padding-inline: 0.5rem;
+    }
 }

@@ -6,7 +6,7 @@ html,
     --primary-hover: color-mix(in oklab, var(--primary), white 15%);
     --primary-active: color-mix(in oklab, var(--primary), black 15%);
     --primary-contrast: color-mix(in oklab, var(--primary), white 90%);
-    --primary-outline: color-mix(in oklab, var(--primary), white 40%);
+    --primary-outline: color-mix(in oklab, var(--primary), white 45%);
 
     --neutral: oklch(0.5 0.02 264);
     --neutral-hover: color-mix(in oklab, var(--neutral), white 15%);
