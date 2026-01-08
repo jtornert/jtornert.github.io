@@ -1,0 +1,23 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      datastar:
+        specifier: https://github.com/starfederation/datastar.git
+        version: https://codeload.github.com/starfederation/datastar/tar.gz/bb9ed6fbe78cf5690f5ad23a5faf86407a44982f
+
+packages:
+
+  datastar@https://codeload.github.com/starfederation/datastar/tar.gz/bb9ed6fbe78cf5690f5ad23a5faf86407a44982f:
+    resolution: {tarball: https://codeload.github.com/starfederation/datastar/tar.gz/bb9ed6fbe78cf5690f5ad23a5faf86407a44982f}
+    version: 0.0.0
+
+snapshots:
+
+  datastar@https://codeload.github.com/starfederation/datastar/tar.gz/bb9ed6fbe78cf5690f5ad23a5faf86407a44982f: {}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Components</title>
+    <link rel="stylesheet" href="dist/base.css">
+    <link rel="stylesheet" href="dist/components.css">
+    <script type="importmap">
+        {"imports": {"datastar": "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.7/bundles/datastar.js"}}
+    </script>
+    <script type="module" src="dist/components.js"></script>
+</head>
+
+<body>
+    <h1>UI Compnonents</h1>
+    <h2>Accordion</h2>
+    <ui-accordion persistent>
+        <h3><button aria-expanded="true">Title 1</button></h3>
+        <div>
+            <p>Content 1.</p>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In quisquam sint iusto quae aliquam quaerat,
+                molestiae delectus ipsum veritatis! Sequi maxime recusandae voluptatum facilis accusamus? Consequuntur
+                officia ut accusantium nulla?
+            </p>
+        </div>
+        <h3><button>Title 2</button></h3>
+        <div>
+            <p>Content 2.</p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo doloribus dignissimos, fugiat nesciunt
+                nam
+                vitae adipisci fuga sint minus quo.
+            </p>
+        </div>
+    </ui-accordion>
+</body>
+
+</html>

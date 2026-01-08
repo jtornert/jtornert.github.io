@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2021",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "outDir": "dist",
+        "isolatedModules": true,
+        "allowJs": true,
+        "noFallthroughCasesInSwitch": true,
+        "lib": ["DOM", "ESNext"],
+        "paths": {
+            "datastar": ["./node_modules/datastar/library/src/bundles/datastar.ts"],
+            "@engine": ["./node_modules/datastar/library/src/engine/engine.ts"],
+            "@engine/*": ["./node_modules/datastar/library/src/engine/*"],
+            "@plugins/*": ["./node_modules/datastar/library/src/plugins/*"],
+            "@types": ["./node_modules/datastar/library/src/engine/types.ts"],
+            "@utils/*": ["./node_modules/datastar/library/src/utils/*"]
+        }
+    }
+}
