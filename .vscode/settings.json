@@ -1,5 +1,6 @@
 {
     "html.format.wrapAttributes": "preserve-aligned",
     "html.format.wrapLineLength": 120,
-    "liveServer.settings.NoBrowser": true
+    "liveServer.settings.NoBrowser": true,
+    "html.customData": [".vscode/custom-elements.json"]
 }
