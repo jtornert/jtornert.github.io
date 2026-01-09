@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIP Animations</title>
+    <script type="module"
+            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.7/bundles/datastar.js"></script>
+    <style>
+        :root {
+            --animation-duration-in: 150ms;
+            --animation-duration-out: 75ms;
+            --animation-delay-flip: 25ms;
+        }
+
+        html {
+            color-scheme: dark;
+            font-family: sans-serif;
+        }
+
+        #notifications {
+            list-style: none;
+            padding: 0;
+            max-width: 30ch;
+        }
+
+        .notification {
+            display: grid;
+            grid-template-columns: 1fr auto;
+        }
+
+        .entering {
+            animation: enter var(--animation-duration-in) linear forwards;
+            pointer-events: none;
+        }
+
+        .leaving {
+            animation: leave var(--animation-duration-out) linear forwards;
+            pointer-events: none;
+            position: absolute;
+        }
+
+        .flipping {
+            animation: flip var(--animation-duration-out) var(--animation-delay-flip) linear backwards;
+        }
+
+        @keyframes leave {
+            to {
+                opacity: 0;
+                translate: 100px;
+                transform-origin: center;
+            }
+        }
+
+        @keyframes enter {
+            from {
+                opacity: 0;
+                translate: 100px;
+                transform-origin: center;
+            }
+        }
+
+        @keyframes flip {
+            from {
+                translate: var(--flip-x, 0px) var(--flip-y, 0px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                --animation-duration-in: 0ms;
+                --animation-duration-out: 0ms;
+                --animation-delay-flip: 0ms;
+            }
+        }
+    </style>
+    <script>
+        function sendNotification() {
+            notifications.append(notification.content.cloneNode(true));
+        }
+
+        function handleNotificationAnimationEnd(evt, el) {
+            switch (evt.animationName) {
+                case "enter":
+                    el.classList.remove("entering");
+                    break;
+                case "leave":
+                    el.remove();
+                    break;
+                case "flip":
+                    for (const li of notifications.querySelectorAll(".flipping")) {
+                        li.classList.remove("flipping");
+                        li.style.removeProperty("--flip-y");
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        function handleNotificationDismiss(evt, el) {
+            const li = el.closest("li");
+            const remainder = Array.prototype.slice.call(notifications.children, Array.prototype.indexOf.call(notifications.children, li) + 1);
+            const next = remainder[0]?.getBoundingClientRect();
+            const rect = li.getBoundingClientRect();
+            for (const child of remainder) {
+                child.classList.add("flipping");
+                child.style.setProperty("--flip-y", `${next.y - rect.y}px`);
+            }
+            li.classList.add('leaving');
+            li.style.width = `${rect.width}px`;
+            li.style.height = `${rect.height}px`;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>FLIP Animations</h1>
+    <button data-on:click="sendNotification()">+</button>
+    <ul id="notifications"></ul>
+    <template id="notification">
+        <li class="notification entering"
+            data-on:animationend="handleNotificationAnimationEnd(evt, el)">
+            <span data-text="Math.random()"></span>
+            <button
+                    data-on:click="handleNotificationDismiss(evt, el)">&cross;</button>
+        </li>
+    </template>
+</body>
+
+</html>
