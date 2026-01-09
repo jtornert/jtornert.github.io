@@ -13,6 +13,9 @@
     --success-active: oklch(from var(--neutral-active) l 0.1 155);
     --success-border: oklch(from var(--neutral-border) l 0.1 155);
     --weak-text: #888;
+    --animation-duration-in: 150ms;
+    --animation-duration-out: 75ms;
+    --animation-delay-flip: 25ms;
     --transition-duration: 200ms;
 }
 
@@ -229,6 +232,45 @@ dialog {
     animation: scale-in var(--transition-duration) ease;
 }
 
+.notification {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    max-width: 30ch;
+
+    .button::before {
+        content: "";
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        mask-image: url("/svg/cross.svg");
+        background: currentColor;
+    }
+}
+
+.entering {
+    animation: enter var(--animation-duration-in) linear forwards;
+    pointer-events: none;
+}
+
+.leaving {
+    animation: leave var(--animation-duration-out) linear forwards;
+    pointer-events: none;
+    position: absolute;
+}
+
+.flipping {
+    animation: flip var(--animation-duration-out) var(--animation-delay-flip) linear backwards;
+}
+
+#notifications {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    height: 10rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 #overlay {
     position: fixed;
     top: 0;
@@ -286,8 +328,41 @@ dialog {
     }
 }
 
+@keyframes leave {
+    to {
+        opacity: 0;
+        translate: 100px;
+        transform-origin: center;
+    }
+}
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        translate: 100px;
+        transform-origin: center;
+    }
+}
+
+@keyframes flip {
+    from {
+        translate: var(--flip-x, 0px) var(--flip-y, 0px);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     :root {
+        --animation-duration-in: 0ms;
+        --animation-duration-out: 0ms;
+        --animation-delay-flip: 0ms;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --animation-duration-in: 0ms;
+        --animation-duration-out: 0ms;
+        --animation-delay-flip: 0ms;
         --transition-duration: 0ms;
     }
 }
