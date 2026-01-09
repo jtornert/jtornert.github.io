@@ -28,7 +28,9 @@ window.customElements.define(
             this.cleanup = effect(() => {
                 const current = this.current();
                 const persistent = this.persistent();
-                const expandedButtons = this.querySelectorAll(":scope > :is(h2,h3,h4,h5,h6) > [aria-expanded=true]");
+                const expandedButtons = this.querySelectorAll(
+                    ":scope > :is(h2,h3,h4,h5,h6) > button[aria-expanded=true]"
+                );
                 if (expandedButtons.length > 1) throw new Error("cannot have several panels open at once");
                 const expandedButton = expandedButtons[0];
                 expandedButton?.removeAttribute("aria-expanded");

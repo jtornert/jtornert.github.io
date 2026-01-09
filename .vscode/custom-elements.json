@@ -8,7 +8,7 @@
             "attributes": [
                 {
                     "name": "persistent",
-                    "description": "Whether or not the accordion will close an already opened panel."
+                    "description": "Force always open panels."
                 }
             ]
         }

@@ -3,7 +3,7 @@ ui-accordion {
         display: none;
     }
 
-    :is(h2, h3, h4, h5, h6):has([aria-expanded="true"]) + div {
+    :is(h2, h3, h4, h5, h6):has(> [aria-expanded="true"]) + div {
         display: block;
     }
 }

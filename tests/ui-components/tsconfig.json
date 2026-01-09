@@ -7,7 +7,6 @@
         "outDir": "dist",
         "isolatedModules": true,
         "allowJs": true,
-        "noFallthroughCasesInSwitch": true,
         "lib": ["DOM", "ESNext"],
         "paths": {
             "datastar": ["./node_modules/datastar/library/src/bundles/datastar.ts"],

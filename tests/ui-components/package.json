@@ -2,9 +2,11 @@
   "name": "ui-components",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "keywords": [],
   "author": "",
+  "scripts": {
+    "dev": "esbuild --watch --bundle --minify --format=esm --external:datastar --outdir=dist src/components.ts src/base.css"
+  },
   "license": "ISC",
   "packageManager": "pnpm@10.27.0",
   "dependencies": {
