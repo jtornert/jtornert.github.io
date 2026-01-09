@@ -248,12 +248,12 @@ dialog {
 }
 
 .entering {
-    animation: enter var(--animation-duration-in) linear forwards;
+    animation: enter var(--animation-duration-in) ease forwards;
     pointer-events: none;
 }
 
 .leaving {
-    animation: leave var(--animation-duration-out) linear forwards;
+    animation: leave var(--animation-duration-out) ease forwards;
     pointer-events: none;
     position: absolute;
 }
