@@ -22,6 +22,7 @@ window.customElements.define(
                 const button = buttons[i];
                 const panel = panels[i];
                 button.id = idFrom(button);
+                button.setAttribute("aria-expanded", "false");
                 panel.setAttribute("aria-labelledby", button.id);
             }
             this.persistent = signal(this.getAttribute("persistent") === "");
@@ -33,7 +34,7 @@ window.customElements.define(
                 );
                 if (expandedButtons.length > 1) throw new Error("cannot have several panels open at once");
                 const expandedButton = expandedButtons[0];
-                expandedButton?.removeAttribute("aria-expanded");
+                expandedButton?.setAttribute("aria-expanded", "false");
                 if (current === null) {
                     if (persistent) {
                         this.querySelector(":scope > :is(h2,h3,h4,h5,h6) > button")?.setAttribute(
