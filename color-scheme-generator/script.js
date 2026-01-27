@@ -7,7 +7,7 @@ import {
     beginBatch,
     endBatch,
 } from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
-import chroma from "https://unpkg.com/chroma-js@3.1.2/index.js";
+import "./chroma.js";
 import { datastarFetch, mock, template } from "/datastar/mock.js";
 
 function memo(fn, maxEntries = -1) {
