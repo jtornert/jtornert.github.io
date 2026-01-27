@@ -107,7 +107,7 @@ pre {
         display: flex;
         flex-wrap: wrap;
 
-        > fieldset {
+        >fieldset {
             flex-basis: 30ch;
             flex-grow: 1;
             flex-shrink: 0;
@@ -190,7 +190,7 @@ pre {
 
             a {
                 color: var(--accent-outline);
-                text-decoration: none;
+                text-decoration-color: oklch(from var(--accent-outline) l c h / 0.5);
 
                 &:hover {
                     text-decoration: underline;
@@ -250,6 +250,7 @@ pre {
     from {
         rotate: 0deg;
     }
+
     to {
         rotate: 360deg;
     }
