@@ -36,21 +36,21 @@ function matchRoute(input, init) {
 
 function __fetch_with_mocks(input, init = {}) {
     const route = matchRoute(input, init);
-    if (route) {
-        let body = route.handler?.();
-        if (!route.handler || !body) {
-            return new Promise((res) => res(new Response("")));
-        }
-        return new Promise((res) => {
-            let contentType = "text/html";
-            if (typeof body !== "string") {
-                contentType = "application/json";
-                body = JSON.stringify(body);
-            }
-            res(new Response(body, { headers: { "content-type": contentType } }));
-        });
+    if (!route) {
+        return __fetch(input, init);
     }
-    return __fetch(input, init);
+    let body = route.handler?.();
+    if (!route.handler || !body) {
+        return new Promise((res) => res(new Response("")));
+    }
+    return new Promise((res) => {
+        let contentType = "text/html";
+        if (typeof body !== "string") {
+            contentType = "application/json";
+            body = JSON.stringify(body);
+        }
+        res(new Response(body, { headers: { "content-type": contentType } }));
+    });
 }
 
 export function sleep(duration) {
