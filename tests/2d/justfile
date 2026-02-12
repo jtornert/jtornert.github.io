@@ -1,0 +1,5 @@
+dev:
+    esbuild src/main.ts --outfile=dist/main.js --watch
+
+build:
+    esbuild src/main.ts --outfile=dist/main.js
