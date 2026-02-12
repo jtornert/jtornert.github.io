@@ -17,7 +17,7 @@ customElements.define(
     ctx;
     pos;
     keys;
-    running;
+    playState;
     frameTimeout;
     jumpAnimationProgress;
     jumpDistance;
@@ -45,7 +45,7 @@ customElements.define(
       this.resetGame();
     }
     resetGame() {
-      this.running = false;
+      this.playState = "menu";
       this.keys = {};
       this.jumpAnimationProgress = 1;
       this.jumpDistance = 0;
@@ -60,7 +60,7 @@ customElements.define(
       this.tiles[18] = BLOCK_GROUND_SPIKE;
       this.chunks = CHUNKS_PER_FRAME;
       this.tick();
-      this.startGame();
+      this.drawStartGame();
     }
     connectedCallback() {
       this.append(this.canvas);
@@ -69,12 +69,12 @@ customElements.define(
           this.keys[e.key] = true;
           if (e.key === "Escape") {
             e.preventDefault();
-            this.running = !this.running;
-            if (this.running) {
+            if (this.playState === "menu") {
+              this.playState = "playing";
               this.currentFrame = /* @__PURE__ */ new Date();
               this.tick();
             }
-          } else if (e.key === "r" && !this.running) {
+          } else if (e.key === "r" && this.playState !== "playing") {
             e.preventDefault();
             this.resetGame();
           }
@@ -93,6 +93,27 @@ customElements.define(
       });
       window.addEventListener("keyup", (e) => {
         this.keys[e.key] = false;
+      });
+      window.addEventListener("touchstart", (e) => {
+        switch (this.playState) {
+          case "playing":
+            this.keys[" "] = true;
+            this.handleKeys();
+            break;
+          case "menu":
+            this.playState = "playing";
+            this.currentFrame = /* @__PURE__ */ new Date();
+            this.tick();
+            break;
+          default:
+            this.resetGame();
+            break;
+        }
+      });
+      window.addEventListener("touchend", (e) => {
+        if (this.playState) {
+          this.keys[" "] = false;
+        }
       });
     }
     handleKeys() {
@@ -116,10 +137,10 @@ customElements.define(
         this.generateChunk();
       }
       if (this.chunks === CHUNKS_PER_GAME + CHUNKS_PER_FRAME) {
-        this.running = false;
-        this.completeGame();
+        this.playState = "success";
+        this.drawCompleteGame();
       }
-      if (this.running) {
+      if (this.playState === "playing") {
         requestAnimationFrame(() => {
           this.tick();
         });
@@ -157,8 +178,8 @@ customElements.define(
               ]
             ]) {
               if (playerStartX < x && x < playerEndX && playerStartY < y && y < playerEndY) {
-                this.running = false;
-                this.failGame();
+                this.playState = "fail";
+                this.drawFailGame();
               }
             }
           }
@@ -255,7 +276,7 @@ customElements.define(
         }
       }
     }
-    startGame() {
+    drawStartGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
       ctx.translate(this.canvas.width / 2, this.canvas.height / 4);
@@ -265,7 +286,7 @@ customElements.define(
       ctx.translate(0, FONT_SIZE + 4);
       ctx.fillText("Space = Jump", 0, 0);
     }
-    completeGame() {
+    drawCompleteGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
       ctx.font = `${FONT_SIZE}px sans-serif`;
@@ -274,7 +295,7 @@ customElements.define(
       ctx.fillText("Nice!", 10, FONT_SIZE + 10);
       ctx.fillText("R = Play again", 10, 2 * FONT_SIZE + 10 + 4);
     }
-    failGame() {
+    drawFailGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
       ctx.font = `${FONT_SIZE}px sans-serif`;
