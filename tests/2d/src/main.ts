@@ -97,29 +97,32 @@ customElements.define(
                 } else if (e.key === " ") {
                     e.preventDefault();
                 }
-                this.handleKeys();
             });
             window.addEventListener("keyup", (e) => {
                 this.keys[e.key as keyof Keys] = false;
             });
-            window.addEventListener("touchstart", (e) => {
-                switch (this.playState) {
-                    case "playing":
-                        this.keys[" "] = true;
-                        this.handleKeys();
-                        break;
+            window.addEventListener(
+                "touchstart",
+                (e) => {
+                    e.preventDefault();
+                    switch (this.playState) {
+                        case "playing":
+                            this.keys[" "] = true;
+                            break;
 
-                    case "menu":
-                        this.playState = "playing";
-                        this.currentFrame = new Date();
-                        this.tick();
-                        break;
+                        case "menu":
+                            this.playState = "playing";
+                            this.currentFrame = new Date();
+                            this.tick();
+                            break;
 
-                    default:
-                        this.resetGame();
-                        break;
-                }
-            });
+                        default:
+                            this.resetGame();
+                            break;
+                    }
+                },
+                { passive: false },
+            );
             window.addEventListener("touchend", (e) => {
                 if (this.playState) {
                     this.keys[" "] = false;
@@ -134,12 +137,14 @@ customElements.define(
         }
 
         tick() {
+            console.debug(this.keys);
             this.lastFrame = this.currentFrame;
             this.currentFrame = new Date();
             this.deltaTime =
                 this.currentFrame.valueOf() - this.lastFrame.valueOf();
             const ctx = this.ctx;
             ctx.resetTransform();
+            this.handleKeys();
             this.updateAnimations();
             this.ctx.fillStyle = "#222";
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
