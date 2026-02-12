@@ -67,7 +67,7 @@ customElements.define(
       window.addEventListener("keydown", (e) => {
         if (!e.repeat) {
           this.keys[e.key] = true;
-          if (e.key === "Escape") {
+          if (e.key === "s") {
             e.preventDefault();
             if (this.playState === "menu") {
               this.playState = "playing";
@@ -125,19 +125,21 @@ customElements.define(
       }
     }
     tick() {
-      console.debug(this.keys);
       this.lastFrame = this.currentFrame;
       this.currentFrame = /* @__PURE__ */ new Date();
       this.deltaTime = this.currentFrame.valueOf() - this.lastFrame.valueOf();
-      const ctx = this.ctx;
-      ctx.resetTransform();
       this.handleKeys();
       this.updateAnimations();
+      const ctx = this.ctx;
+      ctx.resetTransform();
       this.ctx.fillStyle = "#222";
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawTiles();
       this.drawPlayer();
       this.detectCollisions();
+      if (this.playState !== "menu") {
+        this.drawProgress();
+      }
       if (this.moveAnimationProgress === 0) {
         this.generateChunk();
       }
@@ -281,20 +283,31 @@ customElements.define(
         }
       }
     }
+    drawProgress() {
+      const ctx = this.ctx;
+      ctx.resetTransform();
+      ctx.translate(this.canvas.width - 10, FONT_SIZE + 10);
+      ctx.textAlign = "end";
+      ctx.fillStyle = "gray";
+      ctx.fillText(
+        ((this.chunks - 4 + this.moveDistance / MOVE_DISTANCE) / CHUNKS_PER_GAME * 100).toFixed(0) + "%",
+        0,
+        0
+      );
+    }
     drawStartGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
       ctx.translate(this.canvas.width / 2, this.canvas.height / 4);
       ctx.fillStyle = "gainsboro";
       ctx.textAlign = "center";
-      ctx.fillText("Esc = Start game", 0, 0);
+      ctx.fillText("S = Start game", 0, 0);
       ctx.translate(0, FONT_SIZE + 4);
       ctx.fillText("Space = Jump", 0, 0);
     }
     drawCompleteGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
-      ctx.font = `${FONT_SIZE}px sans-serif`;
       ctx.textAlign = "start";
       ctx.fillStyle = "lime";
       ctx.fillText("Nice!", 10, FONT_SIZE + 10);
@@ -303,7 +316,6 @@ customElements.define(
     drawFailGame() {
       const ctx = this.ctx;
       ctx.resetTransform();
-      ctx.font = `${FONT_SIZE}px sans-serif`;
       ctx.textAlign = "start";
       ctx.fillStyle = "tomato";
       ctx.fillText("Bonk!", 10, FONT_SIZE + 10);
