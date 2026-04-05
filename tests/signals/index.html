@@ -4,15 +4,17 @@
     <meta name="viewport" content="device-width;initial-scale=1"> 
     <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
     <title>Signals</title>
-    <style>html{color-scheme:dark;font-family:sans-serif}</style>
+    <style>html{color-scheme:dark;font-family:sans-serif}.accordion{button{display:block}}</style>
 </head>
 <body>
     <h1>Signals</h1>
-    <button data-signals:accordion="1" data-on:click="$accordion = 1">Button 1</button>
-    <p data-show="$accordion === 1">Content 1</p>
-    <button data-on:click="$accordion = 2">Button 2</button>
-    <p style="display:none" data-show="$accordion === 2">Content 2</p>
-    <button data-on:click="$accordion = 3">Button 3</button>
-    <p style="display:none" data-show="$accordion === 3">Content 3</p>
+    <div class="accordion" data-signals:accordion="1">
+        <button data-on:click="$accordion = 1">Button 1</button>
+        <p data-show="$accordion === 1">Content 1</p>
+        <button data-on:click="$accordion = 2">Button 2</button>
+        <p style="display:none" data-show="$accordion === 2">Content 2</p>
+        <button data-on:click="$accordion = 3">Button 3</button>
+        <p style="display:none" data-show="$accordion === 3">Content 3</p>
+    </div>
 </body>
 </html>
