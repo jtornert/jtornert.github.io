@@ -7,7 +7,7 @@ import {
     mergePatch,
     beginBatch,
     endBatch,
-} from "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.6/bundles/datastar.js";
+} from "https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.1/bundles/datastar.js";
 import { template, datastarFetch, mock, sleep } from "./mock.js";
 
 (function beginMock() {
