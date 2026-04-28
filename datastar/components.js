@@ -17,24 +17,20 @@ class Popover extends HTMLElement {
     }
 
     connectedCallback() {
-        this.invariant();
+        this.attributeChangedCallback();
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.invariant();
-    }
-
-    invariant() {
+    attributeChangedCallback() {
         const anchorId = this.getAttribute("anchor");
         const popoverEl = this;
         const anchorEl = anchorId ? document.getElementById(anchorId) : this.previousElementSibling;
         const isVisible = this.getAttribute("visible") === "";
         const preferredPlacement = this.getAttribute("placement");
-
+  
         anchorEl.setAttribute("aria-haspopover", "true");
         anchorEl.setAttribute("aria-expanded", isVisible);
         anchorEl.id && popoverEl.setAttribute("aria-labelledby", anchorEl.id);
-
+  
         if (isVisible) {
             computePosition(anchorEl, popoverEl, {
                 placement: preferredPlacement ?? "bottom",
@@ -58,31 +54,27 @@ class Icon extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute("aria-hidden", "true");
-        this.invariant();
+        this.attributeChangedCallback();
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.invariant();
-    }
+  async attributeChangedCallback() {
+      const name = this.getAttribute("icon");
+      const svg = await fetch(`${iconsBaseURL}/${name}.svg`, { cache: "default" })
+          .then((res) => res.text())
+          .then((text) => {
+              const svg = new DOMParser().parseFromString(text, "image/svg+xml");
 
-    async invariant() {
-        const name = this.getAttribute("icon");
-        const svg = await fetch(`${iconsBaseURL}/${name}.svg`, { cache: "default" })
-            .then((res) => res.text())
-            .then((text) => {
-                const svg = new DOMParser().parseFromString(text, "image/svg+xml");
+              svg.querySelector("script")?.remove();
 
-                svg.querySelector("script")?.remove();
+              const g = svg.querySelector("g");
 
-                const g = svg.querySelector("g");
+              g.removeAttribute("style");
 
-                g.removeAttribute("style");
+              return svg.firstElementChild.cloneNode(true);
+          });
 
-                return svg.firstElementChild.cloneNode(true);
-            });
-
-        this.replaceChildren(svg);
-    }
+      this.replaceChildren(svg);
+  }
 }
 
 customElements.define("ui-icon", Icon);
@@ -125,7 +117,7 @@ class Menu extends HTMLElement {
             }
         }
 
-        this.invariant();
+        this.attributeChangedCallback();
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
         this.addEventListener("focusin", this.handleFocusIn.bind(this));
         this.addEventListener("focusout", this.handleFocusOut.bind(this));
@@ -135,17 +127,13 @@ class Menu extends HTMLElement {
         this.addEventListener("keydown", this.handleKeyDown.bind(this));
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.invariant();
-    }
-
-    invariant() {
+    attributeChangedCallback() {
         const activeItemId = this.getAttribute("aria-activedescendant");
-
+  
         if (activeItemId) {
             const activeItem = document.getElementById(activeItemId);
             const visited = [];
-
+  
             for (
                 let popover = activeItem.closest("[data-ui='menu.popover']");
                 popover;
@@ -156,20 +144,20 @@ class Menu extends HTMLElement {
                 }
                 visited.push(popover);
             }
-
+  
             for (const popover of this.querySelectorAll("[data-ui='menu.popover']")) {
                 if (visited.indexOf(popover) === -1 && activeItem.nextElementSibling !== popover) {
                     popover.removeAttribute("visible");
                 }
             }
-
+  
             activeItem.focus();
         } else {
             for (const popover of this.querySelectorAll("[data-ui='menu.popover']")) {
                 popover.removeAttribute("visible");
             }
         }
-
+  
         if (activeItemId === "") {
             this.querySelector("[data-ui='menu.trigger']").tabIndex = null;
             window.removeEventListener("click", this.handleOutsideClick, { capture: true });
